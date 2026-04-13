@@ -2,6 +2,6 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/Aoi/', // Thay 'ten-repo' bằng tên repository của anh
+  base: '/Aoi/', // Thay bằng tên repository của bạn
   // ... các cấu hình khác
 })
