@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
       - run: npm install
       - run: npm run build
       
-      - name: 📦 Đăng tải ➺【Artifact】
+      - name: Đăng tải ➺【Artifact】
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
