@@ -2,7 +2,7 @@ name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡ ωєв
 
 on:
   push:
-    branches: ["main"] # Hoặc branch anh dùng (ví dụ: main, master)
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -19,13 +19,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-      - run: npm ci
+          
+      - run: npm install
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Mặc định Vite build ra thư mục này
-      - uses: actions/deploy-pages@v4
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
         
       - name: ♻️𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
         run: |
