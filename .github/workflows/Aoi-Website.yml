@@ -38,26 +38,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v5
-
-      - name: ♻️𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
-        run: |
-          gh api repos/${{ github.repository }}/actions/runs \
-            --paginate \
-            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[5:] | map(select(.status=="completed")) | .[].id' \
-            | while read run; do
-                echo "🗑️ đã xóa $run"
-                gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
-              done
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: ♻️𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
-        run: |
-          gh cache list --json id,createdAt \
-            | jq 'sort_by(.createdAt) | reverse | .[5:] | .[].id' \
-            | while read id; do
-                echo "🗑️ đã xóa $id"
-                gh cache delete "$id"
-              done
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
