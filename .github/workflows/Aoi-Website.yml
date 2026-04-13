@@ -22,11 +22,12 @@ jobs:
       - run: npm install
       - run: npm run build
       
-      - name: 📦 Upload Website
+      - name: 📦 Đăng tải ➺【Artifact】
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
-      - name: Deploy to GitHub Pages
+          
+      - name: Triển khai ➺【GitHub Pages】
         uses: actions/deploy-pages@v4
         
       - name: 🗑️ 𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
