@@ -1,27 +1,49 @@
-<div class="settings-btn" id="settingsBtn">⚙️</div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>AoiChan</title>
+</head>
+<body>
+  <div id="app"></div>
 
-<div class="settings-overlay" id="overlay"></div>
+  <!-- ⚙️ SETTINGS BUTTON -->
+  <div class="settings-btn" id="settingsBtn">⚙️</div>
 
-<div class="settings-panel" id="settings">
-  <div class="settings-header">
-    <span>⚙️ Settings</span>
-    <button id="closeBtn">✕</button>
+  <!-- 🌫 OVERLAY -->
+  <div class="settings-overlay" id="overlay"></div>
+
+  <!-- 🧠 PANEL -->
+  <div class="settings-panel" id="settings">
+    <div class="settings-header">
+      <span>Settings</span>
+      <button id="closeBtn">✕</button>
+    </div>
+
+    <div class="setting-item">
+      <label>Theme</label>
+      <select id="themeSelect">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
+    </div>
+
+    <div class="setting-item">
+      <label>UI Scale</label>
+      <input type="range" id="scaleRange" min="0.9" max="1.2" step="0.05">
+    </div>
+
+    <div class="setting-item">
+      <label>Language</label>
+      <select id="langSelect">
+        <option value="vi">VI</option>
+        <option value="en">EN</option>
+      </select>
+    </div>
+
+    <button class="home-btn" id="homeBtn">🏠 Home</button>
   </div>
 
-  <label>🌐 Language</label>
-  <select id="langSelect">
-    <option value="vi">Tiếng Việt</option>
-    <option value="en">English</option>
-  </select>
-
-  <label>🎨 Theme</label>
-  <select id="themeSelect">
-    <option value="dark">Dark</option>
-    <option value="light">Light</option>
-  </select>
-
-  <label>🔎 UI Scale</label>
-  <input type="range" id="scaleRange" min="0.8" max="1.3" step="0.1">
-
-  <button id="homeBtn">🏠 Home</button>
-</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
