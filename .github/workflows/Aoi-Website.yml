@@ -13,13 +13,17 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v5
+      - name: 📥 Check Source
+        uses: actions/checkout@v6
+        
+      - name: 📒 Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: npm
       
       - run: npm install
       - run: npm run build
@@ -31,7 +35,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     environment: 
       name: github-pages
