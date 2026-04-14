@@ -6,7 +6,32 @@
 </head>
 <body>
   <div id="app"></div>
-  <canvas id="sakura"></canvas>
+
+  <!-- Settings -->
+  <div class="settings-btn" onclick="toggleSettings()">⚙️</div>
+
+  <div class="settings-panel" id="settings">
+    <h3>⚙️ Settings</h3>
+
+    <label>🌐 Language</label>
+    <select onchange="setLang(this.value)">
+      <option value="vi">Tiếng Việt</option>
+      <option value="en">English</option>
+    </select>
+
+    <label>🎨 Theme</label>
+    <select onchange="setTheme(this.value)">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+
+    <label>🔎 UI Scale</label>
+    <input type="range" min="0.8" max="1.5" step="0.1"
+           onchange="setScale(this.value)">
+
+    <button onclick="goHome()">🏠 Home</button>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
