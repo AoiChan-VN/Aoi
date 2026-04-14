@@ -1,5 +1,6 @@
 import './style.css'
 
+// UI
 document.querySelector('#app').innerHTML = `
   <div class="container">
     <h1 id="title">◡🥀 AoiChan 🥀◡</h1>
@@ -7,68 +8,59 @@ document.querySelector('#app').innerHTML = `
 
     <div class="card">
       <h2>🚀 About</h2>
-      <p>Website cá nhân + dashboard điều khiển.</p>
-    </div>
-
-    <div class="card">
-      <h2>📦 Projects</h2>
-      <ul>
-        <li>Aoi Plugin</li>
-        <li>Cultivation System</li>
-        <li>Automation Tools</li>
-      </ul>
+      <p>Website cá nhân + dashboard.</p>
     </div>
   </div>
 `
 
-// ===== UI CONTROL =====
-const panel = document.getElementById("settings")
-const overlay = document.getElementById("overlay")
+// SETTINGS SYSTEM
+window.addEventListener("DOMContentLoaded", () => {
+  const panel = document.getElementById("settings")
+  const overlay = document.getElementById("overlay")
+  const btn = document.getElementById("settingsBtn")
+  const closeBtn = document.getElementById("closeBtn")
 
-document.getElementById("settingsBtn").onclick = () => {
-  panel.classList.add("open")
-  overlay.classList.add("show")
-}
-
-document.getElementById("closeBtn").onclick = closePanel
-overlay.onclick = closePanel
-
-function closePanel() {
+  // force reset trạng thái
   panel.classList.remove("open")
   overlay.classList.remove("show")
-}
 
-// ===== SETTINGS =====
-const themeSelect = document.getElementById("themeSelect")
-const scaleRange = document.getElementById("scaleRange")
-const langSelect = document.getElementById("langSelect")
+  // open
+  btn.addEventListener("click", () => {
+    panel.classList.add("open")
+    overlay.classList.add("show")
+  })
 
-themeSelect.onchange = e => {
-  document.body.className = e.target.value
-  localStorage.setItem("theme", e.target.value)
-}
+  // close
+  function close() {
+    panel.classList.remove("open")
+    overlay.classList.remove("show")
+  }
 
-scaleRange.oninput = e => {
-  const scale = e.target.value
-  document.body.style.transform = `scale(${scale})`
-  document.body.style.transformOrigin = "top center"
-  localStorage.setItem("scale", scale)
-}
+  closeBtn.addEventListener("click", close)
+  overlay.addEventListener("click", close)
 
-langSelect.onchange = e => {
-  const lang = e.target.value
-  localStorage.setItem("lang", lang)
+  // THEME
+  const themeSelect = document.getElementById("themeSelect")
+  themeSelect.onchange = e => {
+    document.body.className = e.target.value
+    localStorage.setItem("theme", e.target.value)
+  }
 
-  document.getElementById("title").innerText =
-    lang === "en" ? "AoiChan" : "◡🥀 AoiChan 🥀◡"
-}
+  // SCALE
+  const scaleRange = document.getElementById("scaleRange")
+  scaleRange.oninput = e => {
+    const scale = e.target.value
+    document.body.style.transform = `scale(${scale})`
+    document.body.style.transformOrigin = "top center"
+    localStorage.setItem("scale", scale)
+  }
 
-document.getElementById("homeBtn").onclick = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" })
-}
+  // HOME
+  document.getElementById("homeBtn").onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
-// ===== LOAD =====
-window.onload = () => {
+  // LOAD
   const theme = localStorage.getItem("theme")
   const scale = localStorage.getItem("scale")
 
@@ -81,4 +73,4 @@ window.onload = () => {
     document.body.style.transform = `scale(${scale})`
     scaleRange.value = scale
   }
-}
+})
