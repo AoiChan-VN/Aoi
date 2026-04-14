@@ -1,62 +1,50 @@
-import './style.css'
+const btn = document.getElementById("settingsBtn")
+const panel = document.getElementById("settings")
+const overlay = document.getElementById("overlay")
+const closeBtn = document.getElementById("closeBtn")
 
-document.querySelector('#app').innerHTML = `
-  <div class="container">
-    <h1 id="title">◡🥀 AoiChan 🥀◡</h1>
-    <p class="subtitle">Dev • Creator • Dreamer</p>
-
-    <div class="card">
-      <h2>🚀 About</h2>
-      <p>Code không chỉ để chạy, mà để đẹp ✨</p>
-    </div>
-
-    <div class="card">
-      <h2>📦 Projects</h2>
-      <ul>
-        <li>Aoi Plugin</li>
-        <li>Cultivation System</li>
-        <li>Automation Tools</li>
-      </ul>
-    </div>
-  </div>
-`
-
-// ⚙️ SETTINGS LOGIC
-
-window.toggleSettings = function () {
-  const panel = document.getElementById("settings")
-  panel.style.display =
-    panel.style.display === "block" ? "block" : "block"
+// Mở
+btn.onclick = () => {
+  panel.classList.add("open")
+  overlay.classList.add("show")
 }
 
-window.setTheme = function (theme) {
-  document.body.className = theme
-  localStorage.setItem("theme", theme)
+// Đóng
+closeBtn.onclick = close
+overlay.onclick = close
+
+function close() {
+  panel.classList.remove("open")
+  overlay.classList.remove("show")
 }
 
-window.setScale = function (scale) {
+// SETTINGS
+
+document.getElementById("themeSelect").onchange = e => {
+  document.body.className = e.target.value
+  localStorage.setItem("theme", e.target.value)
+}
+
+document.getElementById("scaleRange").oninput = e => {
+  const scale = e.target.value
   document.body.style.transform = `scale(${scale})`
   document.body.style.transformOrigin = "top center"
   localStorage.setItem("scale", scale)
 }
 
-window.setLang = function (lang) {
-  localStorage.setItem("lang", lang)
-
-  const title = document.getElementById("title")
-
-  if (lang === "en") {
-    title.innerText = "AoiChan"
-  } else {
-    title.innerText = "◡🥀 AoiChan 🥀◡"
-  }
-}
-
-window.goHome = function () {
+document.getElementById("homeBtn").onclick = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
-// LOAD SAVED SETTINGS
+document.getElementById("langSelect").onchange = e => {
+  const lang = e.target.value
+  localStorage.setItem("lang", lang)
+
+  document.getElementById("title").innerText =
+    lang === "en" ? "AoiChan" : "◡🥀 AoiChan 🥀◡"
+}
+
+// LOAD
 window.onload = () => {
   const theme = localStorage.getItem("theme")
   const scale = localStorage.getItem("scale")
