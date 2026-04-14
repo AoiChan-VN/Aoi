@@ -16,11 +16,13 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
+  
   background: #8a2be2;
   padding: 10px;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 2;
+  
+  z-index: 1002;
 }
 
 /* OVERLAY */
@@ -38,13 +40,17 @@ body {
 /* PANEL */
 .panel {
   position: fixed;
-  right: -260px;
+  right: -300px;
   top: 0;
-  width: 240px;
+  
+  width: 260px;
   height: 100%;
+  
   background: #111;
   padding: 20px;
+  
   transition: 0.3s;
+  z-index: 1001;
 }
 
 .panel.show {
