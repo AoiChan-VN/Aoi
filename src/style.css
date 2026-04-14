@@ -53,8 +53,8 @@ body {
   z-index: 1001;
 }
 
-.panel.show ~ .settings-btn {
-  right: 280px;
+.panel.show {
+  right: 0;
 }
 
 .header {
