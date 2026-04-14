@@ -44,13 +44,6 @@ jobs:
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
         uses: actions/deploy-pages@v5
-
-      - name: Delete deployment
-        uses: strumwolf/delete-deployment-environment@v2
-        with:
-          token: ${{ secrets.AOI_PAGES }}
-          environment: github-pages
-          onlyRemoveDeployments: true
         
       - name: 🗑️ 𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
         run: |
