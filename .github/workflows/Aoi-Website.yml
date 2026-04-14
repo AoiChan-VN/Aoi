@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
@@ -24,7 +24,7 @@ jobs:
       - run: npm run build
       
       - name: Đăng tải ➺【Artifact】
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-github-pages-artifact@v4
         with:
           path: './dist'
 
