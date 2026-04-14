@@ -1,52 +1,8 @@
 import './style.css'
 
-const canvas = document.getElementById("sakura")
-const ctx = canvas.getContext("2d")
-
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-
-let petals = []
-
-for (let i = 0; i < 40; i++) {
-  petals.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 4 + 2,
-    d: Math.random() * 2
-  })
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  ctx.fillStyle = "pink"
-
-  petals.forEach(p => {
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-    ctx.fill()
-  })
-
-  update()
-}
-
-function update() {
-  petals.forEach(p => {
-    p.y += p.d
-    p.x += Math.sin(p.y * 0.01)
-
-    if (p.y > canvas.height) {
-      p.y = 0
-      p.x = Math.random() * canvas.width
-    }
-  })
-}
-
-setInterval(draw, 30)
-
 document.querySelector('#app').innerHTML = `
   <div class="container">
-    <h1>◡🥀 AoiChan 🥀◡</h1>
+    <h1 id="title">◡🥀 AoiChan 🥀◡</h1>
     <p class="subtitle">Dev • Creator • Dreamer</p>
 
     <div class="card">
@@ -63,4 +19,51 @@ document.querySelector('#app').innerHTML = `
       </ul>
     </div>
   </div>
-` 
+`
+
+// ⚙️ SETTINGS LOGIC
+
+window.toggleSettings = function () {
+  const panel = document.getElementById("settings")
+  panel.style.display =
+    panel.style.display === "block" ? "block" : "block"
+}
+
+window.setTheme = function (theme) {
+  document.body.className = theme
+  localStorage.setItem("theme", theme)
+}
+
+window.setScale = function (scale) {
+  document.body.style.transform = `scale(${scale})`
+  document.body.style.transformOrigin = "top center"
+  localStorage.setItem("scale", scale)
+}
+
+window.setLang = function (lang) {
+  localStorage.setItem("lang", lang)
+
+  const title = document.getElementById("title")
+
+  if (lang === "en") {
+    title.innerText = "AoiChan"
+  } else {
+    title.innerText = "◡🥀 AoiChan 🥀◡"
+  }
+}
+
+window.goHome = function () {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
+
+// LOAD SAVED SETTINGS
+window.onload = () => {
+  const theme = localStorage.getItem("theme")
+  const scale = localStorage.getItem("scale")
+
+  if (theme) document.body.className = theme
+  if (scale) {
+    document.body.style.transform = `scale(${scale})`
+    document.body.style.transformOrigin = "top center"
+  }
+}
