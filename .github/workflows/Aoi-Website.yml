@@ -46,7 +46,7 @@ jobs:
         uses: actions/deploy-pages@v5
         
       - name: Delete deployment
-        uses: strumwolf/delete-deployment-environment@v2
+        uses: strumwolf/delete-deployment-environment@v3
         with:
           token: ${{ secrets.AOI_ACTIONS }}
           environment: github-pages
