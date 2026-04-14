@@ -20,12 +20,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
-          
       - run: npm install
       - run: npm run build
       
       - name: Đăng tải ➺【Artifact】
-        uses: actions/artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           path: './dist'
 
