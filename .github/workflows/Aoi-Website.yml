@@ -17,7 +17,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '24'
           
@@ -25,7 +25,7 @@ jobs:
       - run: npm run build
       
       - name: Đăng tải ➺【Artifact】
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/artifact@v4
         with:
           path: './dist'
 
