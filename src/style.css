@@ -13,6 +13,7 @@ body {
 h1 {
   color: #8a2be2;
   text-shadow: 0 0 20px #8a2be2;
+  box-shadow: 0 0 25px rgba(138,43,226,0.6);
 }
 
 .subtitle {
