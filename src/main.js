@@ -8,19 +8,18 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 
-// ===== SETTINGS (SIÊU NGẮN) =====
+// ===== SETTINGS =====
 const panel = document.getElementById("panel")
 const overlay = document.getElementById("overlay")
+const btn = document.getElementById("btn")
 
-document.getElementById("btn").onclick = () => {
-  panel.classList.add("show")
-  overlay.classList.add("show")
+btn.onclick = () => {
+  panel.classList.toggle("show")
+  overlay.classList.toggle("show")
 }
 
-document.getElementById("close").onclick = close
-overlay.onclick = close
-
-function close() {
+// click nền → đóng
+overlay.onclick = () => {
   panel.classList.remove("show")
   overlay.classList.remove("show")
 }
