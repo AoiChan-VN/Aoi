@@ -3,74 +3,44 @@ import './style.css'
 // UI
 document.querySelector('#app').innerHTML = `
   <div class="container">
-    <h1 id="title">◡🥀 AoiChan 🥀◡</h1>
-    <p class="subtitle">Dev • Creator • Dreamer</p>
-
-    <div class="card">
-      <h2>🚀 About</h2>
-      <p>Website cá nhân + dashboard.</p>
-    </div>
+    <h1>◡🥀 AoiChan 🥀◡</h1>
+    <p>Simple. Clean. No bug 😏</p>
   </div>
 `
 
-// SETTINGS SYSTEM
-window.addEventListener("DOMContentLoaded", () => {
-  const panel = document.getElementById("settings")
-  const overlay = document.getElementById("overlay")
-  const btn = document.getElementById("settingsBtn")
-  const closeBtn = document.getElementById("closeBtn")
+// ===== SETTINGS (SIÊU NGẮN) =====
+const panel = document.getElementById("panel")
+const overlay = document.getElementById("overlay")
 
-  // force reset trạng thái
-  panel.classList.remove("open")
+document.getElementById("btn").onclick = () => {
+  panel.classList.add("show")
+  overlay.classList.add("show")
+}
+
+document.getElementById("close").onclick = close
+overlay.onclick = close
+
+function close() {
+  panel.classList.remove("show")
   overlay.classList.remove("show")
+}
 
-  // open
-  btn.addEventListener("click", () => {
-    panel.classList.add("open")
-    overlay.classList.add("show")
-  })
+// THEME
+const theme = document.getElementById("theme")
 
-  // close
-  function close() {
-    panel.classList.remove("open")
-    overlay.classList.remove("show")
-  }
+theme.onchange = e => {
+  document.body.className = e.target.value
+  localStorage.setItem("theme", e.target.value)
+}
 
-  closeBtn.addEventListener("click", close)
-  overlay.addEventListener("click", close)
+// LOAD
+const saved = localStorage.getItem("theme")
+if (saved) {
+  document.body.className = saved
+  theme.value = saved
+}
 
-  // THEME
-  const themeSelect = document.getElementById("themeSelect")
-  themeSelect.onchange = e => {
-    document.body.className = e.target.value
-    localStorage.setItem("theme", e.target.value)
-  }
-
-  // SCALE
-  const scaleRange = document.getElementById("scaleRange")
-  scaleRange.oninput = e => {
-    const scale = e.target.value
-    document.body.style.transform = `scale(${scale})`
-    document.body.style.transformOrigin = "top center"
-    localStorage.setItem("scale", scale)
-  }
-
-  // HOME
-  document.getElementById("homeBtn").onclick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
-  // LOAD
-  const theme = localStorage.getItem("theme")
-  const scale = localStorage.getItem("scale")
-
-  if (theme) {
-    document.body.className = theme
-    themeSelect.value = theme
-  }
-
-  if (scale) {
-    document.body.style.transform = `scale(${scale})`
-    scaleRange.value = scale
-  }
-})
+// HOME
+document.getElementById("home").onclick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
