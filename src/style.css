@@ -1,31 +1,14 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle, #0f0f2d, #050510);
-  color: #ddd;
+  font-family: sans-serif;
+  background: #0f0f2d;
+  color: white;
 }
 
 /* UI */
 .container {
   text-align: center;
-  padding: 60px 20px;
-}
-
-h1 {
-  color: #c084fc;
-  text-shadow: 0 0 15px rgba(192,132,252,0.5);
-}
-
-.subtitle {
-  opacity: 0.6;
-}
-
-.card {
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 500px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
+  padding: 60px;
 }
 
 /* BUTTON */
@@ -33,79 +16,48 @@ h1 {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: rgba(138,43,226,0.8);
+  background: #8a2be2;
   padding: 10px;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 2;
 }
 
 /* OVERLAY */
-.settings-overlay {
+.overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.4);
-
-  opacity: 0;
-  pointer-events: none;
-
-  transition: 0.3s;
-  z-index: 999;
+  display: none;
 }
 
-.settings-overlay.show {
-  opacity: 1;
-  pointer-events: auto;
+.overlay.show {
+  display: block;
 }
 
 /* PANEL */
-.settings-panel {
+.panel {
   position: fixed;
+  right: -260px;
   top: 0;
-  right: -300px;
-
-  width: 260px;
+  width: 240px;
   height: 100%;
-
-  background: rgba(20,20,30,0.95);
+  background: #111;
   padding: 20px;
-
-  transition: right 0.3s ease;
-  z-index: 1000;
+  transition: 0.3s;
 }
 
-.settings-panel.open {
+.panel.show {
   right: 0;
 }
 
-.settings-header {
+.header {
   display: flex;
   justify-content: space-between;
 }
 
-.settings-header button {
-  background: none;
-  border: none;
-  color: #aaa;
-  cursor: pointer;
-}
-
-.settings-panel label {
-  display: block;
-  margin-top: 15px;
-  font-size: 13px;
-}
-
-.settings-panel select,
-.settings-panel input,
-.settings-panel button {
-  width: 100%;
-  margin-top: 5px;
-  padding: 6px;
-}
-
-/* LIGHT MODE */
+/* LIGHT */
 body.light {
-  background: #f3f3f3;
-  color: #222;
+  background: #f2f2f2;
+  color: #111;
 }
