@@ -8,32 +8,25 @@
 
 <div id="app"></div>
 
-<!-- ⚙️ BUTTON -->
-<div class="settings-btn" id="settingsBtn">⚙️</div>
+<div class="settings-btn" id="btn">⚙️</div>
 
-<!-- OVERLAY -->
-<div class="settings-overlay" id="overlay"></div>
+<div class="overlay" id="overlay"></div>
 
-<!-- PANEL -->
-<div class="settings-panel" id="settings">
-  <div class="settings-header">
+<div class="panel" id="panel">
+  <div class="header">
     <span>Settings</span>
-    <button id="closeBtn">✕</button>
+    <button id="close">✕</button>
   </div>
 
   <label>Theme</label>
-  <select id="themeSelect">
+  <select id="theme">
     <option value="dark">Dark</option>
     <option value="light">Light</option>
   </select>
 
-  <label>UI Scale</label>
-  <input type="range" id="scaleRange" min="0.9" max="1.2" step="0.05">
-
-  <button id="homeBtn">🏠 Home</button>
+  <button id="home">🏠 Home</button>
 </div>
 
 <script type="module" src="/src/main.js"></script>
-
 </body>
 </html>
