@@ -48,7 +48,7 @@ jobs:
       - name: Delete deployment
         uses: strumwolf/delete-deployment-environment@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AOI_PAGES }}
           environment: github-pages
           onlyRemoveDeployments: true
         
