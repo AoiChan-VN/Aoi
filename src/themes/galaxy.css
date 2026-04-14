@@ -1,0 +1,16 @@
+body {
+  background: radial-gradient(circle at 20% 30%, #1a0033, #000814);
+  color: #e0ccff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.galaxy-bg {
+  background-image: url('/images/galaxy.jpg');
+  background-size: cover;
+  animation: float 20s infinite linear;
+}
+
+@keyframes float {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 1000px; }
+} 
