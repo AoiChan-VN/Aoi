@@ -3,17 +3,18 @@ name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡ ωєв
 on:
   push:
     branches: ["main"]
+    
   workflow_dispatch:
-
-permissions:
-  actions: write
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      actions: write
+      contents: read
+      pages: write
+      id-token: write
     
     steps:
       - name: 📥 Check Source
