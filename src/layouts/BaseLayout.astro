@@ -4,6 +4,8 @@ import "../styles/themes.css";
 
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+
+import GlobalPlayer from "../components/media/GlobalPlayer.astro";
 ---
 
 <html lang="en" data-theme="dark">
@@ -31,5 +33,7 @@ import Footer from "../components/layout/Footer.astro";
       <slot />
     </main>
     <Footer />
+
+    <GlobalPlayer />
   </body>
 </html>
