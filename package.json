@@ -2,7 +2,6 @@
   "name": "aoi-astro-pages",
   "version": "1.0.0",
   "type": "module",
-  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
