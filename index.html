@@ -8,22 +8,26 @@
 
 <div id="app"></div>
 
-<div class="settings-btn" id="btn">⚙️</div>
+<!-- ⚙️ Floating button -->
+<div class="fab" id="btn">⚙️</div>
 
-<div class="overlay" id="overlay"></div>
-
-<div class="panel" id="panel">
-  <div class="header">
+<!-- 📱 Bottom Sheet -->
+<div class="sheet" id="sheet">
+  <div class="sheet-header">
+    <div class="drag"></div>
     <span>Settings</span>
   </div>
-  
-  <label class="switch">
-    <input type="checkbox" id="themeToggle">
-    <span class="slider"></span>
-  </label>
-  <button id="home">🏠 Home</button>
+
+  <div class="item">
+    <span>Dark Mode</span>
+    <label class="switch">
+      <input type="checkbox" id="themeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
 </div>
 
 <script type="module" src="/src/main.js"></script>
+
 </body>
 </html>
