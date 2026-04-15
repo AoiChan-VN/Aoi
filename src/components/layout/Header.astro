@@ -1,0 +1,32 @@
+---
+import ThemeToggle from "../ui/ThemeToggle.astro";
+import LangToggle from "../ui/LangToggle.astro";
+import NavControls from "./NavControls.astro";
+---
+
+<header class="header">
+  <div class="logo">AoiChan</div>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/media">Media</a>
+    <a href="/docs">Docs</a>
+  </nav>
+
+  <div class="controls">
+    <NavControls />
+    <ThemeToggle />
+    <LangToggle />
+  </div>
+</header>
+
+<style>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+</style> 
