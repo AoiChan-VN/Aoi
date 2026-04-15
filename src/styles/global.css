@@ -19,6 +19,26 @@ html, body {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
+nav a {
+  margin: 0 10px;
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  left: 0;
+  bottom: -3px;
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
 /* BUTTON */
 .btn {
   padding: 0.5rem 1rem;
