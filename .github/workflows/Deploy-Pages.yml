@@ -17,26 +17,32 @@ jobs:
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v6
-      - name: ⚡Install, 📦build, 📤and upload site
-        uses: withastro/action@v6
-        with:
-          path: .
-         # node-version: 24
-          package-manager: pnpm@latest
-          build-cmd: pnpm run build
+        
+      - name: 📦 Install dependencies
+        run: npm install
 
+      - name: 🏗 Build Astro
+        run: npm run build
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+          
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    
     environment: 
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    
     steps:
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
         uses: actions/deploy-pages@v5
         
-      - name: Delete deployment
+      - name: 🗑️ 𝐎𝐋𝐃 deployment
         uses: strumwolf/delete-deployment-environment@v3
         with:
           token: ${{ secrets.AOI_ACTIONS }}
