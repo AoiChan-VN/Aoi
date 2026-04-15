@@ -1,0 +1,11 @@
+---
+import Navbar from '../components/Navbar.astro';
+import ThemeToggle from '../components/ThemeToggle';
+---
+<html lang="en">
+  <body>
+    <Navbar />
+    <ThemeToggle client:load />
+    <slot />
+  </body>
+</html> 
