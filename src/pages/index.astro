@@ -1,7 +1,13 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
+
 <BaseLayout>
   <h1>🌸 AoiChan Website</h1>
-  <p>Welcome to my world ✨</p>
-</BaseLayout> 
+  <p>Welcome to my world.</p>
+
+  <div style="display:flex; gap:10px;">
+    <button onclick="history.back()" class="btn">⬅ Back</button>
+    <button onclick="history.forward()" class="btn">Next ➡</button>
+  </div>
+</BaseLayout>
