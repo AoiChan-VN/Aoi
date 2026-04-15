@@ -1,0 +1,12 @@
+// =======================
+// BLOG SYSTEM (MARKDOWN)
+// =======================
+---
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
+---
+{posts.map(post => (
+  <div class="glass">
+    <a href={post.slug}>{post.data.title}</a>
+  </div>
+))} 
