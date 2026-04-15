@@ -1,0 +1,25 @@
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/videos', label: 'Videos' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/docs', label: 'Docs' }
+];
+---
+<nav>
+  {links.map(link => (
+    <a href={link.href}>{link.label}</a>
+  ))}
+</nav>
+
+<style>
+nav {
+  display:flex;
+  gap:12px;
+  padding:16px;
+}
+a {
+  text-decoration:none;
+  color:var(--text);
+}
+</style> 
