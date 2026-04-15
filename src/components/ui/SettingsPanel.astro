@@ -1,5 +1,10 @@
+<div id="overlay" class="overlay"></div>
+
 <div id="panel" class="panel">
-  <h2>Settings</h2>
+  <div class="header">
+    <h2>Settings</h2>
+    <button id="closePanel">✖</button>
+  </div>
 
   <div class="item">
     <label>Theme</label>
@@ -14,51 +19,80 @@
 
 <script>
 const panel = document.getElementById("panel");
-const btn = document.getElementById("openSettings");
+const overlay = document.getElementById("overlay");
+const openBtn = document.getElementById("openSettings");
+const closeBtn = document.getElementById("closePanel");
 
-btn.onclick = () => {
-  panel.classList.toggle("show");
+// OPEN
+openBtn.onclick = () => {
+  panel.classList.add("show");
+  overlay.classList.add("show");
 };
 
-// THEME
-document.getElementById("themeToggle").onclick = () => {
-  const current = document.documentElement.dataset.theme || "dark";
+// CLOSE (button)
+closeBtn.onclick = closePanel;
 
-  const next =
-    current === "dark" ? "light" :
-    current === "light" ? "cyber" :
-    "dark";
+// CLOSE (click outside)
+overlay.onclick = closePanel;
 
-  document.documentElement.dataset.theme = next;
-  localStorage.setItem("theme", next);
-};
+// CLOSE (ESC)
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closePanel();
+});
 
-// LANG
-document.getElementById("langToggle").onclick = () => {
-  const lang = localStorage.getItem("lang") === "vi" ? "en" : "vi";
-  localStorage.setItem("lang", lang);
-  location.reload();
-};
+function closePanel() {
+  panel.classList.remove("show");
+  overlay.classList.remove("show");
+}
 </script>
 
 <style>
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .panel {
   position: fixed;
   top: 0;
   right: -300px;
   width: 260px;
   height: 100%;
-  background: rgba(20,20,20,0.9);
+  background: rgba(20,20,20,0.95);
   backdrop-filter: blur(15px);
   padding: 1rem;
   transition: right 0.3s ease;
+  z-index: 1000;
 }
 
 .panel.show {
   right: 0;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closePanel {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
 .item {
   margin-top: 1rem;
 }
-</style> 
+</style>
