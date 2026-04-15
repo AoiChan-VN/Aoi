@@ -26,17 +26,17 @@ jobs:
       - name: 🟢 Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: "pnpm"
 
       - name: 📦 Install deps
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: 🏗 Build
         run: pnpm build
         
       - name: 📤 Upload artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
           
@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
         uses: strumwolf/delete-deployment-environment@v3
