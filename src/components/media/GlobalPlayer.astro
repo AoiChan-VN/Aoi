@@ -1,9 +1,10 @@
-<audio id="player" controls src="/assets/audio/test.mp3"></audio>
+<audio id="player" autoplay muted loop src="/assets/audio/test.mp3"></audio>
 
-<style>
-#player {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-</style> 
+<script>
+const player = document.getElementById("player");
+
+document.body.addEventListener("click", () => {
+  player.muted = false;
+  player.play();
+}, { once: true });
+</script>
