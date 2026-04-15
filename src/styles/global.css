@@ -1,0 +1,28 @@
+:root {
+  --bg: #0f0f14;
+  --text: #ffffff;
+  --accent: #8b5cf6;
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #111;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  transition: all .2s ease;
+}
+
+button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+ 
