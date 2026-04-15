@@ -1,13 +1,17 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+import ThemeToggle from "./ThemeToggle.astro";
+import LanguageToggle from "./LanguageToggle.astro";
 ---
-<nav class="nav">
-  <a href="/Aoi/">Home</a>
-  <a href="/Aoi/videos">Videos</a>
-  <a href="/Aoi/gallery">Gallery</a>
-  <a href="/Aoi/music">Music</a>
-  <a href="/Aoi/blog">Blog</a>
-  <a href="/Aoi/docs">Docs</a>
 
-  <ThemeToggle />
-</nav> 
+<nav class="glass" style="padding:10px; display:flex; gap:10px;">
+  <a href="/">Home</a>
+  <a href="/gallery">Gallery</a>
+  <a href="/videos">Videos</a>
+  <a href="/blog">Blog</a>
+  <a href="/docs">Docs</a>
+
+  <div style="margin-left:auto; display:flex; gap:10px;">
+    <ThemeToggle />
+    <LanguageToggle />
+  </div>
+</nav>
