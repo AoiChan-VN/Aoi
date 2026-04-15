@@ -25,18 +25,22 @@ overlay.onclick = () => {
 }
 
 // THEME
-const theme = document.getElementById("theme")
+const toggle = document.getElementById("themeToggle")
 
-theme.onchange = e => {
-  document.body.className = e.target.value
-  localStorage.setItem("theme", e.target.value)
+// đổi theme
+toggle.onchange = () => {
+  const isLight = toggle.checked
+
+  document.body.className = isLight ? "light" : ""
+  localStorage.setItem("theme", isLight ? "light" : "dark")
 }
 
-// LOAD
+// load lại
 const saved = localStorage.getItem("theme")
-if (saved) {
-  document.body.className = saved
-  theme.value = saved
+
+if (saved === "light") {
+  document.body.className = "light"
+  toggle.checked = true
 }
 
 // HOME
