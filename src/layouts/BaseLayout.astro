@@ -4,6 +4,7 @@ import "../styles/themes.css";
 
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import SettingsPanel from "../components/ui/SettingsPanel.astro";
 ---
 
 <html lang="en" data-theme="dark">
@@ -31,5 +32,7 @@ import Footer from "../components/layout/Footer.astro";
       <slot />
     </main>
     <Footer />
+
+    <SettingsPanel />
   </body>
 </html>
