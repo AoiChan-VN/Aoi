@@ -8,16 +8,28 @@ html, body {
   font-family: system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* GLASS UI */
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 1rem;
-} 
+/* BUTTON */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00f7ff, #6a00ff);
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
