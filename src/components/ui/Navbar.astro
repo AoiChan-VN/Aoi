@@ -1,40 +1,11 @@
----
-const currentPath = Astro.url.pathname;
----
+<nav>
+  <a href="/Aoi/">🏠 Home</a>
+  <a href="/Aoi/videos">🎬 Videos</a>
+  <a href="/Aoi/gallery">🖼 Gallery</a>
+  <a href="/Aoi/music">🎧 Music</a>
+  <a href="/Aoi/blog">✍ Blog</a>
+  <a href="/Aoi/docs">📘 Docs</a>
 
-<nav class="glass nav">
-  <div class="left">
-    <button onclick="history.back()">←</button>
-    <button onclick="history.forward()">→</button>
-  </div>
-
-  <div class="center">
-    <a class={currentPath === '/' ? 'active' : ''} href="/">Home</a>
-    <a class={currentPath.startsWith('/videos') ? 'active' : ''} href="/videos">Videos</a>
-    <a class={currentPath.startsWith('/gallery') ? 'active' : ''} href="/gallery">Gallery</a>
-    <a class={currentPath.startsWith('/blog') ? 'active' : ''} href="/blog">Blog</a>
-    <a class={currentPath.startsWith('/docs') ? 'active' : ''} href="/docs">Docs</a>
-  </div>
-
-  <div class="right">
-    <slot />
-  </div>
+  <button onclick="history.back()">⬅</button>
+  <button onclick="history.forward()">➡</button>
 </nav>
-
-<style>
-.nav {
-  display:flex;
-  justify-content:space-between;
-  padding:12px 20px;
-}
-
-.center a {
-  margin:0 8px;
-  text-decoration:none;
-  color:white;
-}
-
-.active {
-  color:#22d3ee;
-}
-</style>
