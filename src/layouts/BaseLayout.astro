@@ -10,8 +10,21 @@ import Footer from "../components/layout/Footer.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
+    <!-- SEO + SPEED -->
     <title>AoiChan</title>
+    <meta name="description" content="AoiChan Website" />
+
+    <!-- PRELOAD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- THEME INIT (NO FLASH) -->
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme) document.documentElement.dataset.theme = theme;
+    </script>
   </head>
+
   <body>
     <Header />
     <main class="container">
@@ -19,4 +32,4 @@ import Footer from "../components/layout/Footer.astro";
     </main>
     <Footer />
   </body>
-</html> 
+</html>
