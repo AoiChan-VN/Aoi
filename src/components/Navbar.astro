@@ -1,26 +1,30 @@
+// =======================
+// Navbar.astro (ADVANCED)
+// =======================
 ---
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/videos', label: 'Videos' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/docs', label: 'Docs' }
-];
+const path = Astro.url.pathname;
 ---
-<nav>
-  {links.map(link => (
-    <a href={link.href}>{link.label}</a>
-  ))}
+<nav class="glass nav">
+  <div class="left">
+    <button onclick="history.back()">←</button>
+    <button onclick="history.forward()">→</button>
+  </div>
+
+  <div class="center">
+    <a class={path==='/'?'active':''} href="/">Home</a>
+    <a class={path.includes('videos')?'active':''} href="/videos">Videos</a>
+    <a class={path.includes('gallery')?'active':''} href="/gallery">Gallery</a>
+    <a class={path.includes('blog')?'active':''} href="/blog">Blog</a>
+    <a class={path.includes('docs')?'active':''} href="/docs">Docs</a>
+  </div>
+
+  <div class="right">
+    <slot />
+  </div>
 </nav>
 
 <style>
-nav {
-  display:flex;
-  gap:12px;
-  padding:16px;
-}
-a {
-  text-decoration:none;
-  color:var(--text);
-}
-</style> 
+.nav {display:flex;justify-content:space-between;padding:12px 20px;}
+.center a {margin:0 8px;text-decoration:none;color:white;}
+.active {color:#22d3ee;}
+</style>
