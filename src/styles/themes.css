@@ -1,0 +1,14 @@
+:root {
+  --bg: #0f0f0f;
+  --text: #ffffff;
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #000000;
+}
+
+[data-theme="cyber"] {
+  --bg: #050510;
+  --text: #00f7ff;
+} 
