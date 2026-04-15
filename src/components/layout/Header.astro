@@ -1,8 +1,5 @@
----
----
-
 <header class="header">
-  <div class="logo">🌙 AoiChan</div>
+  <div class="logo">:🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
 
   <nav>
     <a href="/">Home</a>
@@ -14,19 +11,8 @@
   <button id="openSettings">⚙️</button>
 </header>
 
-<style>
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 1rem;
-  backdrop-filter: blur(12px);
-}
-
-#openSettings {
-  border: none;
-  background: transparent;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-</style>
+<script>
+document.getElementById("openSettings")?.addEventListener("click", () => {
+  window.dispatchEvent(new Event("open-settings"));
+});
+</script>
