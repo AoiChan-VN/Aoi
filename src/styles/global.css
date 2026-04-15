@@ -1,34 +1,24 @@
-// =======================
-//       (CYBER UI)
-// =======================
 :root {
-  --bg: #05070d;
-  --card: rgba(255,255,255,0.06);
-  --text: #e6e6ff;
-  --accent: #7c3aed;
-  --neon: #22d3ee;
+  --bg: #0a0a0f;
+  --neon: #00f0ff;
+  --pink: #ff00ff;
 }
 
 body {
-  margin: 0;
-  background: radial-gradient(circle at top, #0a0f1f, #05070d);
-  color: var(--text);
-  font-family: 'Inter', system-ui;
-}
-
-.glass {
-  background: var(--card);
-  backdrop-filter: blur(14px);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-button {
-  padding: 10px 16px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(135deg, #7c3aed, #22d3ee);
+  background: var(--bg);
   color: white;
-  transition: 0.2s;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.cyber-btn {
+  border: 1px solid var(--neon);
+  padding: 10px 20px;
+  color: var(--neon);
+  transition: 0.3s;
+}
+
+.cyber-btn:hover {
+  background: var(--neon);
+  color: black;
+  box-shadow: 0 0 15px var(--neon);
 }
