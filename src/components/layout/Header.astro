@@ -1,9 +1,7 @@
 ---
-import ThemeToggle from "../ui/ThemeToggle.astro";
-import LangToggle from "../ui/LangToggle.astro";
 ---
 
-<header class="header glass">
+<header class="header">
   <div class="logo">🌙 AoiChan</div>
 
   <nav>
@@ -13,10 +11,7 @@ import LangToggle from "../ui/LangToggle.astro";
     <a href="/docs">Docs</a>
   </nav>
 
-  <div class="controls">
-    <ThemeToggle />
-    <LangToggle />
-  </div>
+  <button id="openSettings">⚙️</button>
 </header>
 
 <style>
@@ -24,8 +19,14 @@ import LangToggle from "../ui/LangToggle.astro";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 1rem;
-  position: sticky;
-  top: 0;
+  padding: 0.8rem 1rem;
+  backdrop-filter: blur(12px);
+}
+
+#openSettings {
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 </style>
