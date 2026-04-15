@@ -1,17 +1,16 @@
-// =======================
-// BaseLayout.astro
-// =======================
 ---
 import Navbar from '../components/Navbar.astro';
 import ThemeToggle from '../components/ThemeToggle';
 import SettingsPanel from '../components/SettingsPanel';
 ---
-<html>
+
+<html lang="en">
   <body>
     <Navbar>
       <ThemeToggle client:load />
       <SettingsPanel client:load />
     </Navbar>
+
     <main>
       <slot />
     </main>
