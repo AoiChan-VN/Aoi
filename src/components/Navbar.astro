@@ -1,9 +1,7 @@
-// =======================
-// Navbar.astro (ADVANCED)
-// =======================
 ---
-const path = Astro.url.pathname;
+const currentPath = Astro.url.pathname;
 ---
+
 <nav class="glass nav">
   <div class="left">
     <button onclick="history.back()">←</button>
@@ -11,11 +9,11 @@ const path = Astro.url.pathname;
   </div>
 
   <div class="center">
-    <a class={path==='/'?'active':''} href="/">Home</a>
-    <a class={path.includes('videos')?'active':''} href="/videos">Videos</a>
-    <a class={path.includes('gallery')?'active':''} href="/gallery">Gallery</a>
-    <a class={path.includes('blog')?'active':''} href="/blog">Blog</a>
-    <a class={path.includes('docs')?'active':''} href="/docs">Docs</a>
+    <a class={currentPath === '/' ? 'active' : ''} href="/">Home</a>
+    <a class={currentPath.startsWith('/videos') ? 'active' : ''} href="/videos">Videos</a>
+    <a class={currentPath.startsWith('/gallery') ? 'active' : ''} href="/gallery">Gallery</a>
+    <a class={currentPath.startsWith('/blog') ? 'active' : ''} href="/blog">Blog</a>
+    <a class={currentPath.startsWith('/docs') ? 'active' : ''} href="/docs">Docs</a>
   </div>
 
   <div class="right">
@@ -24,7 +22,19 @@ const path = Astro.url.pathname;
 </nav>
 
 <style>
-.nav {display:flex;justify-content:space-between;padding:12px 20px;}
-.center a {margin:0 8px;text-decoration:none;color:white;}
-.active {color:#22d3ee;}
+.nav {
+  display:flex;
+  justify-content:space-between;
+  padding:12px 20px;
+}
+
+.center a {
+  margin:0 8px;
+  text-decoration:none;
+  color:white;
+}
+
+.active {
+  color:#22d3ee;
+}
 </style>
