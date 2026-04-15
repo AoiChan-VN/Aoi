@@ -14,32 +14,25 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: 📥 Check Source
-        uses: actions/checkout@v5
-        
-      - name: 📒 Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: '24'
-      
-      - run: npm install
-      - run: npm run build
-      
-      - name: Đăng tải ➺【Artifact】
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: './dist'
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v6
+      - name: ⚡Install, 📦build, 📤and upload site
+        uses: withastro/action@v6
+        # with:
+          # path: . # The root location of your Astro project inside the repository. (optional)
+          # node-version: 24 # The specific version of Node that should be used to build your site. Defaults to 22. (optional)
+          # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
+          # build-cmd: pnpm run build # The command to run to build your site. Runs the package build script/task by default. (optional)
+        # env:
+          # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
     environment: 
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
     steps:
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
