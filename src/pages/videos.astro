@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import VideoEmbed from "../components/VideoEmbed.astro";
+import videos from "../data/videos.json";
+---
+
+<BaseLayout>
+  <h2>Videos</h2>
+
+  {videos.map(v => (
+    <VideoEmbed url={v.url} />
+  ))}
+</BaseLayout> 
