@@ -1,9 +1,22 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+
 const posts = await getCollection('blog');
 ---
-{posts.map(post => (
-  <div class="glass">
-    <a href={post.slug}>{post.data.title}</a>
-  </div>
-))} 
+
+<BaseLayout>
+  <h1>📝 Blog</h1>
+
+  {posts.length === 0 && (
+    <p>No posts yet.</p>
+  )}
+
+  {posts.map((post) => (
+    <div class="glass" style="padding:16px;margin:12px 0;">
+      <a href={`/blog/${post.slug}`}>
+        <h3>{post.data.title}</h3>
+      </a>
+    </div>
+  ))}
+</BaseLayout>
