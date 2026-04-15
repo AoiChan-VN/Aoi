@@ -1,7 +1,7 @@
 :root {
-  --bg: #0f0f1a;
+  --bg: #0f0f14;
   --text: #ffffff;
-  --accent: #ff4da6;
+  --primary: #7c5cff;
 }
 
 [data-theme="light"] {
@@ -17,23 +17,19 @@ body {
   transition: 0.3s;
 }
 
-button {
-  border-radius: 12px;
+/* Glass UI */
+.glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+}
+
+/* Button iOS style */
+.btn {
   padding: 10px 16px;
-  border: none;
-  background: var(--accent);
+  border-radius: 999px;
+  background: var(--primary);
   color: white;
+  border: none;
   cursor: pointer;
-}
-
-.nav {
-  display: flex;
-  gap: 10px;
-  padding: 10px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 16px;
 }
