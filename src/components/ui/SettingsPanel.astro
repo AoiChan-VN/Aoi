@@ -1,0 +1,64 @@
+<div id="panel" class="panel">
+  <h2>Settings</h2>
+
+  <div class="item">
+    <label>Theme</label>
+    <button id="themeToggle">Change</button>
+  </div>
+
+  <div class="item">
+    <label>Language</label>
+    <button id="langToggle">Switch</button>
+  </div>
+</div>
+
+<script>
+const panel = document.getElementById("panel");
+const btn = document.getElementById("openSettings");
+
+btn.onclick = () => {
+  panel.classList.toggle("show");
+};
+
+// THEME
+document.getElementById("themeToggle").onclick = () => {
+  const current = document.documentElement.dataset.theme || "dark";
+
+  const next =
+    current === "dark" ? "light" :
+    current === "light" ? "cyber" :
+    "dark";
+
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem("theme", next);
+};
+
+// LANG
+document.getElementById("langToggle").onclick = () => {
+  const lang = localStorage.getItem("lang") === "vi" ? "en" : "vi";
+  localStorage.setItem("lang", lang);
+  location.reload();
+};
+</script>
+
+<style>
+.panel {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 260px;
+  height: 100%;
+  background: rgba(20,20,20,0.9);
+  backdrop-filter: blur(15px);
+  padding: 1rem;
+  transition: right 0.3s ease;
+}
+
+.panel.show {
+  right: 0;
+}
+
+.item {
+  margin-top: 1rem;
+}
+</style> 
