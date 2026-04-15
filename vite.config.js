@@ -1,7 +1,6 @@
-// vite.config.js
-import { defineConfig } from 'vite'
+import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  base: '/Aoi/', // Thay bằng tên repository của bạn
-  // ... các cấu hình khác
-})
+  site: 'https://aoichan-vn.github.io/Aoi/',
+  base: '/Aoi/',
+});
