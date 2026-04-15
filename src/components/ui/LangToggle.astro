@@ -1,0 +1,11 @@
+<button id="langToggle">Lang</button>
+
+<script>
+const btn = document.getElementById("langToggle");
+
+btn.onclick = () => {
+  const lang = localStorage.getItem("lang") === "vi" ? "en" : "vi";
+  localStorage.setItem("lang", lang);
+  location.reload();
+};
+</script>
