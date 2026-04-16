@@ -1,16 +1,23 @@
-import { initI18n, updateContent } from './i18n.js';
-import { renderProducts } from './renderer.js';
+import { initI18n } from './i18n.js';
+import { renderContent } from './renderer.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Chạy song song các tác vụ để tiết kiệm thời gian
-    const [lang] = await Promise.all([
-        initI18n(),
-        renderProducts()
-    ]);
+    const loader = document.getElementById('loading');
 
-    // Hiệu ứng Fade-in khi mọi thứ đã sẵn sàng
-    document.body.classList.add('ready');
-    
-    console.log("System 2026 Ready.");
+    try {
+        // Chạy đồng thời để tối ưu tốc độ
+        await Promise.all([
+            initI18n(),
+            renderContent()
+        ]);
+        
+        // Tắt màn hình chờ
+        if(loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.remove(), 500);
+        }
+    } catch (err) {
+        console.error("Lỗi hệ thống:", err);
+        if(loader) loader.remove();
+    }
 });
- 
