@@ -3,36 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</title>
-    <!-- Load CSS cực nhanh bằng cách preload -->
-    <link rel="preload" href="assets/css/main.css" as="style">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <title>◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
+    <script src="https://jsdelivr.net"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <style>
+        /* Loading Screen Fix: Tự biến mất sau 3s nếu JS kẹt */
+        #loading {
+            position: fixed; inset: 0; background: #050510; z-index: 10000;
+            display: flex; justify-content: center; align-items: center;
+            color: #ff007a; font-family: sans-serif; transition: 0.5s;
+            animation: autoHide 3s forwards;
+        }
+        @keyframes autoHide { 90% {opacity:1;} 100% {opacity:0; visibility:hidden;} }
+    </style>
 </head>
 <body>
+    <div id="loading">✨ Loading Space...</div>
     <div class="nebula-bg"></div>
-    
+
     <nav class="navbar">
-        <div class="logo">🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
+        <div class="logo">◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
+        <ul class="nav-links">
+            <li data-key="nav_home">Trang chủ</li>
+            <li data-key="nav_prods">Sản phẩm</li>
+        </ul>
         <select id="langSwitcher">
-            <option value="vi">VI</option>
-            <option value="en">EN</option>
+            <option value="vi">🇻🇳 VI</option>
+            <option value="en">🇺🇸 EN</option>
         </select>
     </nav>
 
     <main>
         <section class="hero">
-            <h1 class="glitch" data-key="hero_title">Loading...</h1>
-            <p data-key="hero_desc"></p>
+            <h1 class="glitch" data-key="hero_title">...</h1>
+            <p data-key="hero_desc">Initialising...</p>
         </section>
 
-        <div id="product-grid" class="grid-container"></div>
+        <section id="products" class="grid-container"></section>
 
-        <section class="markdown-area">
-            <div id="md-viewer"></div>
+        <section class="content-area">
+            <h2 data-key="title_blog">Tài liệu</h2>
+            <div id="md-viewer" class="md-content"></div>
         </section>
     </main>
 
-    <!-- Sử dụng type="module" để code không bị lộn xộn và tự động load nhanh -->
-    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>
