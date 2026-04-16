@@ -49,6 +49,11 @@ header h1 {
   margin-bottom: 10px;
 }
 
+.post-item.active {
+  color: #00ffcc;
+  font-weight: bold;
+}
+
 /* CONTENT */
 #app {
   padding: clamp(12px, 3vw, 30px);
