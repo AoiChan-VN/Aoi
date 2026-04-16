@@ -3,8 +3,13 @@
 
   await loadLang(lang);
   await loadTheme();
+  await loadPosts();
 
   router();
+
+  if (POSTS[0]) {
+    loadPost(POSTS[0].slug);
+  }
 
   const langSwitch = document.getElementById("lang-switch");
 
@@ -21,4 +26,4 @@
     await loadLang(langSwitch.value);
     router();
   };
-})(); 
+})();
