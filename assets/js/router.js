@@ -1,9 +1,8 @@
 function router() {
-  const app = document.getElementById("app");
   const path = location.hash.slice(1) || "/";
 
   if (path === "/") {
-    app.innerHTML = `<h2>${t("home")}</h2>`;
+    document.getElementById("app").innerHTML = "<h2>Welcome</h2>";
   }
 
   if (path.startsWith("/post/")) {
@@ -12,4 +11,4 @@ function router() {
   }
 }
 
-window.addEventListener("hashchange", router); 
+window.addEventListener("hashchange", router);
