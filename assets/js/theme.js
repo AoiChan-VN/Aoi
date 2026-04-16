@@ -25,4 +25,4 @@ function applyTheme(theme) {
   } else {
     bg.innerHTML = `<img src="${theme.file}">`;
   }
-} 
+}
