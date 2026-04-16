@@ -1,7 +1,10 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar.astro';
 ---
-
-<BaseLayout>
-  <h1>Welcome to AoiChan 🌙</h1>
-</BaseLayout> 
+<MainLayout>
+  <Navbar />
+  <section class="h-screen flex items-center justify-center text-center">
+    <h1 class="text-4xl font-bold">Welcome to Astro 2026</h1>
+  </section>
+</MainLayout>
