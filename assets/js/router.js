@@ -6,6 +6,8 @@ function router() {
     CURRENT = slug;
     loadPost(slug);
     renderPosts();
+  } else {
+    document.getElementById("app").innerHTML = "<h2>Welcome</h2>";
   }
 }
 
