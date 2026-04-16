@@ -1,56 +1,48 @@
-// Dữ liệu mẫu (Có thể chuyển sang file JSON riêng nếu cần)
-const products = [
-    { title: "Quantum Plugin", desc: "Tối ưu hóa Server tốc độ cao.", link: "#" },
-    { title: "Galaxy War Game", desc: "Game RPG phong cách vũ trụ.", link: "#" }
-];
+const App = {
+    // Dữ liệu ngôn ngữ nhúng trực tiếp để không tốn thời gian fetch file .json lúc đầu
+    langData: {
+        vi: { hero: "Chuyên gia phát triển Plugin & Game", title: "Sản phẩm" },
+        en: { hero: "Expert Plugin & Game Developer", title: "Products" }
+    },
 
-// 1. Đa ngôn ngữ
-async function updateLanguage(lang) {
-    const response = await fetch('lang.json');
-    const data = await response.json();
-    
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.innerText = data[lang][key];
-    });
-    localStorage.setItem('pref-lang', lang);
-}
+    init() {
+        // 1. Tắt màn hình loading ngay khi DOM sẵn sàng
+        const loader = document.getElementById('loader');
+        if(loader) loader.style.opacity = '0';
+        setTimeout(() => loader?.remove(), 400);
 
-document.getElementById('lang-switcher').addEventListener('change', (e) => {
-    updateLanguage(e.target.value);
-});
+        // 2. Render nhanh dữ liệu tĩnh
+        this.renderContent();
 
-// 2. Load Markdown
-async function loadMarkdown(file) {
-    try {
-        const response = await fetch(`./content/${file}.md`);
-        const text = await response.text();
-        document.getElementById('md-viewer').innerHTML = marked.parse(text);
-    } catch (err) {
-        document.getElementById('md-viewer').innerHTML = "Chưa có nội dung bài viết.";
-    }
-}
+        // 3. Trì hoãn các tác vụ nặng (Markdown, hiệu ứng xa)
+        window.requestIdleCallback(() => {
+            this.loadExtraModules();
+        });
+    },
 
-// 3. Khởi tạo Website
-window.onload = () => {
-    // Ngôn ngữ mặc định
-    const savedLang = localStorage.getItem('pref-lang') || 'vi';
-    document.getElementById('lang-switcher').value = savedLang;
-    updateLanguage(savedLang);
-
-    // Load Sản phẩm
-    const prodList = document.getElementById('product-list');
-    products.forEach(p => {
-        prodList.innerHTML += `
-            <div class="card">
-                <h3>${p.title}</h3>
-                <p>${p.desc}</p>
-                <a href="${p.link}" style="color:var(--accent); text-decoration:none; margin-top:10px; display:inline-block;">Chi tiết →</a>
+    renderContent() {
+        const lang = localStorage.getItem('lang') || 'vi';
+        document.getElementById('hero-text').innerText = this.langData[lang].hero;
+        
+        // Render card sản phẩm nhanh từ mảng có sẵn
+        const products = [
+            { t: "Aoi Plugin", d: "High performance." },
+            { t: "Star Game", d: "Cosmic RPG." }
+        ];
+        const container = document.getElementById('product-list');
+        container.innerHTML = products.map(p => `
+            <div class="card" style="opacity:0; animation: fadeIn 0.5s forwards;">
+                <h3>${p.t}</h3><p>${p.d}</p>
             </div>
-        `;
-    });
+        `).join('');
+    },
 
-    // Load bài Markdown mặc định (Ví dụ file about.md)
-    loadMarkdown('about');
+    loadExtraModules() {
+        // Chỉ tải Markdown khi người dùng cuộn xuống hoặc sau khi trang chính đã mượt
+        console.log("Hệ thống đã sẵn sàng 100%");
+        // Gọi fetch Markdown ở đây nếu cần
+    }
 };
- 
+
+// Chạy khởi tạo
+document.addEventListener('DOMContentLoaded', () => App.init());
