@@ -1,0 +1,8 @@
+{
+  "defaultLang": "vi",
+  "themes": [
+    { "name": "Video", "type": "video", "file": "assets/media/bg.mp4" },
+    { "name": "GIF", "type": "gif", "file": "assets/media/bg.gif" },
+    { "name": "Image", "type": "image", "file": "assets/media/bg.jpg" }
+  ]
+} 
