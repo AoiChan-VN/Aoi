@@ -3,60 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀 | Portfolio</title>
-    <meta name="description" content="AoiChan Portfolio - Plugins, Games & Products">
-    <!-- Thư viện hỗ trợ: Font & Markdown -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <script src="https://jsdelivr.net"></script>
-    <link rel="stylesheet" href="style.css">
+    <title>꧁🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀꧂</title>
+    
+    <!-- Critical CSS: Hiển thị ngay lập tức không chờ file .css -->
+    <style>
+        :root { --bg: #050510; --accent: #ff007a; }
+        body { background: var(--bg); margin: 0; overflow-x: hidden; color: #fff; font-family: sans-serif; }
+        .loading-screen { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.4s; }
+        .navbar { height: 60px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); position: fixed; width: 100%; top: 0; z-index: 100; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    </style>
+    
+    <!-- Tải CSS chính một cách bất đồng bộ -->
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
 </head>
 <body>
-    <div id="nebula-bg"></div> <!-- Hiệu ứng vũ trụ -->
+    <!-- Màn hình chờ siêu nhẹ -->
+    <div id="loader" class="loading-screen">✨</div>
+
+    <div id="nebula-bg"></div>
 
     <nav class="navbar">
-        <div class="logo">◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
-        <ul class="nav-links">
-            <li><a href="#home" data-i18n="nav_home">Trang chủ</a></li>
-            <li><a href="#products" data-i18n="nav_prods">Sản phẩm</a></li>
-            <li><a href="#blog" data-i18n="nav_blog">Bài viết</a></li>
-        </ul>
-        <select id="lang-switcher">
-            <option value="vi">🇻🇳 VI</option>
-            <option value="en">🇺🇸 EN</option>
-        </select>
+        <div class="logo" style="margin-left: 5%;">🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
     </nav>
 
     <main id="content-area">
-        <!-- Section Home -->
-        <section id="home" class="hero fade-in">
-            <h1 class="glitch">𝓐𝓸𝓲 𝓒𝓱𝓪𝓷</h1>
-            <p data-i18n="hero_desc">Chuyên gia phát triển Plugin, Game và Giải pháp công nghệ cao.</p>
-            <div class="cta-btns">
-                <a href="#products" class="btn primary" data-i18n="btn_view">Xem ngay</a>
-            </div>
+        <section class="hero">
+            <h1 class="glitch" style="font-size: 3.5rem;">𝓐𝓸𝓲 𝓒𝓱𝓪𝓷</h1>
+            <p id="hero-text">Loading energy...</p>
         </section>
-
-        <!-- Section Products -->
-        <section id="products" class="grid-container fade-in">
-            <h2 data-i18n="title_prods">Sản phẩm nổi bật</h2>
-            <div id="product-list" class="grid">
-                <!-- Data đổ từ script -->
-            </div>
-        </section>
-
-        <!-- Section Markdown Content -->
-        <section id="blog" class="markdown-section fade-in">
-            <h2 data-i18n="title_blog">Tài liệu & Markdown</h2>
-            <div id="md-viewer" class="md-content">
-                <!-- Nội dung Markdown hiển thị tại đây -->
-            </div>
-        </section>
+        
+        <div id="product-list" class="grid" style="padding: 0 10%;"></div>
+        <div id="md-viewer" style="padding: 5% 10%;"></div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 AoiChan. Powered by StarDust Engine.</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <!-- Tải Script ở cuối và dùng defer -->
+    <script src="https://jsdelivr.net" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
