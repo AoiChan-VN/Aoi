@@ -3,42 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>꧁🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀꧂</title>
-    
-    <!-- Critical CSS: Hiển thị ngay lập tức không chờ file .css -->
+    <title>◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
     <style>
-        :root { --bg: #050510; --accent: #ff007a; }
-        body { background: var(--bg); margin: 0; overflow-x: hidden; color: #fff; font-family: sans-serif; }
-        .loading-screen { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.4s; }
-        .navbar { height: 60px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); position: fixed; width: 100%; top: 0; z-index: 100; }
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        /* Tối ưu CSS: Chỉ dùng những gì cần thiết để hiển thị ngay */
+        :root { --bg: #030308; --accent: #ff007a; --nebula: linear-gradient(45deg, #050510, #1a0b2e, #050510); }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        /* Hiệu ứng nền tĩnh - nhẹ hơn video/ảnh nhiều lần */
+        .nebula-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--nebula); z-index: -1; opacity: 0.6; }
+        
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(0,0,0,0.9); position: fixed; width: 100%; top: 0; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+        
+        /* Hero Section */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle, rgba(255,0,122,0.05) 0%, transparent 70%); }
+        h1 { font-size: clamp(2rem, 8vw, 4rem); margin: 0; letter-spacing: 2px; }
+        .btn { margin-top: 20px; padding: 12px 30px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; border-radius: 50px; transition: 0.3s; background: transparent; cursor: pointer; }
+        .btn:hover { background: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent); }
+
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 50px 10%; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+        /* Đa ngôn ngữ & Markdown Area */
+        .content-section { padding: 80px 10%; min-height: 400px; }
+        #md-content { line-height: 1.7; color: #ccc; }
+        
+        /* Responsive */
+        @media (max-width: 600px) { .grid { padding: 20px 5%; } }
     </style>
-    
-    <!-- Tải CSS chính một cách bất đồng bộ -->
-    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
 </head>
 <body>
-    <!-- Màn hình chờ siêu nhẹ -->
-    <div id="loader" class="loading-screen">✨</div>
-
-    <div id="nebula-bg"></div>
-
-    <nav class="navbar">
-        <div class="logo" style="margin-left: 5%;">🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
+    <div class="nebula-bg"></div>
+    <nav>
+        <div class="logo">◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
+        <select id="lang" style="background:transparent; color:#fff; border:1px solid #444; border-radius:4px; padding:2px 5px;">
+            <option value="vi">VI</option>
+            <option value="en">EN</option>
+        </select>
     </nav>
 
-    <main id="content-area">
-        <section class="hero">
-            <h1 class="glitch" style="font-size: 3.5rem;">𝓐𝓸𝓲 𝓒𝓱𝓪𝓷</h1>
-            <p id="hero-text">Loading energy...</p>
-        </section>
-        
-        <div id="product-list" class="grid" style="padding: 0 10%;"></div>
-        <div id="md-viewer" style="padding: 5% 10%;"></div>
-    </main>
+    <section class="hero">
+        <h1 id="hero-title">𝓐𝓸𝓲 𝓒𝓱𝓪𝓷</h1>
+        <p id="hero-desc">Đang tải...</p>
+        <a href="#products" class="btn" id="btn-text">Khám phá</a>
+    </section>
 
-    <!-- Tải Script ở cuối và dùng defer -->
-    <script src="https://jsdelivr.net" defer></script>
-    <script src="script.js" defer></script>
+    <section id="products" class="grid"></section>
+
+    <section class="content-section">
+        <h2 id="blog-title">Bài viết</h2>
+        <div id="md-content">Vui lòng đợi nội dung được tối ưu...</div>
+    </section>
+
+    <script>
+        // Dữ liệu nhúng trực tiếp để KHÔNG tốn thời gian fetch file bên ngoài
+        const DATA = {
+            vi: {
+                desc: "Chuyên gia Plugin & Game 2026",
+                btn: "Xem sản phẩm",
+                blog: "Tài liệu & Markdown",
+                items: [
+                    { t: "Aoi Core", d: "Plugin tối ưu hệ thống." },
+                    { t: "Nebula Engine", d: "Game engine nhẹ nhất thế giới." }
+                ]
+            },
+            en: {
+                desc: "Expert Plugin & Game Developer 2026",
+                btn: "View Products",
+                blog: "Docs & Markdown",
+                items: [
+                    { t: "Aoi Core", d: "System optimization plugin." },
+                    { t: "Nebula Engine", d: "World's lightest game engine." }
+                ]
+            }
+        };
+
+        const render = (lang) => {
+            const d = DATA[lang];
+            document.getElementById('hero-desc').innerText = d.desc;
+            document.getElementById('btn-text').innerText = d.btn;
+            document.getElementById('blog-title').innerText = d.blog;
+            
+            const grid = document.getElementById('products');
+            grid.innerHTML = d.items.map(i => `
+                <div class="card">
+                    <h3>${i.t}</h3>
+                    <p style="font-size:0.9rem; color:#888;">${i.d}</p>
+                </div>
+            `).join('');
+            
+            // Giả lập Markdown đơn giản không cần thư viện Marked.js nặng nề
+            document.getElementById('md-content').innerHTML = `
+                <p>🚀 <strong>Hệ thống sẵn sàng.</strong></p>
+                <p>Website đã được tối ưu hóa Code sạch, loại bỏ toàn bộ JavaScript dư thừa và Request ngoại vi để đạt tốc độ tối đa trên GitHub Pages.</p>
+            `;
+        };
+
+        // Khởi tạo
+        document.getElementById('lang').onchange = (e) => render(e.target.value);
+        window.onload = () => render('vi');
+    </script>
 </body>
 </html>
