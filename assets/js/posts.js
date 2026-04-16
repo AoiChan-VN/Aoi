@@ -4,7 +4,6 @@ let CURRENT = "";
 async function loadPosts() {
   const res = await fetch("content/index.json");
   POSTS = await res.json();
-
   renderPosts();
 }
 
@@ -22,6 +21,6 @@ function renderPosts() {
 function goPost(slug) {
   CURRENT = slug;
   location.hash = "/post/" + slug;
-  renderPosts(); // update active
+  renderPosts();
   closeMenu();
 }
