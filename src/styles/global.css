@@ -1,55 +1,25 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ffffff;
+  --text: #000000;
 }
 
-html, body {
-  font-family: system-ui, sans-serif;
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+}
+
+[data-theme="cyber"] {
+  --bg: #020617;
+  --text: #22d3ee;
+  font-family: monospace;
+}
+
+body {
   background: var(--bg);
   color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-/* GLASS UI */
-.glass {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-nav a {
-  margin: 0 10px;
-  position: relative;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: var(--accent);
-  left: 0;
-  bottom: -3px;
   transition: 0.3s;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-/* BUTTON */
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(135deg, #00f7ff, #6a00ff);
-  color: white;
-  transition: transform 0.2s ease;
-}
-
-.btn:hover {
-  transform: scale(1.05);
 }
