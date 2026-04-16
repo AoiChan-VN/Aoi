@@ -39,9 +39,14 @@ header h1 {
 
 /* SIDEBAR */
 #sidebar {
+  display: none;
   padding: clamp(10px, 2vw, 20px);
   overflow-y: auto;
   backdrop-filter: blur(10px);
+}
+
+#sidebar.open {
+  display: block;
 }
 
 .post-item {
