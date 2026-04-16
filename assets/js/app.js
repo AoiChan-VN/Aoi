@@ -11,6 +11,7 @@
     loadPost(POSTS[0].slug);
   }
 
+  // LANGUAGE
   const langSwitch = document.getElementById("lang-switch");
 
   ["vi", "en"].forEach(l => {
@@ -25,5 +26,16 @@
   langSwitch.onchange = async () => {
     await loadLang(langSwitch.value);
     router();
+  };
+
+  // SEARCH
+  const search = document.getElementById("search");
+
+  search.oninput = () => {
+    if (!search.value) {
+      renderPosts();
+    } else {
+      searchPosts(search.value);
+    }
   };
 })();
