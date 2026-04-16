@@ -1,19 +1,29 @@
+let THEMES = [];
+
 async function loadTheme() {
   const res = await fetch("config.json");
   const config = await res.json();
 
+  THEMES = config.themes;
+
   const select = document.getElementById("theme-switch");
 
-  config.themes.forEach((t, i) => {
+  THEMES.forEach((t, i) => {
     const opt = document.createElement("option");
     opt.value = i;
     opt.textContent = t.name;
     select.appendChild(opt);
   });
 
-  select.onchange = () => applyTheme(config.themes[select.value]);
+  const saved = localStorage.getItem("theme") || 0;
+  select.value = saved;
 
-  applyTheme(config.themes[0]);
+  applyTheme(THEMES[saved]);
+
+  select.onchange = () => {
+    localStorage.setItem("theme", select.value);
+    applyTheme(THEMES[select.value]);
+  };
 }
 
 function applyTheme(theme) {
