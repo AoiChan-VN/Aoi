@@ -4,22 +4,49 @@
 
 :root {
   --bg: #ffffff;
-  --text: #000000;
+  --text: #111827;
+  --accent: #2563eb;
 }
 
-[data-theme="dark"] {
-  --bg: #0f172a;
+/* SYSTEM DARK AUTO SUPPORT */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #020617;
+    --text: #e5e7eb;
+  }
+}
+
+/* MANUAL THEMES (CSS ONLY) */
+#theme-light:checked ~ * {
+  --bg: #ffffff;
+  --text: #111827;
+}
+
+#theme-dark:checked ~ * {
+  --bg: #020617;
   --text: #e5e7eb;
 }
 
-[data-theme="cyber"] {
+#theme-cyber:checked ~ * {
   --bg: #020617;
   --text: #22d3ee;
-  font-family: monospace;
+  --accent: #a855f7;
+  font-family: "JetBrains Mono", monospace;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  transition: 0.3s;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* CYBER GRID + GLOW */
+#theme-cyber:checked ~ * body {
+  background-image: linear-gradient(rgba(34,211,238,0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(34,211,238,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+#theme-cyber:checked ~ * * {
+  text-shadow: 0 0 6px var(--text);
 }
