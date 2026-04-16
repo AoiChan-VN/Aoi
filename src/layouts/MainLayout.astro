@@ -2,30 +2,29 @@
 import "../styles/global.css";
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" transition:animate="fade">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Astro 2026 high performance site" />
-    <title>Astro Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO -->
+    <meta name="description" content="Astro 2026 ultra fast website" />
+    <meta property="og:title" content="Astro 2026" />
+    <meta property="og:type" content="website" />
+
+    <!-- Prefetch -->
+    <link rel="prefetch" href="/gallery" />
+    <link rel="prefetch" href="/docs" />
+
+    <title>Astro 2026</title>
   </head>
+
   <body>
+    <!-- PURE CSS THEME ENGINE (ZERO JS) -->
+    <input type="radio" name="theme" id="theme-light" hidden checked />
+    <input type="radio" name="theme" id="theme-dark" hidden />
+    <input type="radio" name="theme" id="theme-cyber" hidden />
+
     <slot />
   </body>
 </html>
-
-// =============================
-// src/components/ThemeToggle.astro
-// =============================
-<button id="themeToggle">Theme</button>
-<script>
-  const btn = document.getElementById('themeToggle');
-  btn.onclick = () => {
-    const current = document.documentElement.dataset.theme || 'light';
-    const next = current === 'light' ? 'dark' : current === 'dark' ? 'cyber' : 'light';
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem('theme', next);
-  };
-
-  document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';
-</script>
