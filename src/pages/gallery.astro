@@ -1,9 +1,11 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import ImageCard from "../components/media/ImageCard.astro";
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
 ---
-
-<BaseLayout>
-  <h1>Gallery</h1>
-  <ImageCard src="/assets/images/test.jpg" />
-</BaseLayout> 
+<MainLayout>
+  <Navbar />
+  <div class="columns-2 md:columns-4 gap-2 p-2">
+    <img src="/images/1.jpg" loading="lazy" />
+    <img src="/images/2.jpg" loading="lazy" />
+  </div>
+</MainLayout>
