@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "gioi_thieu",
+    "title": "Hello AoiChan",
+    "tags": ["intro"],
+    "date": "2026-04-16"
+  },
+  {
+    "slug": "update",
+    "title": "Update System",
+    "tags": ["dev", "update"],
+    "date": "2026-04-16"
+  }
+] 
