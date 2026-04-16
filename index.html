@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
-    
-    <!-- Inline CSS: Hiển thị giao diện ngay lập tức trong 0.1s -->
+    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</title>
     <style>
         :root { --accent: #ff007a; --bg: #050510; }
-        body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui, -apple-system, sans-serif; }
-        .nebula-bg { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at center, #1b0a2e 0%, #050510 100%); }
-        nav { display: flex; justify-content: space-between; padding: 15px 5%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
-        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .glitch { font-size: clamp(2rem, 8vw, 4rem); color: var(--accent); text-shadow: 0 0 20px var(--accent); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px 8%; }
-        .card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid #333; }
-        #md-viewer { padding: 40px 8%; line-height: 1.6; color: #ccc; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: system-ui; }
+        nav { display: flex; justify-content: space-between; padding: 15px 5%; background: rgba(0,0,0,0.9); border-bottom: 1px solid #222; }
+        .hero { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .glitch { font-size: 3rem; color: var(--accent); text-shadow: 0 0 15px var(--accent); }
+        .md-container { padding: 40px 10%; line-height: 1.7; }
+        /* Style cho Markdown tự chế */
+        .md-h1 { color: var(--accent); font-size: 2rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .md-bold { color: #fff; font-weight: bold; }
+        .md-list { color: #ccc; margin-left: 20px; }
     </style>
 </head>
 <body>
-    <div class="nebula-bg"></div>
     <nav>
         <div style="font-weight:bold; color:var(--accent)">◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</div>
-        <select id="langS" style="background:#000; color:#fff; border:1px solid #444;">
+        <select id="lang" style="background:#000; color:#fff; border:1px solid #444;">
             <option value="vi">🇻🇳 VI</option>
             <option value="en">🇬🇧 EN</option>
         </select>
@@ -30,49 +28,48 @@
 
     <div class="hero">
         <h1 class="glitch">𝓐𝓸𝓲 𝓒𝓱𝓪𝓷</h1>
-        <p id="h-desc">System Initializing...</p>
+        <p id="desc">...</p>
     </div>
 
-    <div id="p-grid" class="grid"></div>
-    <div id="md-viewer">Loading documentation...</div>
+    <div id="md-viewer" class="md-container">Đang tải tài liệu...</div>
 
     <script>
-        // Dữ liệu nội tại - Không cần chờ fetch từ file bên ngoài
-        const CORE_DATA = {
-            vi: { desc: "Chuyên gia Plugin & Game 2026", items: [{t:"Aoi Core", d:"Tối ưu hệ thống"}, {t:"Nebula", d:"Game Engine"}] },
-            en: { desc: "Expert Developer 2026", items: [{t:"Aoi Core", d:"System Opt"}, {t:"Nebula", d:"Game Engine"}] }
+        const DATA = {
+            vi: { desc: "Chuyên gia Plugin & Game 2026", file: "intro.md" },
         };
 
-        function render(l) {
-            const d = CORE_DATA[l];
-            document.getElementById('h-desc').innerText = d.desc;
-            document.getElementById('p-grid').innerHTML = d.items.map(i => `
-                <div class="card"><h3>${i.t}</h3><p>${i.d}</p></div>
-            `).join('');
+        // Bộ chuyển đổi MD sang HTML siêu nhẹ (Không cần thư viện)
+        function miniMarkdown(text) {
+            return text
+                .replace(/^# (.*$)/gim, '<h1 class="md-h1">$1</h1>') // Tiêu đề #
+                .replace(/^\- (.*$)/gim, '<li class="md-list">$1</li>') // Gạch đầu dòng -
+                .replace(/\*\*(.*)\*\*/gim, '<span class="md-bold">$1</span>') // In đậm **
+                .replace(/\n/gim, '<br>'); // Xuống dòng
         }
 
-        // Khởi chạy ngay lập tức khi HTML vừa load xong
-        const savedLang = localStorage.getItem('aoi-lang') || 'vi';
-        document.getElementById('langS').value = savedLang;
-        render(savedLang);
+        async function loadContent(l) {
+            const lang = DATA[l];
+            document.getElementById('desc').innerText = lang.desc;
+            
+            try {
+                // Fetch trực tiếp file .md từ folder content
+                const res = await fetch(`./content/${lang.file}`);
+                const rawText = await res.text();
+                document.getElementById('md-viewer').innerHTML = miniMarkdown(rawText);
+            } catch (e) {
+                document.getElementById('md-viewer').innerHTML = "Lỗi tải file .md";
+            }
+        }
 
-        document.getElementById('langS').onchange = (e) => {
-            localStorage.setItem('aoi-lang', e.target.value);
-            render(e.target.value);
+        document.getElementById('lang').onchange = (e) => {
+            localStorage.setItem('lang', e.target.value);
+            loadContent(e.target.value);
         };
 
-        // Trì hoãn việc tải thư viện nặng (Marked.js) để không làm chậm trang chính
-        window.addEventListener('load', () => {
-            const script = document.createElement('script');
-            script.src = "https://jsdelivr.net";
-            script.onload = () => {
-                fetch('./content/intro.md')
-                    .then(r => r.text())
-                    .then(t => document.getElementById('md-viewer').innerHTML = marked.parse(t))
-                    .catch(() => document.getElementById('md-viewer').innerHTML = "No MD content.");
-            };
-            document.body.appendChild(script);
-        });
+        // Khởi chạy
+        const currentLang = localStorage.getItem('lang') || 'vi';
+        document.getElementById('lang').value = currentLang;
+        loadContent(currentLang);
     </script>
 </body>
 </html>
