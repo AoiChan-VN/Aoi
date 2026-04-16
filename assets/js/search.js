@@ -1,20 +1,26 @@
 function searchPosts(query) {
-  query = query.toLowerCase();
+  query = query.toLowerCase().trim();
+
+  const sidebar = document.getElementById("sidebar");
+
+  if (!query) {
+    renderPosts();
+    return;
+  }
 
   const results = POSTS.filter(p =>
     p.title.toLowerCase().includes(query) ||
-    (p.tags && p.tags.join(" ").includes(query))
+    (p.tags && p.tags.join(" ").toLowerCase().includes(query))
   );
 
-  renderSearch(results);
-}
+  if (results.length === 0) {
+    sidebar.innerHTML = `<div>❌ No result</div>`;
+    return;
+  }
 
-function renderSearch(list) {
-  const sidebar = document.getElementById("sidebar");
-
-  sidebar.innerHTML = list.map(p => `
+  sidebar.innerHTML = results.map(p => `
     <div class="post-item" onclick="goPost('${p.slug}')">
       🔎 ${p.title}
     </div>
   `).join("");
-} 
+}
