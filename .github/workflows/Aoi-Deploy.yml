@@ -40,7 +40,7 @@ jobs:
         uses: actions/deploy-pages@v5
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
-        uses: strumwolf/delete-deployment-environment@v5
+        uses: strumwolf/delete-deployment-environment@v4
         with:
           token: ${{ secrets.AOI_ACTIONS }}
           environment: github-pages
