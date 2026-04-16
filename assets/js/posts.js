@@ -27,4 +27,5 @@ function renderPosts() {
 
 function goPost(slug) {
   location.hash = "/post/" + slug;
-} 
+  closeMenu(); /* 🔥 đóng menu */
+}
