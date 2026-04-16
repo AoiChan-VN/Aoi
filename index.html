@@ -6,52 +6,38 @@
 
   <title>AoiChan</title>
 
-  <!-- SEO -->
-  <meta name="description" content="AoiChan Website">
-  <meta name="theme-color" content="#000000">
-  <meta property="og:title" content="AoiChan">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/media/bg.jpg">
-
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/theme.css">
 
-  <script defer src="assets/js/ui.js"></script>
   <script defer src="assets/js/i18n.js"></script>
-  <script defer src="assets/js/search.js"><script>
   <script defer src="assets/js/theme.js"></script>
   <script defer src="assets/js/markdown.js"></script>
   <script defer src="assets/js/posts.js"></script>
+  <script defer src="assets/js/search.js"></script>
+  <script defer src="assets/js/ui.js"></script>
   <script defer src="assets/js/router.js"></script>
   <script defer src="assets/js/app.js"></script>
 </head>
 
 <body>
-  <!-- Background -->
   <div id="bg-container"></div>
 
-  <!-- Header -->
   <header>
-  <div class="left">
-    <button id="menu-btn" onclick="toggleMenu()">☰</button>
-    <h1>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
-  </div>
+    <div class="left">
+      <button id="menu-btn" onclick="toggleMenu()">☰</button>
+      <h1>꧁🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀꧂</h1>
+    </div>
 
-  <div class="controls">
-    <input id="search" placeholder="Search..." />
-    <select id="lang-switch"></select>
-    <select id="theme-switch"></select>
-  </div>
+    <div class="controls">
+      <input id="search" placeholder="Search..." />
+      <select id="lang-switch"></select>
+      <select id="theme-switch"></select>
+    </div>
   </header>
-  
-  <!-- Layout -->
+
   <main id="layout">
     <aside id="sidebar"></aside>
     <section id="app"></section>
   </main>
-
-  <footer>
-    <p>© 2026 AoiChan</p>
-  </footer>
 </body>
 </html>
