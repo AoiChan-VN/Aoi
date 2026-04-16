@@ -2,14 +2,21 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import { Image } from 'astro:assets';
+
+// IMPORT images từ src/assets (auto optimize + auto size)
+import img1 from '../assets/images/1.jpg';
+import img2 from '../assets/images/2.jpg';
+import img3 from '../assets/images/3.jpg';
+import img4 from '../assets/images/4.jpg';
 ---
 <MainLayout>
   <Navbar />
 
-  <div class="columns-2 md:columns-4 gap-2 p-2">
-    <Image src="/images/1.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
-    <Image src="/images/2.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
-    <Image src="/images/3.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
-    <Image src="/images/4.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
+  <!-- Masonry layout, no CLS, auto optimized -->
+  <div transition:name="gallery" class="columns-2 md:columns-4 gap-2 p-2">
+    <Image src={img1} alt="img" class="mb-2 rounded-xl" />
+    <Image src={img2} alt="img" class="mb-2 rounded-xl" />
+    <Image src={img3} alt="img" class="mb-2 rounded-xl" />
+    <Image src={img4} alt="img" class="mb-2 rounded-xl" />
   </div>
 </MainLayout>
