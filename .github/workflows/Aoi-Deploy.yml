@@ -20,6 +20,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+
+      - name: Artifacts ➺ Deploy
+        uses: actions/upload-pages-artifact@v5
+        with:
+           path: .
           
   deploy:
     needs: build
