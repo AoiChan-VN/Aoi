@@ -17,12 +17,12 @@ jobs:
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '24'
 
       - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
            path: .
           
@@ -37,10 +37,10 @@ jobs:
     steps:
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
-        uses: strumwolf/delete-deployment-environment@v3
+        uses: strumwolf/delete-deployment-environment@v5
         with:
           token: ${{ secrets.AOI_ACTIONS }}
           environment: github-pages
