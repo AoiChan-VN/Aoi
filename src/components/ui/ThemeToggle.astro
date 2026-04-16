@@ -1,12 +1,5 @@
-<button id="themeToggle">Theme</button>
-<script>
-  const btn = document.getElementById('themeToggle');
-  btn.onclick = () => {
-    const current = document.documentElement.dataset.theme || 'light';
-    const next = current === 'light' ? 'dark' : current === 'dark' ? 'cyber' : 'light';
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem('theme', next);
-  };
-
-  document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';
-</script> 
+<div class="flex gap-2">
+  <label for="theme-light" class="cursor-pointer">☀️</label>
+  <label for="theme-dark" class="cursor-pointer">🌙</label>
+  <label for="theme-cyber" class="cursor-pointer">⚡</label>
+</div>
