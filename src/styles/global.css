@@ -8,7 +8,6 @@
   --accent: #2563eb;
 }
 
-/* SYSTEM DARK AUTO SUPPORT */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #020617;
@@ -16,7 +15,6 @@
   }
 }
 
-/* MANUAL THEMES (CSS ONLY) */
 #theme-light:checked ~ * {
   --bg: #ffffff;
   --text: #111827;
@@ -40,7 +38,7 @@ body {
   transition: background 0.25s, color 0.25s;
 }
 
-/* CYBER GRID + GLOW */
+/* Cyber visuals */
 #theme-cyber:checked ~ * body {
   background-image: linear-gradient(rgba(34,211,238,0.05) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(34,211,238,0.05) 1px, transparent 1px);
