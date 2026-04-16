@@ -4,15 +4,24 @@
   box-sizing: border-box;
 }
 
-html, body {
-  width: 100%;
-  overflow-x: hidden; /* ❗ chặn tràn ngang */
+html {
+  font-size: clamp(14px, 1.5vw, 18px);
 }
 
 body {
   font-family: system-ui, sans-serif;
   color: white;
   background: black;
+  overflow-x: hidden;
+}
+
+/* CONTAINER */
+#layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 25vw) 1fr;
+  max-width: 1400px;
+  margin: auto;
+  min-height: 100vh;
 }
 
 /* HEADER */
@@ -20,53 +29,41 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* ❗ mobile xuống dòng */
-  gap: 10px;
-  padding: 12px;
-  backdrop-filter: blur(10px);
+  flex-wrap: wrap;
+  padding: clamp(10px, 2vw, 20px);
 }
 
 header h1 {
-  font-size: 18px;
-}
-
-.controls {
-  display: flex;
-  gap: 8px;
-}
-
-.controls select {
-  padding: 5px;
-  font-size: 12px;
-}
-
-/* LAYOUT */
-#layout {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  min-height: 80vh;
+  font-size: clamp(16px, 2vw, 22px);
 }
 
 /* SIDEBAR */
 #sidebar {
-  padding: 15px;
-  backdrop-filter: blur(8px);
-  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: clamp(10px, 2vw, 20px);
   overflow-y: auto;
-  max-height: 100vh;
+  backdrop-filter: blur(10px);
 }
 
-/* POST */
 .post-item {
-  cursor: pointer;
+  font-size: clamp(13px, 1.5vw, 16px);
   margin-bottom: 10px;
-  font-size: 14px;
 }
 
 /* CONTENT */
 #app {
-  padding: 16px;
+  padding: clamp(12px, 3vw, 30px);
   width: 100%;
+}
+
+/* TEXT SCALE */
+h1 { font-size: clamp(20px, 3vw, 28px); }
+h2 { font-size: clamp(18px, 2.5vw, 24px); }
+h3 { font-size: clamp(16px, 2vw, 20px); }
+
+/* CODE */
+pre {
+  font-size: clamp(11px, 1.2vw, 14px);
+  overflow-x: auto;
 }
 
 /* BACKGROUND */
@@ -82,83 +79,48 @@ video, img {
   object-fit: cover;
 }
 
-/* MARKDOWN */
-h1 { font-size: 22px; margin-bottom: 10px; }
-h2 { font-size: 18px; margin-bottom: 8px; }
-h3 { font-size: 16px; margin-bottom: 6px; }
-
-pre {
-  background: #111;
-  padding: 10px;
-  overflow-x: auto;
-  font-size: 12px;
-}
-
-/* 📱 MOBILE FIX */
+/* 📱 MOBILE (REAL FIX) */
 @media (max-width: 768px) {
 
   #layout {
-    display: block; /* ❗ bỏ grid */
+    display: block;
   }
-
-  #sidebar {
-    display: none; /* ❗ ẩn sidebar */
-  }
-
-  #app {
-    padding: 12px;
-  }
-
-  header h1 {
-    font-size: 16px;
-  }
-
-  pre {
-    font-size: 11px;
-  }
-}
-
-/* MENU BUTTON */
-header .left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-button {
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-/* SIDEBAR ANIMATION */
-#sidebar {
-  transition: transform 0.3s ease;
-}
-
-@media (max-width: 768px) {
 
   #sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 220px;
+    width: 70%;
+    max-width: 260px;
     height: 100%;
-    background: rgba(0,0,0,0.9);
+    left: 0;
+    top: 0;
     transform: translateX(-100%);
-    z-index: 10;
+    background: rgba(0,0,0,0.95);
+    z-index: 100;
+    transition: 0.3s;
   }
 
   #sidebar.open {
     transform: translateX(0);
   }
-}
 
-/* FADE CONTENT */
-#app {
-  animation: fade 0.3s ease;
-}
+  #app {
+    padding: 16px;
+  }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  input {
+    flex: 1;
+    min-width: 120px;
+  }
 }
