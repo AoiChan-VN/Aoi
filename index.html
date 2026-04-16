@@ -30,14 +30,18 @@
 
   <!-- Header -->
   <header>
-    <h1>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
+  <div class="left">
+    <button onclick="toggleMenu()">☰</button>
+    <h1>◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</h1>
+  </div>
 
-    <div class="controls">
-      <select id="lang-switch"></select>
-      <select id="theme-switch"></select>
-    </div>
+  <div class="controls">
+    <input id="search" placeholder="Search..." />
+    <select id="lang-switch"></select>
+    <select id="theme-switch"></select>
+  </div>
   </header>
-
+  
   <!-- Layout -->
   <main id="layout">
     <aside id="sidebar"></aside>
