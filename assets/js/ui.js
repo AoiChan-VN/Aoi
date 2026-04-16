@@ -6,7 +6,7 @@ function toggleMenu() {
 /* ❗ Auto close khi click ngoài */
 document.addEventListener("click", (e) => {
   const sidebar = document.getElementById("sidebar");
-  const button = document.querySelector("button");
+  const button = document.getElementById("menu-btn");
 
   if (!sidebar || !button) return;
 
