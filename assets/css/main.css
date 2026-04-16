@@ -1,0 +1,14 @@
+:root { --p: #ff007a; --bg: #050510; }
+body { margin:0; background: var(--bg); color: #fff; font-family: system-ui; opacity: 0; transition: opacity 0.5s; }
+body.ready { opacity: 1; }
+
+.nebula-bg {
+    position: fixed; inset: 0; z-index: -1;
+    background: radial-gradient(circle at center, #1b0a2e 0%, #050510 100%);
+}
+
+.navbar { display: flex; justify-content: space-between; padding: 20px 5%; border-bottom: 1px solid #222; }
+.hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 5%; }
+.card { background: #111; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+ 
