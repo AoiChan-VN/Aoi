@@ -1,20 +1,19 @@
 function searchPosts(query) {
   query = query.toLowerCase().trim();
 
-  const sidebar = document.getElementById("sidebar");
-
   if (!query) {
     renderPosts();
     return;
   }
 
   const results = POSTS.filter(p =>
-    p.title.toLowerCase().includes(query) ||
-    (p.tags && p.tags.join(" ").toLowerCase().includes(query))
+    p.title.toLowerCase().includes(query)
   );
 
+  const sidebar = document.getElementById("sidebar");
+
   if (results.length === 0) {
-    sidebar.innerHTML = `<div>❌ No result</div>`;
+    sidebar.innerHTML = "❌ No result";
     return;
   }
 
