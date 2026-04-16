@@ -1,18 +1,19 @@
 export async function initI18n() {
-    const lang = localStorage.getItem('lang') || 'vi';
+    const lang = localStorage.getItem('aoi-lang') || 'vi';
     document.getElementById('langSwitcher').value = lang;
-    
-    const response = await fetch(`./assets/lang/${lang}.json`);
-    const data = await response.json();
-    
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (data[key]) el.innerText = data[key];
-    });
 
-    document.getElementById('langSwitcher').addEventListener('change', (e) => {
-        localStorage.setItem('lang', e.target.value);
-        location.reload(); // Reload nhanh để áp dụng bundle mới
-    });
+    try {
+        const res = await fetch(`./assets/lang/${lang}.json`);
+        const data = await res.json();
+
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (data[key]) el.innerText = data[key];
+        });
+    } catch (e) { console.error("I18n Error:", e); }
+
+    document.getElementById('langSwitcher').onchange = (e) => {
+        localStorage.setItem('aoi-lang', e.target.value);
+        window.location.reload();
+    };
 }
- 
