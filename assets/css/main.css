@@ -4,52 +4,72 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* ❗ chặn tràn ngang */
+}
+
 body {
   font-family: system-ui, sans-serif;
   color: white;
   background: black;
 }
 
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  align-items: center;
+  flex-wrap: wrap; /* ❗ mobile xuống dòng */
+  gap: 10px;
+  padding: 12px;
   backdrop-filter: blur(10px);
 }
 
-.controls select {
-  margin-left: 10px;
-  padding: 5px;
+header h1 {
+  font-size: 18px;
 }
 
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.controls select {
+  padding: 5px;
+  font-size: 12px;
+}
+
+/* LAYOUT */
 #layout {
   display: grid;
   grid-template-columns: 250px 1fr;
+  min-height: 80vh;
 }
 
+/* SIDEBAR */
 #sidebar {
   padding: 15px;
   backdrop-filter: blur(8px);
   border-right: 1px solid rgba(255,255,255,0.1);
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
+/* POST */
 .post-item {
   cursor: pointer;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
-.post-item:hover {
-  opacity: 0.7;
-}
-
-main {
-  min-height: 80vh;
-}
-
+/* CONTENT */
 #app {
-  padding: 20px;
+  padding: 16px;
+  width: 100%;
 }
 
+/* BACKGROUND */
 #bg-container {
   position: fixed;
   inset: 0;
@@ -62,18 +82,38 @@ video, img {
   object-fit: cover;
 }
 
+/* MARKDOWN */
+h1 { font-size: 22px; margin-bottom: 10px; }
+h2 { font-size: 18px; margin-bottom: 8px; }
+h3 { font-size: 16px; margin-bottom: 6px; }
+
 pre {
   background: #111;
   padding: 10px;
   overflow-x: auto;
+  font-size: 12px;
 }
 
+/* 📱 MOBILE FIX */
 @media (max-width: 768px) {
+
   #layout {
-    grid-template-columns: 1fr;
+    display: block; /* ❗ bỏ grid */
   }
 
   #sidebar {
-    display: none;
+    display: none; /* ❗ ẩn sidebar */
+  }
+
+  #app {
+    padding: 12px;
+  }
+
+  header h1 {
+    font-size: 16px;
+  }
+
+  pre {
+    font-size: 11px;
   }
 }
