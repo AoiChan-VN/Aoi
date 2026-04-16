@@ -1,13 +1,13 @@
 [
   {
     "slug": "gioi_thieu",
-    "title": "Hello AoiChan",
+    "title": "Giới thiệu",
     "tags": ["intro"],
     "date": "2026-04-16"
   },
   {
     "slug": "update",
-    "title": "Update System",
+    "title": "Cập nhập",
     "tags": ["dev", "update"],
     "date": "2026-04-16"
   }
