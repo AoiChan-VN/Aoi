@@ -1,17 +1,10 @@
 let POSTS = [];
+let CURRENT = "";
 
 async function loadPosts() {
-  const cache = localStorage.getItem("posts");
-
-  if (cache) {
-    POSTS = JSON.parse(cache);
-    renderPosts();
-  }
-
   const res = await fetch("content/index.json");
   POSTS = await res.json();
 
-  localStorage.setItem("posts", JSON.stringify(POSTS));
   renderPosts();
 }
 
@@ -19,13 +12,16 @@ function renderPosts() {
   const sidebar = document.getElementById("sidebar");
 
   sidebar.innerHTML = POSTS.map(p => `
-    <div class="post-item" onclick="goPost('${p.slug}')">
+    <div class="post-item ${CURRENT === p.slug ? "active" : ""}"
+         onclick="goPost('${p.slug}')">
       📄 ${p.title}
     </div>
   `).join("");
 }
 
 function goPost(slug) {
+  CURRENT = slug;
   location.hash = "/post/" + slug;
-  closeMenu(); /* 🔥 đóng menu */
+  renderPosts(); // update active
+  closeMenu();
 }
