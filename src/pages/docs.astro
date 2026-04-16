@@ -1,11 +1,12 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Navbar from '../components/ui/Navbar.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 <MainLayout>
   <Navbar />
-  <article class="prose p-4">
+
+  <article class="prose dark:prose-invert max-w-2xl mx-auto p-4">
     <h1>Documentation</h1>
-    <p>Write markdown content here.</p>
+    <p>This page supports Markdown content rendering in Astro.</p>
   </article>
-</MainLayout> 
+</MainLayout>
