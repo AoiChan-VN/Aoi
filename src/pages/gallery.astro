@@ -1,11 +1,15 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Navbar from '../components/ui/Navbar.astro';
+import Navbar from '../components/Navbar.astro';
+import { Image } from 'astro:assets';
 ---
 <MainLayout>
   <Navbar />
+
   <div class="columns-2 md:columns-4 gap-2 p-2">
-    <img src="/images/1.jpg" loading="lazy" />
-    <img src="/images/2.jpg" loading="lazy" />
+    <Image src="/images/1.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
+    <Image src="/images/2.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
+    <Image src="/images/3.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
+    <Image src="/images/4.jpg" alt="img" loading="lazy" class="mb-2 rounded-xl" />
   </div>
 </MainLayout>
