@@ -1,57 +1,84 @@
-const appState = {
-    lang: localStorage.getItem('aoi_lang') || 'vi',
-    theme: localStorage.getItem('aoi_theme') || 'dark'
+const UI = {
+    themeBtn: document.getElementById('theme-toggle'),
+    langSelect: document.getElementById('lang-switch'),
+    grid: document.getElementById('content-grid'),
+    viewer: document.getElementById('viewer'),
+    loader: document.getElementById('loader')
 };
 
-const i18n = {
-    vi: { sub: "Plugin, Game & Sản phẩm sáng tạo", more: "Khám phá" },
-    en: { sub: "Plugins, Games & Creative Works", more: "Explore" }
-};
-
-// 1. Khởi tạo ngay lập tức (Zero Delay)
-document.documentElement.setAttribute('theme', appState.theme);
-
-window.addEventListener('DOMContentLoaded', () => {
-    updateUI();
-    loadDatabase();
-    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 300);
-});
-
-// 2. Chức năng lưu Setting vĩnh viễn
-function toggleTheme() {
-    appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('theme', appState.theme);
-    localStorage.setItem('aoi_theme', appState.theme);
-}
-
-function toggleLang() {
-    appState.lang = appState.lang === 'vi' ? 'en' : 'vi';
-    localStorage.setItem('aoi_lang', appState.lang);
-    updateUI();
-    loadDatabase();
-}
-
-function updateUI() {
-    document.getElementById('sub-title').innerText = i18n[appState.lang].sub;
-    document.getElementById('lang-btn').innerText = appState.lang.toUpperCase();
-}
-
-// 3. Cơ chế Auto-fetching (Tự động nhận file)
-async function loadDatabase() {
-    const grid = document.getElementById('content-grid');
-    try {
-        const res = await fetch('./data/content.json');
-        const data = await res.json();
-        
-        grid.innerHTML = data.map(item => `
-            <div class="card">
-                <img src="${item.img}" alt="Aoi">
-                <h3>${item.title}</h3>
-                <p>${item.desc[appState.lang]}</p>
-                <a href="${item.url}" style="color:var(--accent); text-decoration:none">${i18n[appState.lang].more} →</a>
-            </div>
-        `).join('');
-    } catch (e) {
-        grid.innerHTML = `<p>/data/content.json</p>`;
+// 1. Database ảo (Tự động nhận file qua JSON này)
+const database = {
+    vi: {
+        welcome: "Chào mừng đến với AoiChan",
+        items: [
+            { id: 1, title: "Aoi Plugin v1", type: "Plugin", file: "plugin.md", thumb: "https://picsum.photos" },
+            { id: 2, title: "Game Chiến Thuật Aoi", type: "Game", file: "game.md", thumb: "https://picsum.photos" }
+        ]
+    },
+    en: {
+        welcome: "Welcome to AoiChan",
+        items: [
+            { id: 1, title: "Aoi Plugin v1", type: "Plugin", file: "plugin_en.md", thumb: "https://picsum.photos" },
+            { id: 2, title: "Aoi Strategy Game", type: "Game", file: "game_en.md", thumb: "https://picsum.photos" }
+        ]
     }
-}
+};
+
+// 2. Quản lý Settings (LocalStorage)
+let currentLang = localStorage.getItem('aoi_lang') || 'vi';
+let currentTheme = localStorage.getItem('aoi_theme') || 'dark';
+
+const init = () => {
+    document.body.className = `theme-${currentTheme}`;
+    UI.langSelect.value = currentLang;
+    renderApp();
+};
+
+// 3. Render nội dung cực nhanh
+const renderApp = () => {
+    UI.loader.style.transform = 'scaleX(1)';
+    UI.grid.innerHTML = '';
+    
+    database[currentLang].items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card fade-in';
+        card.innerHTML = `
+            <img src="${item.thumb}" style="width:100%; border-radius:10px; margin-bottom:15px">
+            <h3>${item.title}</h3>
+            <span class="badge">${item.type}</span>
+        `;
+        card.onclick = () => openDoc(item.file);
+        UI.grid.appendChild(card);
+    });
+
+    setTimeout(() => UI.loader.style.transform = 'scaleX(0)', 500);
+};
+
+// 4. Đọc Markdown tự động (Docs)
+const openDoc = async (fileName) => {
+    UI.viewer.classList.remove('hidden');
+    try {
+        const res = await fetch(`./content/${fileName}`);
+        const text = await res.text();
+        document.getElementById('md-render-area').innerHTML = marked.parse(text);
+    } catch (e) {
+        document.getElementById('md-render-area').innerHTML = "Lỗi tải file bài viết!";
+    }
+};
+
+// 5. Sự kiện (Settings)
+UI.themeBtn.onclick = () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.body.className = `theme-${currentTheme}`;
+    localStorage.setItem('aoi_theme', currentTheme);
+};
+
+UI.langSelect.onchange = (e) => {
+    currentLang = e.target.value;
+    localStorage.setItem('aoi_lang', currentLang);
+    renderApp();
+};
+
+document.querySelector('.close-btn').onclick = () => UI.viewer.classList.add('hidden');
+
+init();
