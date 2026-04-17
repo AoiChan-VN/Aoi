@@ -1,0 +1,53 @@
+:root {
+    --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); --text: #f8fafc; --accent: #8b5cf6;
+}
+.theme-light {
+    --bg: #f8fafc; --card: rgba(255, 255, 255, 0.8); --text: #0f172a; --accent: #6366f1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-x: hidden;
+}
+
+/* Tối ưu Loader */
+.loader {
+    position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.glass-nav {
+    position: fixed; top: 0; width: 100%; padding: 1rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1);
+    z-index: 100;
+}
+
+.grid-container {
+    display: grid; padding: 100px 5% 50px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;
+}
+
+.card {
+    background: var(--card); padding: 20px; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; animation: slideUp 0.6s ease forwards;
+}
+
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .grid-container { grid-template-columns: 1fr; }
+}
+ 
