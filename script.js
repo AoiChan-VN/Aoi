@@ -52,6 +52,6 @@ async function loadDatabase() {
             </div>
         `).join('');
     } catch (e) {
-        grid.innerHTML = `<p>Vui lòng tạo file /data/content.json để hiển thị bài viết.</p>`;
+        grid.innerHTML = <p>/data/content.json</p>;
     }
 }
