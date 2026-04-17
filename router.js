@@ -13,6 +13,5 @@ window.onpopstate = renderRoute;
 function renderRoute() {
   const path = location.pathname;
   const view = routes[path] || homePage;
-  document.getElementById("app").innerHTML = "";
   view();
-} 
+}
