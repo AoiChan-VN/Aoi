@@ -3,40 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 | Personal Portfolio</title>
+    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts & Lucide Icons -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <script src="https://jsdelivr.net"></script>
 </head>
 <body class="theme-dark">
-    <div id="loader" class="loader"></div>
+    <!-- Loader nội bộ -->
+    <div id="loader" class="loader-line"></div>
 
     <nav class="glass-nav">
         <div class="logo">𝓐𝓸𝓲𝓒𝓱𝓪𝓷</div>
         <div class="nav-controls">
-            <select id="lang-switch" class="btn-sm">
-                <option value="vi">🇻🇳 VI</option>
-                <option value="en">🇺🇸 EN</option>
+            <select id="lang-switch">
+                <option value="vi">🇻🇳</option>
+                <option value="en">🇬🇧</option>
             </select>
-            <button id="theme-toggle" class="btn-sm">🌙</button>
+            <button id="theme-toggle">🌓</button>
         </div>
     </nav>
 
     <main id="app">
-        <!-- Nội dung sẽ tự động render tại đây -->
-        <section id="hero" class="fade-in">
-            <h1 class="gradient-text">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
-            <p id="sub-title">Khám phá Plugin, Game và Sản phẩm mới nhất.</p>
-        </section>
-
-        <section id="content-grid" class="grid-container"></section>
+        <header class="hero">
+            <h1 class="aoi-title">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
+            <p id="sub-title"></p>
+        </header>
+        <div id="content-grid" class="grid"></div>
     </main>
 
+    <!-- Modal xem nội dung Markdown -->
     <div id="viewer" class="modal hidden">
-        <div class="modal-content glass">
-            <button class="close-btn">&times;</button>
-            <div id="md-render-area"></div>
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeDoc()">×</button>
+            <div id="md-render-area" class="md-body"></div>
         </div>
     </div>
 
