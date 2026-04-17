@@ -1,38 +1,35 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AoiChan Portfolio</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AoiChan</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div id="loader"></div>
+<div id="loader"></div>
 
-  <header>
-    <h1>🌿🥀AoiChan🥀🌿</h1>
-    <nav>
-      <a href="#/">Home</a>
-      <a href="#/projects">Projects</a>
-      <a href="#/docs">Docs</a>
-      <a href="#/blog">Blog</a>
-    </nav>
+<header>
+  <h1>🌿🥀AoiChan🥀🌿</h1>
+  <nav>
+    <a href="#/">Home</a>
+    <a href="#/blog">Blog</a>
+  </nav>
 
-    <div class="controls">
-      <select id="lang-switch">
-        <option value="vi">🇻🇳</option>
-        <option value="vi">🇬🇧</option>
-      </select>
-      <button id="theme-toggle">🌙</button>
-    </div>
-  </header>
+  <div class="controls">
+    <select id="lang-switch"></select>
+    <button id="theme-toggle">🌙</button>
+  </div>
+</header>
 
-  <main id="app"></main>
+<main id="app"></main>
 
-  <script src="assets/js/app.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/i18n.js"></script>
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/loader.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/router.js"></script>
+<script src="assets/js/blog.js"></script>
+<script src="assets/js/markdown.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/storage.js"></script>
 </body>
 </html>
