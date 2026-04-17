@@ -43,10 +43,14 @@ const state = {
 };
 
 const init = () => {
-    // Áp dụng theme/lang ngay lập tức (không lag)
     document.body.className = `theme-${state.theme}`;
     document.getElementById('lang-switch').value = state.lang;
     render();
+    
+    // Thêm đoạn này: Tự động mở bài viết từ URL (Ví dụ: index.html?post=game.md)
+    const urlParams = new URLSearchParams(window.location.search);
+    const postFile = urlParams.get('post');
+    if (postFile) openDoc(postFile);
 };
 
 const render = () => {
@@ -102,17 +106,3 @@ document.getElementById('lang-switch').onchange = (e) => {
 };
 
 init();
-
-const handleURL = () => {
-    const params = new URLSearchParams(window.location.search);
-    const file = params.get('post');
-    if (file) openDoc(file);
-};
-
-// Gọi handleURL() trong init
-const init = () => {
-    document.body.className = `theme-${state.theme}`;
-    document.getElementById('lang-switch').value = state.lang;
-    render();
-    handleURL(); // Thêm dòng này
-};
