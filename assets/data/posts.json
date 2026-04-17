@@ -1,4 +1,12 @@
 [
-  {"title":"Plugin RPG","desc":"Hệ thống tu tiên","file":"rpg.md"},
-  {"title":"Game 2D","desc":"Adventure","file":"game.md"}
+  {
+    "title": "RPG Plugin",
+    "desc": "Hệ thống tu tiên",
+    "file": "rpg.md"
+  },
+  {
+    "title": "Game 2D",
+    "desc": "Adventure",
+    "file": "game.md"
+  }
 ]
