@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AoiChan</title>
-<meta name="description" content="AoiChan Portfolio">
-<link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font & Icons -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://unpkg.com"></script>
 </head>
-<body>
-<header>
-  <h1>🌿🥀AoiChan🥀🌿</h1>
-  <nav>
-    <a href="#/">Home</a>
-    <a href="#/projects">Projects</a>
-    <a href="#/blog">Blog</a>
-    <a href="#/docs">Docs</a>
-  </nav>
-  <input id="search" placeholder="Search everything...">
-  <button id="theme-toggle">🌗</button>
-</header>
-<main id="app"></main>
+<body class="theme-dark">
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>
 
-<script src="assets/js/app.js"></script>
-<script src="assets/js/router.js"></script>
-<script src="assets/js/blog.js"></script>
-<script src="assets/js/docs.js"></script>
-<script src="assets/js/search.js"></script>
-<script src="assets/js/markdown.js"></script>
-<script src="assets/js/scanner.js"></script>
-<script src="assets/js/seo.js"></script>
-<script src="assets/js/theme.js"></script>
-<script src="assets/js/storage.js"></script>
+    <nav class="glass-nav">
+        <div class="logo">𝓐𝓸𝓲𝓒𝓱𝓪𝓷</div>
+        <div class="nav-controls">
+            <button id="lang-switch" class="btn-icon"><i data-lucide="languages"></i></button>
+            <button id="theme-toggle" class="btn-icon"><i data-lucide="sun"></i></button>
+        </div>
+    </nav>
+
+    <main id="app">
+        <section id="hero" class="fade-in">
+            <h1 class="glitch" data-text="🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
+            <p id="hero-desc">Plugin, Game & Creative Developer</p>
+        </section>
+
+        <section id="content-grid" class="grid-container">
+            <!-- Dữ liệu tự động đổ vào đây -->
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
