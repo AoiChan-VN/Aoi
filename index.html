@@ -3,32 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</title>
+    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 | Personal Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Preload critical content -->
-    <link rel="preconnect" href="https://googleapis.com">
+    <!-- Google Fonts & Lucide Icons -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://jsdelivr.net"></script>
 </head>
-<body>
-    <div id="loader"></div>
+<body class="theme-dark">
+    <div id="loader" class="loader"></div>
 
-    <nav class="glass">
+    <nav class="glass-nav">
         <div class="logo">𝓐𝓸𝓲𝓒𝓱𝓪𝓷</div>
-        <div class="actions">
-            <button onclick="toggleLang()" id="lang-btn">VI</button>
-            <button onclick="toggleTheme()" id="theme-btn">🌙</button>
+        <div class="nav-controls">
+            <select id="lang-switch" class="btn-sm">
+                <option value="vi">🇻🇳 VI</option>
+                <option value="en">🇺🇸 EN</option>
+            </select>
+            <button id="theme-toggle" class="btn-sm">🌙</button>
         </div>
     </nav>
 
     <main id="app">
-        <header class="hero">
-            <h1 class="glitch">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
-            <p id="sub-title">Loading system...</p>
-        </header>
+        <!-- Nội dung sẽ tự động render tại đây -->
+        <section id="hero" class="fade-in">
+            <h1 class="gradient-text">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
+            <p id="sub-title">Khám phá Plugin, Game và Sản phẩm mới nhất.</p>
+        </section>
 
-        <div id="content-grid" class="grid">
-            <!-- Tự động đổ dữ liệu từ database cá nhân vào đây -->
-        </div>
+        <section id="content-grid" class="grid-container"></section>
     </main>
+
+    <div id="viewer" class="modal hidden">
+        <div class="modal-content glass">
+            <button class="close-btn">&times;</button>
+            <div id="md-render-area"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
