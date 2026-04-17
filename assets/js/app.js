@@ -12,8 +12,7 @@ async function loadComponent(id,file){
 
 // Home
 async function homePage(){
-  const res=await fetch("assets/data/posts.json");
-  const data=await res.json();
+  const data = await loadPostsAuto();
 
   const html=`
   <section class="hero">
@@ -33,7 +32,13 @@ async function homePage(){
   applyLang();
 }
 
+// Preload markdown
+async function preloadPost(file){
+  fetch(`assets/posts/${file}`);
+}
+
 function openPost(file){
+  preloadPost(file);
   navigate("/post",{file});
 }
 
