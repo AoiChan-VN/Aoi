@@ -3,35 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 | Portfolio</title>
+    <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font & Icons -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <script src="https://unpkg.com"></script>
+    <!-- Preload critical content -->
+    <link rel="preconnect" href="https://googleapis.com">
 </head>
-<body class="theme-dark">
-    <!-- Loader -->
-    <div id="loader" class="loader">
-        <div class="spinner"></div>
-    </div>
+<body>
+    <div id="loader"></div>
 
-    <nav class="glass-nav">
+    <nav class="glass">
         <div class="logo">𝓐𝓸𝓲𝓒𝓱𝓪𝓷</div>
-        <div class="nav-controls">
-            <button id="lang-switch" class="btn-icon"><i data-lucide="languages"></i></button>
-            <button id="theme-toggle" class="btn-icon"><i data-lucide="sun"></i></button>
+        <div class="actions">
+            <button onclick="toggleLang()" id="lang-btn">VI</button>
+            <button onclick="toggleTheme()" id="theme-btn">🌙</button>
         </div>
     </nav>
 
     <main id="app">
-        <section id="hero" class="fade-in">
-            <h1 class="glitch" data-text="🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
-            <p id="hero-desc">Plugin, Game & Creative Developer</p>
-        </section>
+        <header class="hero">
+            <h1 class="glitch">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
+            <p id="sub-title">Loading system...</p>
+        </header>
 
-        <section id="content-grid" class="grid-container">
-            <!-- Dữ liệu tự động đổ vào đây -->
-        </section>
+        <div id="content-grid" class="grid">
+            <!-- Tự động đổ dữ liệu từ database cá nhân vào đây -->
+        </div>
     </main>
 
     <script src="script.js"></script>
