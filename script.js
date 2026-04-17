@@ -18,14 +18,22 @@ const DB = {
 // 2. MINI MARKDOWN PARSER (Tự viết, không dùng thư viện ngoài)
 const parseMD = (text) => {
     return text
+        // Tiêu đề
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        // Ảnh: ![alt](url)
+        .replace(/!\[(.*?)\]\((.*?)\)/gim, '<div class="md-img-container"><img alt="$1" src="$2" loading="lazy"></div>')
+        // Video: @[video](url) - Cú pháp tự chế cho Aoi
+        .replace(/@\[video\]\((.*?)\)/gim, '<video controls class="md-video"><source src="$1" type="video/mp4"></video>')
+        // Link: [text](url)
+        .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" class="md-link">$1</a>')
+        // Bold & Italic
         .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
         .replace(/\*(.*)\*/gim, '<i>$1</i>')
-        .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2'>")
-        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-        .replace(/\n$/gim, '<br />');
+        // Danh sách gạch đầu dòng
+        .replace(/^\- (.*$)/gim, '<li>$1</li>')
+        // Ngắt dòng
+        .replace(/\n/gim, '<br>');
 };
 
 // 3. LOGIC HỆ THỐNG
@@ -94,3 +102,17 @@ document.getElementById('lang-switch').onchange = (e) => {
 };
 
 init();
+
+const handleURL = () => {
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get('post');
+    if (file) openDoc(file);
+};
+
+// Gọi handleURL() trong init
+const init = () => {
+    document.body.className = `theme-${state.theme}`;
+    document.getElementById('lang-switch').value = state.lang;
+    render();
+    handleURL(); // Thêm dòng này
+};
