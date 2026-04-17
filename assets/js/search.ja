@@ -1,0 +1,13 @@
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("search").addEventListener("input",async (e)=>{
+    const q = e.target.value.toLowerCase();
+    const posts = await fetch('assets/data/posts.json').then(r=>r.json());
+
+    const filtered = posts.filter(p=>p.title.toLowerCase().includes(q));
+
+    document.getElementById("app").innerHTML = filtered.map(p=>`
+      <div class="card">
+        <a href="#/post/${p.file.replace('.md','')}">${p.title}</a>
+      </div>`).join('');
+  });
+}); 
