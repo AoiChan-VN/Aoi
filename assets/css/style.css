@@ -26,4 +26,4 @@ async function render(){
   if(route === "docs") return renderDocs();
 
   document.getElementById("app").innerHTML = `<h2>${t('welcome')}</h2>`;
-    }
+}
