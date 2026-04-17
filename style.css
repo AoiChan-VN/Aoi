@@ -1,83 +1,45 @@
 :root {
-    --bg: #0f172a; --card: rgba(255, 255, 255, 0.05);
-    --text: #f8fafc; --accent: #8b5cf6;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --bg: #050505; --card: #111; --text: #eee; --accent: #ff2d55;
 }
-
 .theme-light {
-    --bg: #f1f5f9; --card: rgba(0, 0, 0, 0.05);
-    --text: #0f172a; --accent: #6366f1;
+    --bg: #f5f5f7; --card: #fff; --text: #1d1d1f; --accent: #007aff;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-
-body { background: var(--bg); color: var(--text); overflow-x: hidden; transition: var(--transition); }
-
-/* Hiệu ứng Loader */
-.loader { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent); z-index: 1000; transform: scaleX(0); transform-origin: left; transition: 0.5s; }
-
-/* Glassmorphism UI */
-.glass-nav { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; backdrop-filter: blur(12px); background: var(--card); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.1); }
-
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 5%; }
-
-.card { background: var(--card); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: var(--transition); }
-.card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-
-/* Typography */
-.gradient-text { background: linear-gradient(90deg, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 3rem; text-align: center; margin-top: 50px; }
-
-/* Modal */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 200; opacity: 1; transition: 0.3s; }
-.modal.hidden { display: none; }
-.modal-content { width: 90%; max-width: 800px; height: 80vh; overflow-y: auto; padding: 40px; border-radius: 20px; position: relative; }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .gradient-text { font-size: 2rem; }
-    .grid-container { grid-template-columns: 1fr; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+    background: var(--bg); color: var(--text); 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: background 0.3s; line-height: 1.6;
 }
 
-/* Tối ưu hóa chuyển động */
-.fade-in {
-    animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Loader line cực mảnh */
+.loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 9999; }
+
+/* Navigation */
+.glass-nav { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 5%; background: var(--card); border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+/* Grid Layout */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 40px 5%; }
+.card { 
+    background: var(--card); padding: 25px; border-radius: 15px; 
+    border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.2s;
 }
+.card:hover { transform: scale(1.02); border-color: var(--accent); }
 
-.filter-bar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
+/* Modal & Markdown */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; }
+.hidden { display: none; }
+.modal-content { 
+    max-width: 800px; margin: auto; background: var(--card); 
+    height: 90vh; border-radius: 20px; padding: 40px; overflow-y: auto; position: relative;
 }
+.close-btn { position: absolute; right: 20px; top: 10px; font-size: 30px; background: none; border: none; color: var(--text); cursor: pointer; }
 
-.filter-btn {
-    padding: 8px 20px;
-    border-radius: 20px;
-    background: var(--card);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text);
-    cursor: pointer;
-    transition: var(--transition);
+/* Responsive Mobile */
+@media (max-width: 600px) {
+    .aoi-title { font-size: 1.5rem; text-align: center; }
+    .modal-content { width: 100%; height: 100%; border-radius: 0; }
 }
-
-.filter-btn.active {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 0 15px var(--accent);
-}
-
-/* Markdown Content Styling */
-#md-render-area h1 { margin-bottom: 20px; color: var(--accent); }
-#md-render-area p { line-height: 1.6; margin-bottom: 15px; opacity: 0.9; }
-#md-render-area img { max-width: 100%; border-radius: 12px; margin: 15px 0; }
-
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
