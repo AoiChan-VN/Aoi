@@ -52,6 +52,6 @@ async function loadDatabase() {
             </div>
         `).join('');
     } catch (e) {
-        grid.innerHTML = <p>/data/content.json</p>;
+        grid.innerHTML = `<p>/data/content.json</p>`;
     }
 }
