@@ -1,8 +1,8 @@
-const LANG = localStorage.getItem("lang") || navigator.language.slice(0,2) || "en";
+const LANG = localStorage.getItem("lang") || "en";
 
 const dict = {
-  en:{intro:"Developer • Creator • Builder"},
-  vi:{intro:"Lập trình viên • Nhà sáng tạo"}
+  en: { intro: "Developer • Creator • Builder" },
+  vi: { intro: "Lập trình viên • Nhà sáng tạo" }
 };
 
 function applyLang(){
