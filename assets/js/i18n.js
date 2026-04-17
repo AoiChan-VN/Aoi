@@ -1,19 +1,17 @@
-export async function initI18n() {
-    const lang = localStorage.getItem('aoi-lang') || 'vi';
-    document.getElementById('langSwitcher').value = lang;
+const translations = {
+  en: {
+    intro: "Developer • Creator • Builder"
+  },
+  vi: {
+    intro: "Lập trình viên • Nhà sáng tạo"
+  }
+};
 
-    try {
-        const res = await fetch(`./assets/lang/${lang}.json`);
-        const data = await res.json();
+const setLang = (lang) => {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.innerText = translations[lang][el.dataset.i18n];
+  });
+  localStorage.setItem("lang", lang);
+};
 
-        document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (data[key]) el.innerText = data[key];
-        });
-    } catch (e) { console.error("I18n Error:", e); }
-
-    document.getElementById('langSwitcher').onchange = (e) => {
-        localStorage.setItem('aoi-lang', e.target.value);
-        window.location.reload();
-    };
-}
+setLang(localStorage.getItem("lang") || "en");
