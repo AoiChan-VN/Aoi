@@ -9,3 +9,17 @@ async function render(){
 
   document.getElementById("app").innerHTML = `<h2>${t('welcome')}</h2>`;
 }
+
+/* ========================= projects ========================= */
+async function renderProjects(){
+  const data = await fetch('assets/data/projects.json').then(r=>r.json());
+
+  document.getElementById("app").innerHTML = `
+    <div class="grid">
+      ${data.map(p=>`
+        <div class="card">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+        </div>`).join('')}
+    </div>`;
+}
