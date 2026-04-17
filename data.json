@@ -4,7 +4,7 @@
     "description": "Nơi chia sẻ Plugin, Game và Tài nguyên độc quyền.",
     "categories": ["Tất cả", "Plugin", "Game", "UI Kit"],
     "items": [
-      { "id": 1, "cat": "Plugin", "title": "Aoi Anti-Lag", "desc": "Tối ưu hóa server Minecraft.", "file": "aoi-plugin.md", "img": "https://picsum.photos" },
+      { "id": 1, "cat": "Plugin", "title": "Tu tiên v1.0", "desc": "Tối ưu hóa cho server Minecraft.", "file": "aoi-plugin.md", "img": "https://picsum.photos" },
       { "id": 2, "cat": "Game", "title": "Aoi Adventure", "desc": "Game RPG nhẹ nhàng cho PC.", "file": "game-rpg.md", "img": "https://picsum.photos" }
     ]
   },
