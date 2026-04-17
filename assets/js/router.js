@@ -1,19 +1,11 @@
-function initRouter() {
-  window.addEventListener("hashchange", render);
-  render();
-}
-
-function render() {
-  const app = document.getElementById("app");
+async function render(){
   const route = location.hash.slice(2);
 
-  if (route === "projects") {
-    app.innerHTML = "<h2>Projects</h2>";
-  } else if (route === "docs") {
-    app.innerHTML = "<h2>Docs</h2>";
-  } else if (route === "blog") {
-    loadPosts();
-  } else {
-    app.innerHTML = "<h2>Welcome</h2>";
-  }
-} 
+  if(route.startsWith("post/")) return renderPost(route.split("/")[1]);
+  if(route.startsWith("doc/")) return renderDoc(route.split("/")[1]);
+  if(route === "blog") return renderBlog();
+  if(route === "projects") return renderProjects();
+  if(route === "docs") return renderDocs();
+
+  document.getElementById("app").innerHTML = `<h2>${t('welcome')}</h2>`;
+}
