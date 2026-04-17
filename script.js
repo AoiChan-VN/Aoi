@@ -1,77 +1,57 @@
-const CONFIG = {
-    lang: localStorage.getItem('lang') || 'vi',
-    theme: localStorage.getItem('theme') || 'dark'
+const appState = {
+    lang: localStorage.getItem('aoi_lang') || 'vi',
+    theme: localStorage.getItem('aoi_theme') || 'dark'
 };
 
-const translations = {
-    vi: { desc: "Nhà phát triển Plugin, Game & Sản phẩm sáng tạo", view: "Xem chi tiết" },
-    en: { desc: "Plugin, Game & Creative Developer", view: "View Details" }
+const i18n = {
+    vi: { sub: "Plugin, Game & Sản phẩm sáng tạo", more: "Khám phá" },
+    en: { sub: "Plugins, Games & Creative Works", more: "Explore" }
 };
 
-// Khởi tạo Lucide Icons
-lucide.createIcons();
+// 1. Khởi tạo ngay lập tức (Zero Delay)
+document.documentElement.setAttribute('theme', appState.theme);
 
-// Xử lý Loader
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 500);
-    }, 800);
+window.addEventListener('DOMContentLoaded', () => {
+    updateUI();
+    loadDatabase();
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 300);
 });
 
-// Chuyển đổi Theme
-const toggleTheme = () => {
-    const body = document.body;
-    CONFIG.theme = CONFIG.theme === 'dark' ? 'light' : 'dark';
-    body.className = `theme-${CONFIG.theme}`;
-    localStorage.setItem('theme', CONFIG.theme);
-    document.getElementById('theme-toggle').innerHTML = `<i data-lucide="${CONFIG.theme === 'dark' ? 'sun' : 'moon'}"></i>`;
-    lucide.createIcons();
-};
+// 2. Chức năng lưu Setting vĩnh viễn
+function toggleTheme() {
+    appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('theme', appState.theme);
+    localStorage.setItem('aoi_theme', appState.theme);
+}
 
-// Tự động lấy dữ liệu (Database cá nhân)
-async function fetchData() {
+function toggleLang() {
+    appState.lang = appState.lang === 'vi' ? 'en' : 'vi';
+    localStorage.setItem('aoi_lang', appState.lang);
+    updateUI();
+    loadDatabase();
+}
+
+function updateUI() {
+    document.getElementById('sub-title').innerText = i18n[appState.lang].sub;
+    document.getElementById('lang-btn').innerText = appState.lang.toUpperCase();
+}
+
+// 3. Cơ chế Auto-fetching (Tự động nhận file)
+async function loadDatabase() {
+    const grid = document.getElementById('content-grid');
     try {
-        // Giả lập fetching từ file data/content.json
-        // Trong thực tế, bạn tạo file content.json trong folder data
-        const response = await fetch('./data/content.json');
-        const data = await response.json();
-        renderContent(data);
-    } catch (err) {
-        console.error("Database not found, using demo data");
-        renderContent(demoData);
+        const res = await fetch('./data/content.json');
+        const data = await res.json();
+        
+        grid.innerHTML = data.map(item => `
+            <div class="card">
+                <img src="${item.img}" alt="Aoi">
+                <h3>${item.title}</h3>
+                <p>${item.desc[appState.lang]}</p>
+                <a href="${item.url}" style="color:var(--accent); text-decoration:none">${i18n[appState.lang].more} →</a>
+            </div>
+        `).join('');
+    } catch (e) {
+        grid.innerHTML = `<p>Vui lòng tạo file /data/content.json để hiển thị bài viết.</p>`;
     }
 }
-
-function renderContent(items) {
-    const container = document.getElementById('content-grid');
-    container.innerHTML = items.map(item => `
-        <div class="card">
-            <img src="${item.image}" alt="${item.title}" style="width:100%; border-radius:10px;">
-            <h3 style="margin: 15px 0 10px">${item.title}</h3>
-            <p style="font-size: 0.9rem; opacity: 0.8">${item.desc}</p>
-            <div style="margin-top: 15px; color: var(--accent); font-weight: bold;">${translations[CONFIG.lang].view} →</div>
-        </div>
-    `).join('');
-}
-
-// Demo Data (Khi chưa có file json)
-const demoData = [
-    { title: "Aoi Plugin Manager", desc: "Tối ưu hóa hệ thống plugin Minecraft.", image: "https://picsum.photos" },
-    { title: "Galaxy War Game", desc: "Game indie bắn súng không gian.", image: "https://picsum.photos" }
-];
-
-// Event Listeners
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-document.getElementById('lang-switch').addEventListener('click', () => {
-    CONFIG.lang = CONFIG.lang === 'vi' ? 'en' : 'vi';
-    localStorage.setItem('lang', CONFIG.lang);
-    location.reload(); // Reload để nhận ngôn ngữ mới nhanh nhất
-});
-
-// Khởi chạy
-document.body.className = `theme-${CONFIG.theme}`;
-document.getElementById('hero-desc').innerText = translations[CONFIG.lang].desc;
-fetchData();
- 
