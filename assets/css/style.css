@@ -2,49 +2,52 @@
   --bg: #0f172a;
   --text: #e2e8f0;
   --card: rgba(255,255,255,0.05);
-  --accent: #22c55e;
 }
 
 body {
-  margin:0;
+  margin: 0;
   font-family: 'Inter', sans-serif;
   background: linear-gradient(120deg,#0f172a,#020617);
   color: var(--text);
 }
 
 .hero {
-  text-align:center;
-  padding:100px 20px;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .card {
   backdrop-filter: blur(10px);
   background: var(--card);
-  border-radius:20px;
-  padding:20px;
-  transition:.25s;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: .25s;
 }
 
-.card:hover { transform: translateY(-6px) scale(1.02); }
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  padding:20px;
+.card:hover {
+  transform: translateY(-6px);
 }
 
 #loader {
-  position:fixed; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  background:black; z-index:999;
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.light {
-  --bg:#fff;
-  --text:#111;
+.markdown pre {
+  background: black;
+  padding: 10px;
+  border-radius: 10px;
 }
-
-/* Markdown */
-.markdown h1 {font-size:2rem}
-.markdown pre {background:#000;padding:10px;border-radius:10px;overflow:auto}
