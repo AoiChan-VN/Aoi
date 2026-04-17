@@ -1,8 +1,14 @@
 :root {
-    --bg: #050505; --card: #111; --text: #eee; --accent: #ff2d55;
+    --bg: #050505; 
+    --card: #111; 
+    --text: #eee; 
+    --accent: #ff2d55;
 }
 .theme-light {
-    --bg: #f5f5f7; --card: #fff; --text: #1d1d1f; --accent: #007aff;
+    --bg: #f5f5f7; 
+    --card: #fff; 
+    --text: #1d1d1f; 
+    --accent: #007aff;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -13,12 +19,23 @@ body {
 }
 
 /* Loader line cực mảnh */
-.loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 9999; }
+.loader-line { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    height: 2px;
+    background: var(--accent); 
+    width: 0;
+    transition: 0.3s; 
+    z-index: 9999;
+}
 
 /* Navigation */
 .glass-nav { 
     display: flex; justify-content: space-between; align-items: center; 
-    padding: 15px 5%; background: var(--card); border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 15px 5%;
+    background: var(--card);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 /* Grid Layout */
@@ -42,4 +59,64 @@ body {
 @media (max-width: 600px) {
     .aoi-title { font-size: 1.5rem; text-align: center; }
     .modal-content { width: 100%; height: 100%; border-radius: 0; }
+}
+
+/* --- PHẦN BỔ SUNG: CSS CHO NỘI DUNG BÀI VIẾT (MARKDOWN) --- */
+.md-body { 
+    line-height: 1.8; 
+    font-size: 1.05rem; 
+    color: var(--text); 
+}
+
+.md-body h1 { 
+    margin-bottom: 25px; 
+    border-bottom: 2px solid var(--accent); 
+    padding-bottom: 10px; 
+    font-size: 1.8rem;
+}
+
+.md-body h2 { 
+    margin: 30px 0 15px; 
+    font-size: 1.4rem; 
+    color: var(--accent);
+}
+
+/* Định dạng cho Ảnh và Video tự động co giãn theo Mobile */
+.md-body img, .md-video { 
+    width: 100%; 
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px; 
+    margin: 20px 0; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    display: block;
+}
+
+.md-link { 
+    color: var(--accent); 
+    text-decoration: none; 
+    font-weight: bold; 
+    border-bottom: 1px dashed var(--accent); 
+}
+
+.md-body li { 
+    margin-left: 20px; 
+    margin-bottom: 8px;
+    list-style-type: square;
+}
+
+/* Nút đóng bài viết kiểu nổi trên Mobile */
+.close-btn { 
+    position: sticky; 
+    top: 0; 
+    float: right;
+    background: var(--accent); 
+    color: white; 
+    width: 35px; 
+    height: 35px;
+    border-radius: 50%; 
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 100;
 }
