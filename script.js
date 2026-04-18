@@ -61,26 +61,31 @@ const searchPosts = () => {
 };
 
 // TỰ ĐỘNG RENDER CARD (Tối ưu cực độ)
-const render = () => {
-    const data = DB[state.lang];
+const render = async () => {
+    // Tự động load data từ file json nội bộ
+    const response = await fetch('./data.json');
+    const dataAll = await response.json();
+    const data = dataAll[state.lang];
+
     document.getElementById('sub-title').innerText = data.sub;
     const grid = document.getElementById('content-grid');
     grid.innerHTML = '';
 
-    data.posts.forEach((fileName, index) => {
-        // Tự động tạo Title từ tên file (ví dụ: 'aoi-game.md' -> 'Aoi Game')
-        const autoTitle = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
-        
+    data.posts.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'card fade-in';
-        card.style.animationDelay = `${index * 0.1}s`; // Hiệu ứng hiện từng cái một
+        card.style.animationDelay = `${index * 0.1}s`;
+        
+        // Chỉ hiện Title và Desc, không hiện tên file .md
         card.innerHTML = `
             <div class="card-icon">📁</div>
-            <h3>${autoTitle}</h3>
-            <p>Nhấp để xem chi tiết bài viết: ${fileName}</p>
-            <div class="card-footer">Read More →</div>
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+            <div class="card-footer">Xem chi tiết →</div>
         `;
-        card.onclick = () => openDoc(fileName);
+        
+        // Khi nhấn vào vẫn mở đúng file .md ngầm
+        card.onclick = () => openDoc(item.file);
         grid.appendChild(card);
     });
 };
