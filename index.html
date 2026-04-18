@@ -2,56 +2,66 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-dark">
-    <!-- Loader nội bộ -->
+    <!-- Hiệu ứng Loader -->
     <div id="loader" class="loader-line"></div>
 
-    <nav class="glass-nav">
-        
-        <div class="logo">
-           <img src="assets/aoi-logo/Aoi-Logo.png" alt="AoiChan Logo" style="height: 40px; width: auto; object-fit: contain;">
-        </div>
-        
-        <div class="nav-controls">
-            <select id="lang-switch">
-                <option value="vi">🇻🇳</option>
-                <option value="en">🇬🇧</option>
-            </select>
-            <button id="theme-toggle">🌓</button>
-        </div>
+    <!-- Thanh Top Bar -->
+    <nav class="top-bar">
+        <button id="menu-open" class="nav-btn">☰</button>
+        <div class="logo-center"><img src="assets/aoi-logo/aoi-logo.png" alt="Aoi Logo"></div>
+        <button id="settings-open" class="nav-btn">⚙️</button>
     </nav>
-    
-    <main id="app">
-        <header class="hero">
-            <img src="assets/logo.png" class="hero-logo">
+
+    <!-- Logo chính giữa màn hình (Hero) -->
+    <main class="hero-container">
+        <div class="hero-content">
+            <img src="assets/aoi-logo/aoi-logo.png" class="hero-logo-large">
             <p id="sub-title"></p>
-        </header>
-
-        <!-- Nút điều khiển ngăn kéo -->
-        <div class="drawer-controls">
-            <button id="toggle-drawer" class="btn-main">📂 Xem danh sách sản phẩm</button>
-        </div>
-
-        <!-- Thanh Search + Grid được cất vào ngăn kéo này -->
-        <div id="drawer" class="drawer hidden">
-            <div class="drawer-content">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." onkeyup="searchPosts()">
-                </div>
-                <div id="content-grid" class="grid"></div>
-                <button class="btn-close-drawer" onclick="toggleDrawer()">Đóng lại</button>
-            </div>
         </div>
     </main>
+
+    <!-- Ngăn kéo bên TRÁI (Menu Bài viết) -->
+    <aside id="menu-drawer" class="side-drawer left">
+        <div class="drawer-header">
+            <span>DANH SÁCH BÀI VIẾT</span>
+            <button class="close-drawer" onclick="toggleSide('menu-drawer')">×</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." onkeyup="searchPosts()">
+        </div>
+        <div id="content-grid" class="grid-menu"></div>
+    </aside>
+
+    <!-- Ngăn kéo bên PHẢI (Cài đặt) -->
+    <aside id="settings-drawer" class="side-drawer right">
+        <div class="drawer-header">
+            <span>CÀI ĐẶT HỆ THỐNG</span>
+            <button class="close-drawer" onclick="toggleSide('settings-drawer')">×</button>
+        </div>
+        <div class="settings-list">
+            <div class="setting-item">
+                <label>Ngôn ngữ 🌏</label>
+                <select id="lang-switch">
+                    <option value="vi">Tiếng Việt 🇻🇳</option>
+                    <option value="en">English 🇬🇧</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>Giao diện 🦋</label>
+                <button id="theme-toggle" class="btn-theme">🌸 Đổi Theme</button>
+            </div>
+        </div>
+    </aside>
 
     <!-- Modal xem nội dung Markdown -->
     <div id="viewer" class="modal hidden">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeDoc()">×</button>
+            <button class="close-view" onclick="closeDoc()">×</button>
             <div id="md-render-area" class="md-body"></div>
         </div>
     </div>
