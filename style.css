@@ -74,13 +74,17 @@ body {
 
 /* _______________ Card Folder _______________ */
 .card { 
-    background: var(--card); 
-    padding: 25px; 
-    border-radius: 15px; 
-    border: 1px solid rgba(255,255,255,0.05); 
-    cursor: default; /* Đổi thành mũi tên mặc định */
-    transition: 0.2s;
-}
+    display: inline-block; /* Nút đẹp hơn */
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer; /* Hiện hình bàn tay khi chỉ vào đây */
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.3s;}
 
 .card:hover {
     border-color: rgba(255,255,255,0.2); /* Chỉ đổi nhẹ màu viền khi hover card */
@@ -106,16 +110,17 @@ body {
 }
 
 .card-footer {
+    display: inline-block; /* Nút đẹp hơn */
     font-size: 0.8rem;
     color: var(--accent);
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 1px solid var(--accent);
+    cursor: pointer; /* Hiện hình bàn tay khi chỉ vào */
     padding: 8px 15px;
     border-radius: 8px;
     margin-top: 20px;
-    display: inline-block;
+    transition: 0.3s;
 }
 
 .card-footer:hover {
@@ -222,5 +227,28 @@ body {
 #search-input:focus {
     border-color: var(--accent);
     box-shadow: 0 0 15px rgba(255, 45, 85, 0.2);
+}
+
+/* Nền gradient chìm cho sang trọng */
+body {
+    background: radial-gradient(circle at top right, #1e1e2e, #050505);
+    background-attachment: fixed;
+}
+
+/* Làm cho cái Folder đẹp hơn */
+.card-icon {
+    background: linear-gradient(135deg, #ff2d55, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+}
+
+/* Nút Xem chi tiết giống nút thật hơn */
+.card-footer {
+    border: 1px solid var(--accent);
+    padding: 8px 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: inline-block;
 }
 
