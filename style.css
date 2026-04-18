@@ -13,12 +13,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { 
-    background: var(--bg); color: var(--text); 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    transition: background 0.3s; line-height: 1.6;
+    background: radial-gradient(circle at top right, #1e1e2e, #050505);
+    background-attachment: fixed;
 }
 
-/* Loader line cực mảnh */
+/* _______________ Loader line _______________ */
 .loader-line { 
     position: fixed; 
     top: 0; 
@@ -38,10 +37,37 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Grid Layout */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 40px 5%; }
+/* _______________ Subtitle lùi xuống ________________ */
+#sub-title {
+    margin-top: 15px;      /* Cách tiêu đề chính */
+    margin-bottom: 30px;   /* Cách thanh Search bên dưới */
+    display: block;
+    opacity: 0.7;
+    font-size: 0.9rem;
+    padding: 0 10px;
+}
 
-/* Card Folder */
+/* _______________ Card Mobile _______________ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* PC giữ nguyên */
+    gap: 15px;
+    padding: 20px 5%;
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr; /* Mobile chỉ 1 cột nhưng card sẽ thu gọn lại */
+        padding: 10px 15px;
+    }
+    .card {
+        padding: 15px; /* Giảm độ dày card trên mobile */
+    }
+    .card h3 { font-size: 1.1rem; }
+    .card p { font-size: 0.9rem; }
+}
+
+/* _______________ Card Folder _______________ */
 .card { 
     background: var(--card); 
     padding: 25px; 
@@ -55,7 +81,7 @@ body {
     border-color: rgba(255,255,255,0.2); /* Chỉ đổi nhẹ màu viền khi hover card */
 }
 
-/* Hiệu ứng hiện dần cho Card */
+/* _______________ Effect Card _______________ */
 .fade-in {
     animation: fadeInCard 0.5s ease forwards;
     opacity: 0;
@@ -66,20 +92,19 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.card-icon { font-size: 2rem; margin-bottom: 15px; }
+.card-icon { 
+    background: linear-gradient(135deg, #ff2d55, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem; 
+}
 
 .card-footer {
+    border: 1px solid var(--accent);
+    padding: 8px 15px;
+    border-radius: 8px;
+    margin-top: 20px;
     display: inline-block;
-    margin-top: 15px;
-    font-size: 0.8rem;
-    color: var(--accent);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: 0.3s;
 }
 
 .card-footer:hover {
@@ -87,7 +112,7 @@ body {
     letter-spacing: 2px; /* Hiệu ứng chữ giãn ra một chút khi nhấn */
 }
 
-/* Modal & Markdown */
+/* _______________ Modal & Markdown _______________ */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; }
 .hidden { display: none; }
 .modal-content { 
@@ -96,13 +121,6 @@ body {
 }
 .close-btn { position: absolute; right: 20px; top: 10px; font-size: 30px; background: none; border: none; color: var(--text); cursor: pointer; }
 
-/* Responsive Mobile */
-@media (max-width: 600px) {
-    .aoi-title { font-size: 1.5rem; text-align: center; }
-    .modal-content { width: 100%; height: 100%; border-radius: 0; }
-}
-
-/* --- PHẦN BỔ SUNG: CSS CHO NỘI DUNG BÀI VIẾT (MARKDOWN) --- */
 .md-body { 
     line-height: 1.8; 
     font-size: 1.05rem; 
@@ -122,7 +140,7 @@ body {
     color: var(--accent);
 }
 
-/* Định dạng cho Ảnh và Video tự động co giãn theo Mobile */
+/* _______________ Auto Size Mobile _______________ */
 .md-body img, .md-video { 
     width: 100%; 
     max-width: 100%;
@@ -146,7 +164,7 @@ body {
     list-style-type: square;
 }
 
-/* Nút đóng bài viết kiểu nổi trên Mobile */
+/* _______________ Button Exits Mobile _______________ */
 .close-btn { 
     position: sticky; 
     top: 0; 
@@ -162,15 +180,15 @@ body {
     z-index: 100;
 }
 
-/* Scrollbar mượt cho Mobile & PC */
+/* _______________ Scrollbar Mobile & PC _______________ */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-/* Trạng thái Loading giả lập khi chuyển trang */
+/* _______________ Giả lập Loading chuyển trang _______________ */
 .loading-active { filter: blur(5px); pointer-events: none; transition: 0.3s; }
 
-/* CSS cho thanh Search */
+/* _______________ Search _______________ */
 .search-container {
     display: flex;
     justify-content: center;
