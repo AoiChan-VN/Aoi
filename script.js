@@ -5,7 +5,7 @@ const state = {
 
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
-    const bgImg = state.theme === 'dark' ? 'assets/bg-dark.jpg' : 'assets/bg-light.jpg';
+    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Pale.webp' : 'assets/aoi-theme/Theme-Reading.webp';
     document.body.style.backgroundImage = `linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('${bgImg}')`;
 };
 
@@ -16,7 +16,7 @@ const parseMD = (text) => {
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
         // Ảnh: ![alt](url)
         .replace(/!\[(.*?)\]\((.*?)\)/gim, '<div class="md-img-container"><img alt="$1" src="$2" loading="lazy"></div>')
-        // Video: @[video](url) - Cú pháp tự chế cho Aoi
+        // Video: @[video](url) - Cú pháp tự chế của Aoi
         .replace(/@\[video\]\((.*?)\)/gim, '<video controls class="md-video"><source src="$1" type="video/mp4"></video>')
         // Link: [text](url)
         .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" class="md-link">$1</a>')
