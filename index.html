@@ -24,22 +24,28 @@
             <button id="theme-toggle">🌓</button>
         </div>
     </nav>
-
+    
     <main id="app">
         <header class="hero">
-            <!-- Logo ảnh lớn nếu muốn hiện giữa màn hình -->
-            <!-- <img src="assets/logo.png" class="hero-logo" style="max-height: 100px; margin-bottom: 10px;"> -->
-            <h1 class="aoi-title">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
+            <img src="assets/logo.png" class="hero-logo">
             <p id="sub-title"></p>
         </header>
 
-        <!-- Thanh tìm kiếm  -->
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Tìm kiếm plugin/game..." onkeyup="searchPosts()">
+        <!-- Nút điều khiển ngăn kéo -->
+        <div class="drawer-controls">
+            <button id="toggle-drawer" class="btn-main">📂 Xem danh sách sản phẩm</button>
         </div>
-        
-        <div id="content-grid" class="grid"></div>
 
+        <!-- Thanh Search + Grid được cất vào ngăn kéo này -->
+        <div id="drawer" class="drawer hidden">
+            <div class="drawer-content">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." onkeyup="searchPosts()">
+                </div>
+                <div id="content-grid" class="grid"></div>
+                <button class="btn-close-drawer" onclick="toggleDrawer()">Đóng lại</button>
+            </div>
+        </div>
     </main>
 
     <!-- Modal xem nội dung Markdown -->
