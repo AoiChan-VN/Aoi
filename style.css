@@ -120,3 +120,33 @@ body {
     font-size: 20px;
     z-index: 100;
 }
+
+/* Hiệu ứng hiện dần cho Card */
+.fade-in {
+    animation: fadeInCard 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeInCard {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card-icon { font-size: 2rem; margin-bottom: 15px; }
+
+.card-footer {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Scrollbar mượt cho Mobile & PC */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+/* Trạng thái Loading giả lập khi chuyển trang */
+.loading-active { filter: blur(5px); pointer-events: none; transition: 0.3s; }
