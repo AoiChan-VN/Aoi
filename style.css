@@ -150,3 +150,29 @@ body {
 
 /* Trạng thái Loading giả lập khi chuyển trang */
 .loading-active { filter: blur(5px); pointer-events: none; transition: 0.3s; }
+
+/* CSS cho thanh Search */
+.search-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 5% 30px 5%;
+}
+
+#search-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--card);
+    color: var(--text);
+    outline: none;
+    transition: 0.3s;
+    font-size: 1rem;
+}
+
+#search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(255, 45, 85, 0.2);
+}
+
