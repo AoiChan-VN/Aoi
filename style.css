@@ -101,18 +101,13 @@ body {
     margin-bottom: 15px;
 }
 
+/* Nút xem chi tiết đẹp hơn */
 .card-footer {
-    display: inline-block; /* Giống nút hơn */
-    margin-top: 15px;
-    font-size: 0.8rem;
-    color: var(--accent);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer; /* Hiện hình bàn tay khi chỉ vào */
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: 0.3s;
+    border: 1px solid var(--accent);
+    padding: 8px 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: inline-block; 
 }
 
 .card-footer:hover {
