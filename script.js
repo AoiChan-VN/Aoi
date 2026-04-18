@@ -3,7 +3,7 @@ const DB = {
     vi: {
         sub: "🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 - Plugin & Game System",
         // Bạn chỉ cần thêm tên file .md vào đây, mọi thứ khác web tự lo
-        posts: ["aoi-Plugin.md", "plugin-v1.md", "my-game.md", "tutorial.md"] 
+        posts: ["aoi-plugin.md", "plugin-v1.md", "my-game.md", "tutorial.md"] 
     },
     en: {
         sub: "🌿🥀AoiChan🥀🌿 - Specialized in Plugins & Games",
