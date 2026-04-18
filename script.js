@@ -24,7 +24,9 @@ const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
     
     // Sử dụng ảnh nội bộ từ thư mục assets để tránh lag
-    const bgImg = state.theme === 'dark' ? 'assets/bg-dark.jpg' : 'assets/bg-light.jpg';
+    const bgImg = state.theme === 'dark' ? 
+        'assets/aoi-theme/Theme-Reading.webp' :
+        'assets/aoi-theme/Theme-Pale.webp';
     document.body.style.backgroundImage = `linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('${bgImg}')`;
     
     // Chống vạch trắng bằng cách ép màu nền trùng với màu theme
