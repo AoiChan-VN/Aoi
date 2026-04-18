@@ -1,17 +1,13 @@
-// 1. DỮ LIỆU NỘI BỘ (Thay thế database ngoài)
+// 1. CƠ SỞ DỮ LIỆU CÁ NHÂN (Dễ dàng mở rộng)
 const DB = {
     vi: {
-        sub: "Hệ thống sản phẩm cá nhân - Tối ưu cực hạn",
-        items: [
-            { title: "Aoi Plugin v1", cat: "Plugin", file: "aoi-plugin.md", desc: "Tối ưu hóa hệ thống server." },
-            { title: "Aoi Game Pro", cat: "Game", file: "game.md", desc: "Trải nghiệm đồ họa đỉnh cao." }
-        ]
+        sub: "🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 - Plugin & Game System",
+        // Bạn chỉ cần thêm tên file .md vào đây, mọi thứ khác web tự lo
+        posts: ["aoi-Plugin.md", "plugin-v1.md", "my-game.md", "tutorial.md"] 
     },
     en: {
-        sub: "Personal Products - Extreme Optimization",
-        items: [
-            { title: "Aoi Plugin v1", cat: "Plugin", file: "aoi-plugin-en.md", desc: "System optimization." }
-        ]
+        sub: "🌿🥀AoiChan🥀🌿 - Specialized in Plugins & Games",
+        posts: ["plugin-v1.md", "my-game.md"]
     }
 };
 
@@ -53,21 +49,27 @@ const init = () => {
     if (postFile) openDoc(postFile);
 };
 
+// 2. HÀM TỰ ĐỘNG RENDER CARD (Tối ưu cực độ)
 const render = () => {
     const data = DB[state.lang];
     document.getElementById('sub-title').innerText = data.sub;
     const grid = document.getElementById('content-grid');
     grid.innerHTML = '';
 
-    data.items.forEach(item => {
+    data.posts.forEach((fileName, index) => {
+        // Tự động tạo Title từ tên file (ví dụ: 'aoi-game.md' -> 'Aoi Game')
+        const autoTitle = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
+        
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card fade-in';
+        card.style.animationDelay = `${index * 0.1}s`; // Hiệu ứng hiện từng cái một
         card.innerHTML = `
-            <div class="card-tag">${item.cat}</div>
-            <h3>${item.title}</h3>
-            <p>${item.desc}</p>
+            <div class="card-icon">📁</div>
+            <h3>${autoTitle}</h3>
+            <p>Nhấp để xem chi tiết bài viết: ${fileName}</p>
+            <div class="card-footer">Read More →</div>
         `;
-        card.onclick = () => openDoc(item.file);
+        card.onclick = () => openDoc(fileName);
         grid.appendChild(card);
     });
 };
