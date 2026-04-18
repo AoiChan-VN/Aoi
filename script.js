@@ -1,4 +1,4 @@
-// 1. CƠ SỞ DỮ LIỆU CÁ NHÂN (Dễ dàng mở rộng)
+// CƠ SỞ DỮ LIỆU CÁ NHÂN (Dễ dàng mở rộng)
 const DB = {
     vi: {
         sub: "🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 - Plugin & Game System",
@@ -11,7 +11,7 @@ const DB = {
     }
 };
 
-// 2. MINI MARKDOWN PARSER (Tự viết, không dùng thư viện ngoài)
+// MINI MARKDOWN PARSER (Tự viết, không dùng thư viện ngoài)
 const parseMD = (text) => {
     return text
         // Tiêu đề
@@ -32,7 +32,7 @@ const parseMD = (text) => {
         .replace(/\n/gim, '<br>');
 };
 
-// 3. LOGIC HỆ THỐNG
+// LOGIC HỆ THỐNG
 const state = {
     lang: localStorage.getItem('aoi_lang') || 'vi',
     theme: localStorage.getItem('aoi_theme') || 'dark'
@@ -43,13 +43,13 @@ const init = () => {
     document.getElementById('lang-switch').value = state.lang;
     render();
     
-    // Thêm đoạn này: Tự động mở bài viết từ URL (Ví dụ: index.html?post=game.md)
+    // Tự động mở bài viết từ URL (Ví dụ: index.html?post=game.md)
     const urlParams = new URLSearchParams(window.location.search);
     const postFile = urlParams.get('post');
     if (postFile) openDoc(postFile);
 };
 
-// 2. HÀM TỰ ĐỘNG RENDER CARD (Tối ưu cực độ)
+// TỰ ĐỘNG RENDER CARD (Tối ưu cực độ)
 const render = () => {
     const data = DB[state.lang];
     document.getElementById('sub-title').innerText = data.sub;
@@ -74,6 +74,17 @@ const render = () => {
     });
 };
 
+// Tìm kiếm bài viết,..
+const searchPosts = () => {
+    const input = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(input) ? 'block' : 'none';
+    });
+};
+
 // Hàm mở file bài viết tự động
 const openDoc = async (file) => {
     const viewer = document.getElementById('viewer');
@@ -94,7 +105,7 @@ const openDoc = async (file) => {
 
 const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
 
-// 4. EVENT LISTENERS
+// EVENT LISTENERS
 document.getElementById('theme-toggle').onclick = () => {
     state.theme = state.theme === 'dark' ? 'light' : 'dark';
     document.body.className = `theme-${state.theme}`;
