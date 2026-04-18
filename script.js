@@ -1,12 +1,12 @@
 // CƠ SỞ DỮ LIỆU CÁ NHÂN (Dễ dàng mở rộng)
 const DB = {
     vi: {
-        sub: "🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿 - Plugin & Game System",
+        sub: "【Plugin & Game System】",
         // Bạn chỉ cần thêm tên file .md vào đây, mọi thứ khác web tự lo
         posts: ["aoi-plugin.md", "plugin-v1.md", "my-game.md", "tutorial.md"] 
     },
     en: {
-        sub: "🌿🥀AoiChan🥀🌿 - Specialized in Plugins & Games",
+        sub: "【Specialized in Plugins & Games】",
         posts: ["plugin-v1.md", "my-game.md"]
     }
 };
@@ -49,6 +49,17 @@ const init = () => {
     if (postFile) openDoc(postFile);
 };
 
+// Tìm kiếm bài viết,..
+const searchPosts = () => {
+    const input = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    
+    cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(input) ? 'block' : 'none';
+    });
+};
+
 // TỰ ĐỘNG RENDER CARD (Tối ưu cực độ)
 const render = () => {
     const data = DB[state.lang];
@@ -71,17 +82,6 @@ const render = () => {
         `;
         card.onclick = () => openDoc(fileName);
         grid.appendChild(card);
-    });
-};
-
-// Tìm kiếm bài viết,..
-const searchPosts = () => {
-    const input = document.getElementById('search-input').value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        card.style.display = title.includes(input) ? 'block' : 'none';
     });
 };
 
