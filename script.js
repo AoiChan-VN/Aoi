@@ -62,7 +62,6 @@ const searchPosts = () => {
 
 // TỰ ĐỘNG RENDER CARD (Tối ưu cực độ)
 const render = async () => {
-    // Tự động load data từ file json nội bộ
     const response = await fetch('./data.json');
     const dataAll = await response.json();
     const data = dataAll[state.lang];
@@ -76,16 +75,21 @@ const render = async () => {
         card.className = 'card fade-in';
         card.style.animationDelay = `${index * 0.1}s`;
         
-        // Chỉ hiện Title và Desc, không hiện tên file .md
+        // Thẻ Card
         card.innerHTML = `
             <div class="card-icon">📁</div>
             <h3>${item.title}</h3>
             <p>${item.desc}</p>
-            <div class="card-footer">Xem chi tiết →</div>
+            <div class="card-footer" data-file="${item.file}">Xem chi tiết →</div>
         `;
         
-        // Khi nhấn vào vẫn mở đúng file .md ngầm
-        card.onclick = () => openDoc(item.file);
+        // CLICK vào nút "Xem chi tiết"
+        const btn = card.querySelector('.card-footer');
+        btn.onclick = (e) => {
+            e.stopPropagation(); // Ngăn chặn sự kiện lan ra ngoài (nếu cần)
+            openDoc(item.file);
+        };
+
         grid.appendChild(card);
     });
 };
