@@ -13,12 +13,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    background: radial-gradient(circle at top right, #1e1e2e, #050505);
-    background-attachment: fixed;
-    
-   /* background: var(--bg); color: var(--text); */
+    background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-   /* transition: background 0.3s; line-height: 1.6; */
+    transition: background 0.3s; line-height: 1.6;
 }
 
 /* _______________ Loader line _______________ */
