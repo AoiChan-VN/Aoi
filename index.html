@@ -11,7 +11,11 @@
     <div id="loader" class="loader-line"></div>
 
     <nav class="glass-nav">
-        <div class="logo">𝓐𝓸𝓲𝓒𝓱𝓪𝓷</div>
+        
+        <div class="logo">
+           <img src="assets/aoi-logo.png" alt="AoiChan Logo" style="height: 40px; width: auto; object-fit: contain;">
+        </div>
+        
         <div class="nav-controls">
             <select id="lang-switch">
                 <option value="vi">🇻🇳</option>
@@ -23,14 +27,19 @@
 
     <main id="app">
         <header class="hero">
+            <!-- Logo ảnh lớn nếu muốn hiện giữa màn hình -->
+            <!-- <img src="assets/logo.png" class="hero-logo" style="max-height: 100px; margin-bottom: 10px;"> -->
             <h1 class="aoi-title">🌿🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀🌿</h1>
             <p id="sub-title"></p>
         </header>
-        <div id="content-grid" class="grid"></div>
 
-        <div class="filter-box">
+        <!-- Thanh tìm kiếm  -->
+        <div class="search-container">
             <input type="text" id="search-input" placeholder="Tìm kiếm plugin/game..." onkeyup="searchPosts()">
         </div>
+        
+        <div id="content-grid" class="grid"></div>
+
     </main>
 
     <!-- Modal xem nội dung Markdown -->
