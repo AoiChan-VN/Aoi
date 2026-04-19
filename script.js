@@ -5,7 +5,7 @@ const state = {
 
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
-    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale';
+    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale.webp';
     document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${bgImg}')`;
     document.getElementById('theme-select').value = state.theme;
 };
@@ -37,7 +37,7 @@ const render = async () => {
         content.posts.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">CHI TIẾT →</div>`;
+            card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">「Chi tiết」→</div>`;
             card.querySelector('.card-footer').onclick = () => openDoc(item.file);
             grid.appendChild(card);
         });
