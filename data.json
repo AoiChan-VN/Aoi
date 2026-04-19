@@ -3,19 +3,22 @@
     "sub": "Hệ thống quản lý Plugin, Game và Tài liệu cá nhân",
     "posts": [
       {
-        "title": "Aoi Plugin System",
-        "desc": "Plugin tối ưu hóa hiệu suất server, giảm thiểu tình trạng giật lag cho Minecraft 2026.",
-        "file": "aoi-plugin.md"
+        "title": "〈Aoi〉 📦Plugin",
+        "desc": "➥Plugins Server Minecraft.",
+        "file": "plugin.md"
       },
       {
-        "title": "Aoi Adventure Game",
-        "desc": "Dự án game nhập vai thế giới mở được phát triển hoàn toàn bằng JavaScript.",
-        "file": "game.md"
+        "title": "🔧〈Cập nhập〉",
+        "desc": "➥Những nâng cấp và thay đổi mới...",
+        "file": "update.md"
       },
       {
-        "title": "Hướng dẫn sử dụng",
-        "desc": "Tài liệu hướng dẫn cài đặt và tùy chỉnh các sản phẩm của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷.",
-        "file": "docs.md"
+        "title": "📢〈Thông báo〉",
+        "desc": "➥🤷",
+      {
+        "title": "📚〈Hướng dẫn〉",
+        "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤.",
+        "file": "info.md"
       }
     ]
   },
