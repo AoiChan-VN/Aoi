@@ -5,7 +5,7 @@ const state = {
 
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
-    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Readring.webp' : 'assets/aoi-theme/Theme-Pale';
+    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale';
     document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${bgImg}')`;
     document.getElementById('theme-select').value = state.theme;
 };
