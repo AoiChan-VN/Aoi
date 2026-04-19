@@ -1,8 +1,8 @@
 :root {
     --accent: #ff2d55;
-    --text: #e6edf3; /* Màu chữ chuẩn GitHub Dark */
-    --bg-drawer: rgba(13, 17, 23, 0.7); /* Màu nền GitHub Dark + Trong suốt */
-    --border: rgba(48, 54, 61, 0.8); /* Viền chuẩn GitHub */
+    --text: #e6edf3; /* Màu chữ Dark */
+    --bg-drawer: rgba(13, 17, 23, 0.7); /* Màu nền Dark + Trong suốt */
+    --border: rgba(48, 54, 61, 0.8); /* Viền chuẩn */
 }
 .theme-light {
     --accent: #0969da;
@@ -35,7 +35,7 @@ body {
 .click-area { position: fixed; inset: 0; z-index: 140; display: none; }
 .click-area.show { display: block; }
 
-/* Side Drawer - GitHub Style */
+/* Side Drawer - Style */
 .side-drawer {
     position: fixed; top: 0; width: 340px; height: 100%;
     background: var(--bg-drawer);
@@ -56,12 +56,12 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* GitHub Card */
+/* Card */
 .grid-menu { padding: 15px; height: calc(100% - 150px); overflow-y: auto; }
 .card {
     background: rgba(255,255,255,0.03);
     padding: 16px;
-    border-radius: 8px; /* Bo góc kiểu GitHub */
+    border-radius: 8px; /* Bo góc */
     margin-bottom: 12px;
     border: 1px solid var(--border);
     transition: 0.2s;
