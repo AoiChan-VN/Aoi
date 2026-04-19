@@ -12,22 +12,26 @@
 
     <nav class="top-bar">
         <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
-        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
+        <div class="logo-center"><img src="assets/logo.png" alt="Aoi"></div>
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn">⚙️</button>
     </nav>
 
+    <main class="hero-main">
+        <img src="assets/logo.png" class="logo-hero-pc">
+        <p id="sub-title"></p>
+    </main>
+
     <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
+        <img src="assets/logo.png" class="footer-logo-small">
         <div class="copyright">
-            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p> 
             <p>Gmail: aoichan@gmail.com</p>
-            <p>© 19/4/2026</p>
+            <p>Aoi © 2026</p>
         </div>
     </footer>
 
     <!-- Ngăn kéo Menu -->
     <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">【Bài viết】</div>
+        <div class="drawer-header">SẢN PHẨM</div>
         <div class="search-box">
             <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." oninput="searchPosts()">
         </div>
@@ -36,20 +40,20 @@
 
     <!-- Ngăn kéo Cài đặt -->
     <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header">【CÀI ĐẶT】</div>
+        <div class="drawer-header">CÀI ĐẶT</div>
         <div class="settings-content">
             <div class="setting-group">
-                <label>【Ngôn ngữ】</label>
+                <label>Ngôn ngữ (Language)</label>
                 <select id="lang-switch" class="aoi-select">
-                    <option value="vi">「Tiếng Việt」</option>
-                    <option value="en">「English」</option>
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="en">English</option>
                 </select>
             </div>
             <div class="setting-group">
-                <label>「Giao diện」</label>
+                <label>Giao diện (Theme)</label>
                 <select id="theme-select" class="aoi-select">
-                    <option value="dark">「Tối」</option>
-                    <option value="light">「Sáng」</option>
+                    <option value="dark">Tối (Dark Mode)</option>
+                    <option value="light">Sáng (Light Mode)</option>
                 </select>
             </div>
         </div>
