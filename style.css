@@ -42,6 +42,10 @@ body {
 
 .nav-btn { background: none; border: none; color: var(--text); font-size: 26px; cursor: pointer; }
 
+#settings-drawer-btn { 
+    margin-left: auto; 
+}
+
 /* Logo Thương hiệu */
 .logo-center img {
     height: 35px;
@@ -104,5 +108,4 @@ body {
 
 @media (max-width: 600px) { 
     .side-drawer { width: 80%; }
-    .logo-hero-pc { width: 120px; }
 }
