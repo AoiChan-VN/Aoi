@@ -32,36 +32,36 @@
 
     <!-- Ngăn kéo Menu -->
     <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">SẢN PHẨM</div>
+        <div class="drawer-header">【Bài viết】</div>
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." oninput="searchPosts()">
+            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." oninput="searchPosts()">
         </div>
         <div id="content-grid" class="grid-menu"></div>
     </aside>
 
     <!-- Ngăn kéo Cài đặt -->
     <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header">CÀI ĐẶT</div>
+        <div class="drawer-header">【CÀI ĐẶT】</div>
         <div class="settings-content">
             <div class="setting-group">
-                <label>Ngôn ngữ (Language)</label>
+                <label>【Ngôn ngữ】</label>
                 <select id="lang-switch" class="aoi-select">
-                    <option value="vi">Tiếng Việt</option>
-                    <option value="en">English</option>
+                    <option value="vi">「Tiếng Việt」</option>
+                    <option value="en">「English」</option>
                 </select>
             </div>
             <div class="setting-group">
-                <label>Giao diện (Theme)</label>
+                <label>【Giao diện】</label>
                 <select id="theme-select" class="aoi-select">
-                    <option value="dark">Tối (Dark Mode)</option>
-                    <option value="light">Sáng (Light Mode)</option>
+                    <option value="dark">「Tối」</option>
+                    <option value="light">「Sáng」</option>
                 </select>
             </div>
         </div>
     </aside>
 
     <div id="viewer" class="modal hidden">
-        <button class="close-view" onclick="closeDoc()">×</button>
+        <button class="close-view" onclick="closeDoc()">✘</button>
         <div class="modal-content" id="md-render-area"></div>
     </div>
 
