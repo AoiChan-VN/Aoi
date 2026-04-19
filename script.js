@@ -31,7 +31,7 @@ const render = async () => {
         const res = await fetch('./data.json');
         const data = await res.json();
         const content = data[state.lang];
-        document.getElementById('sub-title').innerText = content.sub;
+        // Đã xóa tiêu đề trung tâm nên không cần update sub-title ở giữa nữa
         const grid = document.getElementById('content-grid');
         grid.innerHTML = '';
         content.posts.forEach(item => {
@@ -81,4 +81,3 @@ document.getElementById('lang-switch').onchange = (e) => {
 };
 
 window.onload = () => { applyTheme(); render(); };
- 
