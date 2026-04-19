@@ -5,27 +5,37 @@ const state = {
 
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
-    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Pale.webp' : 'assets/aoi-theme/Theme-Reading.webp';
+    const bgImg = state.theme === 'dark' ? 'assets/bg-dark.jpg' : 'assets/bg-light.jpg';
     document.body.style.backgroundImage = `linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('${bgImg}')`;
+    document.body.style.backgroundColor = state.theme === 'dark' ? '#050505' : '#f5f5f7';
+};
+
+const closeAllDrawers = () => {
+    document.getElementById('menu-drawer').classList.remove('show');
+    document.getElementById('settings-drawer').classList.remove('show');
+    document.getElementById('overlay').classList.remove('show');
+};
+
+const toggleSide = (id) => {
+    const el = document.getElementById(id);
+    const overlay = document.getElementById('overlay');
+    const isShowing = el.classList.contains('show');
+
+    closeAllDrawers();
+
+    if (!isShowing) {
+        el.classList.add('show');
+        overlay.classList.add('show');
+    }
 };
 
 const parseMD = (text) => {
     return text
-        // Tiêu đề
         .replace(/^# (.*$)/gim, '<h1>$1</h1>')
         .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        // Ảnh: ![alt](url)
-        .replace(/!\[(.*?)\]\((.*?)\)/gim, '<div class="md-img-container"><img alt="$1" src="$2" loading="lazy"></div>')
-        // Video: @[video](url) - Cú pháp tự chế của Aoi
-        .replace(/@\[video\]\((.*?)\)/gim, '<video controls class="md-video"><source src="$1" type="video/mp4"></video>')
-        // Link: [text](url)
-        .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" class="md-link">$1</a>')
-        // Bold & Italic
-        .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
-        .replace(/\*(.*)\*/gim, '<i>$1</i>')
-        // Danh sách gạch đầu dòng
-        .replace(/^\- (.*$)/gim, '<li>$1</li>')
-        // Ngắt dòng
+        .replace(/!\[(.*?)\]\((.*?)\)/gim, '<img alt="$1" src="$2">')
+        .replace(/@\[video\]\((.*?)\)/gim, '<video controls style="width:100%"><source src="$1" type="video/mp4"></video>')
+        .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" style="color:var(--accent)">$1</a>')
         .replace(/\n/gim, '<br>');
 };
 
@@ -45,7 +55,7 @@ const render = async () => {
             card.innerHTML = `
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
-                <div class="card-footer">XEM CHI TIẾT →</div>
+                <div class="card-footer">CHI TIẾT →</div>
             `;
             card.querySelector('.card-footer').onclick = () => openDoc(item.file);
             grid.appendChild(card);
@@ -56,19 +66,17 @@ const render = async () => {
 const openDoc = async (file) => {
     const loader = document.getElementById('loader');
     loader.style.width = '100%';
+    closeAllDrawers();
     try {
         const res = await fetch(`./content/${file}`);
         const text = await res.text();
         document.getElementById('md-render-area').innerHTML = parseMD(text);
         document.getElementById('viewer').classList.remove('hidden');
-        document.getElementById('menu-drawer').classList.remove('show');
     } catch (e) { alert("Lỗi tải bài viết"); }
     setTimeout(() => loader.style.width = '0', 400);
 };
 
 const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
-
-const toggleSide = (id) => document.getElementById(id).classList.toggle('show');
 
 document.getElementById('menu-open').onclick = () => toggleSide('menu-drawer');
 document.getElementById('settings-open').onclick = () => toggleSide('settings-drawer');
