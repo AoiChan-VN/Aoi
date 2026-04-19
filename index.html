@@ -13,18 +13,19 @@
     <nav class="top-bar">
         <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
         <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
-        <button id="settings-drawer-btn" onclick="toggleSide('settings-drawer', event)" class="nav-btn">⚙️</button>
+        <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
     </nav>
     
+    <!-- Đã xóa logo giữa, chỉ để lại thông tin footer -->
     <footer class="footer-hero">
         <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
         <div class="copyright">
-            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤ | © 2026</p>
+            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
             <p>Gmail: aoichan@gmail.com</p>
+            <p>© 2026</p>
         </div>
     </footer>
 
-    <!-- Ngăn kéo Menu -->
     <aside id="menu-drawer" class="side-drawer left">
         <div class="drawer-header">【Bài viết】</div>
         <div class="search-box">
@@ -33,7 +34,6 @@
         <div id="content-grid" class="grid-menu"></div>
     </aside>
 
-    <!-- Ngăn kéo Cài đặt -->
     <aside id="settings-drawer" class="side-drawer right">
         <div class="drawer-header">【CÀI ĐẶT】</div>
         <div class="settings-content">
