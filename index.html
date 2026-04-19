@@ -10,50 +10,50 @@
     <div id="loader" class="loader-line"></div>
     <div id="global-click-area" class="click-area" onclick="closeAll()"></div>
 
+    <!-- Top Bar mới: Logo đi kèm nút Menu -->
     <nav class="top-bar">
-        <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
-        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
+        <div class="nav-left">
+            <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
+            <img src="assets/aoi-logo/Aoi-Logo.png" class="nav-logo-small">
+        </div>
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn">⚙️</button>
     </nav>
 
-    <main class="hero-main">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="logo-hero-pc">
-        <p id="sub-title"></p>
-    </main>
-
+    <!-- Footer bản quyền -->
     <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
+        <p id="sub-title" style="display: none;"></p> <!-- Ẩn sub ở hero -->
         <div class="copyright">
-            <p>Author: 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤
+            <p>Author: 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
             <p>Gmail: aoichan@gmail.com</p>
+            <p>🇻🇳 2026</p>
         </div>
     </footer>
 
-    <!-- Ngăn kéo Menu -->
+    <!-- Ngăn kéo Menu (GitHub Style) -->
     <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">SẢN PHẨM</div>
+        <div class="drawer-header">【Bài viết】</div>
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." oninput="searchPosts()">
+            <input type="text" id="search-input" placeholder="🔍 Search resources..." oninput="searchPosts()">
         </div>
         <div id="content-grid" class="grid-menu"></div>
     </aside>
 
     <!-- Ngăn kéo Cài đặt -->
     <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header">CÀI ĐẶT</div>
+        <div class="drawer-header">【CÀI ĐẶT】</div>
         <div class="settings-content">
             <div class="setting-group">
-                <label>Ngôn ngữ (Language)</label>
+                <label>【Ngôn ngữ】</label>
                 <select id="lang-switch" class="aoi-select">
                     <option value="vi">Tiếng Việt</option>
                     <option value="en">English</option>
                 </select>
             </div>
             <div class="setting-group">
-                <label>Giao diện (Theme)</label>
+                <label>【Giao diện】</label>
                 <select id="theme-select" class="aoi-select">
-                    <option value="dark">Tối (Dark Mode)</option>
-                    <option value="light">Sáng (Light Mode)</option>
+                    <option value="dark">『dark』</option>
+                    <option value="light">『light』</option>
                 </select>
             </div>
         </div>
