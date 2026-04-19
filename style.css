@@ -31,9 +31,6 @@ body {
 .nav-btn { background: none; border: none; color: var(--text); font-size: 26px; cursor: pointer; }
 .logo-center img { height: 35px; }
 
-/* Hero Logo */
-.hero-main { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
 /* Footer và Copyright */
 .footer-hero { position: fixed; bottom: 30px; width: 100%; text-align: center; }
 .footer-logo-small { width: 50px; opacity: 0.6; margin-bottom: 5px; }
