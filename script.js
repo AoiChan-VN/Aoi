@@ -10,22 +10,29 @@ const applyTheme = () => {
     document.body.style.backgroundColor = state.theme === 'dark' ? '#050505' : '#f5f5f7';
 };
 
+// Hàm đóng nhanh không gây trễ
 const closeAllDrawers = () => {
-    document.getElementById('menu-drawer').classList.remove('show');
-    document.getElementById('settings-drawer').classList.remove('show');
-    document.getElementById('overlay').classList.remove('show');
+    const menu = document.getElementById('menu-drawer');
+    const settings = document.getElementById('settings-drawer');
+    const overlay = document.getElementById('overlay');
+
+    if(menu) menu.classList.remove('show');
+    if(settings) settings.classList.remove('show');
+    if(overlay) overlay.classList.remove('show');
 };
 
+// Hàm mở ngăn kéo
 const toggleSide = (id) => {
     const el = document.getElementById(id);
     const overlay = document.getElementById('overlay');
-    const isShowing = el.classList.contains('show');
-
-    closeAllDrawers();
-
-    if (!isShowing) {
+    
+    // Nếu cái đang bấm đã mở rồi thì đóng hết
+    if (el.classList.contains('show')) {
+        closeAllDrawers();
+    } else {
+        closeAllDrawers(); // Đóng các cái khác trước
         el.classList.add('show');
-        overlay.classList.add('show');
+        overlay.classList.add('show'); // Hiện lớp tàng hình để đợi click đóng
     }
 };
 
