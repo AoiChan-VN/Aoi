@@ -9,6 +9,8 @@
 <body class="theme-dark">
     <!-- Hiệu ứng Loader -->
     <div id="loader" class="loader-line"></div>
+    <!-- Lớp phủ mờ khi mở Drawer (Bấm vào đây sẽ đóng menu) -->
+    <div id="overlay" class="overlay hidden" onclick="closeAllDrawers()"></div>
 
     <!-- Thanh Top Bar -->
     <nav class="top-bar">
@@ -17,14 +19,16 @@
         <button id="settings-open" class="nav-btn">⚙️</button>
     </nav>
 
-    <!-- Logo chính giữa màn hình (Hero) -->
-    <main class="hero-container">
-        <div class="hero-content">
-            <img src="assets/aoi-logo/Aoi-Logo.png" class="hero-logo-large">
-            <p id="sub-title"></p>
+    <!-- Logo và Copyright -->
+    <footer class="footer-hero">
+        <img src="assets/aoi-logo/Aoi-Logo.png" class="hero-logo-small">
+        <p id="sub-title"></p>
+        <div class="copyright">
+            <p>Gmail: 24HouStreamer@gmail.com</p>
+            <p>Aoi © 2026</p>
         </div>
-    </main>
-
+    </footer>
+    
     <!-- Ngăn kéo bên TRÁI (Menu Bài viết) -->
     <aside id="menu-drawer" class="side-drawer left">
         <div class="drawer-header">
