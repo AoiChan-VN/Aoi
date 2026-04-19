@@ -5,8 +5,9 @@ const state = {
 
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
-    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale.webp';
-    document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${bgImg}')`;
+    const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Readring.webp' : 'assets/aoi-theme/Theme-Pale.webp';
+    // Ép màu nền tối đồng bộ
+    document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgImg}')`;
     document.getElementById('theme-select').value = state.theme;
 };
 
@@ -16,13 +17,15 @@ const closeAll = () => {
 };
 
 const toggleSide = (id, event) => {
-    event.stopPropagation();
+    if (event) event.stopPropagation();
     const el = document.getElementById(id);
+    const area = document.getElementById('global-click-area');
     const isShow = el.classList.contains('show');
+
     closeAll();
     if (!isShow) {
         el.classList.add('show');
-        document.getElementById('global-click-area').classList.add('show');
+        area.classList.add('show');
     }
 };
 
@@ -31,26 +34,21 @@ const render = async () => {
         const res = await fetch('./data.json');
         const data = await res.json();
         const content = data[state.lang];
-        document.getElementById('sub-title').innerText = content.sub;
+        // Cập nhật sub ngầm (nếu cần dùng ở chỗ khác)
         const grid = document.getElementById('content-grid');
         grid.innerHTML = '';
         content.posts.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">CHI TIẾT →</div>`;
+            card.innerHTML = `
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+                <div class="card-footer">VIEW DETAILS →</div>
+            `;
             card.querySelector('.card-footer').onclick = () => openDoc(item.file);
             grid.appendChild(card);
         });
-    } catch (e) { console.error(e); }
-};
-
-const searchPosts = () => {
-    const keyword = document.getElementById('search-input').value.toLowerCase();
-    document.querySelectorAll('.card').forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        const desc = card.querySelector('p').innerText.toLowerCase();
-        card.style.display = (title.includes(keyword) || desc.includes(keyword)) ? 'block' : 'none';
-    });
+    } catch (e) { console.error("Error loading data"); }
 };
 
 const openDoc = async (file) => {
@@ -60,13 +58,24 @@ const openDoc = async (file) => {
     try {
         const res = await fetch(`./content/${file}`);
         const text = await res.text();
-        document.getElementById('md-render-area').innerHTML = text.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\n/gim, '<br>');
+        // Parser đơn giản cho Markdown
+        document.getElementById('md-render-area').innerHTML = text
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/\n/gim, '<br>');
         document.getElementById('viewer').classList.remove('hidden');
-    } catch (e) { alert("Lỗi tải bài viết"); }
+    } catch (e) { alert("Post not found"); }
     setTimeout(() => loader.style.width = '0', 400);
 };
 
 const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
+
+const searchPosts = () => {
+    const keyword = document.getElementById('search-input').value.toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(keyword) ? 'block' : 'none';
+    });
+};
 
 document.getElementById('theme-select').onchange = (e) => {
     state.theme = e.target.value;
