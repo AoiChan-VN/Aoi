@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-dark">
-    <!-- Vùng tàng hình bao phủ toàn màn hình để đóng menu khi chạm -->
+    <div id="loader" class="loader-line"></div>
     <div id="global-click-area" class="click-area" onclick="closeAll()"></div>
 
     <nav class="top-bar">
@@ -16,43 +16,49 @@
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn">⚙️</button>
     </nav>
 
-    <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="hero-logo-small">
+    <main class="hero-main">
+        <img src="assets/aoi-logo/Aoi-Logo.png" class="logo-hero-pc">
         <p id="sub-title"></p>
+    </main>
+
+    <footer class="footer-hero">
+        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
         <div class="copyright">
             <p>Author: 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤
-            <p>Gmail: AoiChan@gmail.com</p>
+            <p>Gmail: aoichan@gmail.com</p>
         </div>
     </footer>
 
-    <!-- Ngăn kéo Menu (Trái) -->
+    <!-- Ngăn kéo Menu -->
     <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">DANH SÁCH SẢN PHẨM</div>
+        <div class="drawer-header">SẢN PHẨM</div>
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." onkeyup="searchPosts()">
+            <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." oninput="searchPosts()">
         </div>
         <div id="content-grid" class="grid-menu"></div>
     </aside>
 
-    <!-- Ngăn kéo Cài đặt (Phải) -->
+    <!-- Ngăn kéo Cài đặt -->
     <aside id="settings-drawer" class="side-drawer right">
         <div class="drawer-header">CÀI ĐẶT</div>
-        <div class="settings-list">
-            <div class="setting-item">
-                <label>Ngôn ngữ 🌏</label>
-                <select id="lang-switch">
+        <div class="settings-content">
+            <div class="setting-group">
+                <label>Ngôn ngữ (Language)</label>
+                <select id="lang-switch" class="aoi-select">
                     <option value="vi">Tiếng Việt</option>
                     <option value="en">English</option>
                 </select>
             </div>
-            <div class="setting-item">
-                <label>Giao diện 🦋</label>
-                <button id="theme-toggle" class="btn-theme">【Đổi Theme】</button>
+            <div class="setting-group">
+                <label>Giao diện (Theme)</label>
+                <select id="theme-select" class="aoi-select">
+                    <option value="dark">Tối (Dark Mode)</option>
+                    <option value="light">Sáng (Light Mode)</option>
+                </select>
             </div>
         </div>
     </aside>
 
-    <!-- Viewer bài viết -->
     <div id="viewer" class="modal hidden">
         <button class="close-view" onclick="closeDoc()">×</button>
         <div class="modal-content" id="md-render-area"></div>
