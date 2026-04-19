@@ -7,20 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-dark">
-    <!-- Hiệu ứng tải trang -->
-    <div id="loader" class="loader-line"></div>
+    <!-- Vùng tàng hình bao phủ toàn màn hình để đóng menu khi chạm -->
+    <div id="global-click-area" class="click-area" onclick="closeAll()"></div>
 
-    <!-- Lớp phủ khi mở Menu (Bấm vào đây để đóng nhanh) -->
-    <div id="overlay" class="overlay" onclick="closeAllDrawers()"></div>
-
-    <!-- Thanh công cụ trên cùng -->
     <nav class="top-bar">
-        <button id="menu-open" class="nav-btn">☰</button>
-        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi Logo"></div>
-        <button id="settings-open" class="nav-btn">⚙️</button>
+        <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
+        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
+        <button onclick="toggleSide('settings-drawer', event)" class="nav-btn">⚙️</button>
     </nav>
 
-    <!-- Logo & Bản quyền dưới đáy màn hình -->
     <footer class="footer-hero">
         <img src="assets/aoi-logo/Aoi-Logo.png" class="hero-logo-small">
         <p id="sub-title"></p>
@@ -30,45 +25,37 @@
         </div>
     </footer>
 
-    <!-- Ngăn kéo TRÁI (Menu Sản phẩm) -->
+    <!-- Ngăn kéo Menu (Trái) -->
     <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">
-            <span>DANH SÁCH SẢN PHẨM</span>
-            <button class="close-drawer" onclick="closeAllDrawers()">×</button>
-        </div>
+        <div class="drawer-header">DANH SÁCH SẢN PHẨM</div>
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." onkeyup="searchPosts()">
+            <input type="text" id="search-input" placeholder="🔍 Tìm kiếm..." onkeyup="searchPosts()">
         </div>
         <div id="content-grid" class="grid-menu"></div>
     </aside>
 
-    <!-- Ngăn kéo PHẢI (Cài đặt) -->
+    <!-- Ngăn kéo Cài đặt (Phải) -->
     <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header">
-            <span>CÀI ĐẶT ⚙️</span>
-            <button class="close-drawer" onclick="closeAllDrawers()">×</button>
-        </div>
+        <div class="drawer-header">CÀI ĐẶT</div>
         <div class="settings-list">
             <div class="setting-item">
-                <label>Ngôn ngữ 🌏</label>
+                <label>Ngôn ngữ</label>
                 <select id="lang-switch">
-                    <option value="vi">Tiếng Việt 🇻🇳</option>
+                    <option value="vi">Tiếng Việt</option>
                     <option value="en">English</option>
                 </select>
             </div>
             <div class="setting-item">
-                <label>Giao diện 🌸</label>
-                <button id="theme-toggle" class="btn-theme">Đổi Theme</button>
+                <label>Giao diện</label>
+                <button id="theme-toggle" class="btn-theme">🌓 Đổi Theme</button>
             </div>
         </div>
     </aside>
 
-    <!-- Modal xem nội dung bài viết -->
+    <!-- Viewer bài viết -->
     <div id="viewer" class="modal hidden">
-        <div class="modal-content">
-            <button class="close-view" onclick="closeDoc()">×</button>
-            <div id="md-render-area" class="md-body"></div>
-        </div>
+        <button class="close-view" onclick="closeDoc()">×</button>
+        <div class="modal-content" id="md-render-area"></div>
     </div>
 
     <script src="script.js"></script>
