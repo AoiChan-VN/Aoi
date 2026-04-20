@@ -73,12 +73,22 @@ body {
 .setting-group { margin-bottom: 25px; }
 .setting-group label { display: block; font-size: 11px; opacity: 0.5; margin-bottom: 10px; text-transform: uppercase; }
 .aoi-select { 
-    width: 100%; padding: 12px; border-radius: 10px; 
-    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); 
-    color: var(--text); outline: none; 
+    width: 160%;
+    padding: 8px 10px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    outline: none;
+    font-size: 0.85rem;
     text-align: center;
-    text-align-last: center; /* FIX: Căn giữa chữ cho dropdown */
-    appearance: none; /* Xóa mũi tên mặc định để cân đối hơn */
+    text-align-last: center;
+    appearance: none;
+}
+
+.aoi-select:hover {
+    border-color: var(--accent);
 }
 
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 300; padding: 20px; overflow-y: auto; backdrop-filter: blur(10px); }
