@@ -88,4 +88,4 @@ body {
 
 .loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1000; }
 
-@media (max-width: 600px) { .side-drawer { width: 70%; } }
+@media (max-width: 600px) { .side-drawer { width: 65%; } }
