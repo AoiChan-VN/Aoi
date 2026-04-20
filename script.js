@@ -31,15 +31,46 @@ const render = async () => {
         const res = await fetch('./data.json');
         const data = await res.json();
         const content = data[state.lang];
-        // Đã xóa tiêu đề trung tâm nên không cần update sub-title ở giữa nữa
         const grid = document.getElementById('content-grid');
         grid.innerHTML = '';
-        content.posts.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">Chi tiết</div>`;
-            card.querySelector('.card-footer').onclick = () => openDoc(item.file);
-            grid.appendChild(card);
+
+        content.categories.forEach((group, index) => {
+            // 1. Tạo thanh tiêu đề nhóm
+            const header = document.createElement('div');
+            header.className = 'group-header';
+            header.innerHTML = `<span>${group.group_name}</span><span class="arrow">▾</span>`;
+            
+            // 2. Tạo khung chứa các bài viết (mặc định ẩn)
+            const container = document.createElement('div');
+            container.className = 'group-content';
+            container.id = `group-${index}`;
+
+            group.posts.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">CHI TIẾT →</div>`;
+                card.querySelector('.card-footer').onclick = (e) => {
+                    e.stopPropagation(); // Ngăn việc bấm nút mà lại đóng nhóm
+                    openDoc(item.file);
+                };
+                container.appendChild(card);
+            });
+
+            // 3. Sự kiện bấm để đóng/mở
+            header.onclick = () => {
+                const isOpen = container.classList.contains('show');
+                // Đóng tất cả các nhóm khác (nếu muốn chỉ mở 1 cái duy nhất)
+                document.querySelectorAll('.group-content').forEach(c => c.classList.remove('show'));
+                document.querySelectorAll('.group-header').forEach(h => h.classList.remove('active'));
+                
+                if (!isOpen) {
+                    container.classList.add('show');
+                    header.classList.add('active');
+                }
+            };
+
+            grid.appendChild(header);
+            grid.appendChild(container);
         });
     } catch (e) { console.error(e); }
 };
