@@ -68,17 +68,17 @@ body {
 .card-footer { margin-top: 15px; font-weight: bold; font-size: 0.75rem; cursor: pointer; display: inline-block; padding: 6px 15px; border-radius: 20px; border: 1px solid var(--accent); color: var(--accent); transition: 0.3s; }
 .card-footer:hover { background: var(--accent); color: #fff; }
 
-/* Căn giữa Settings & Sửa lỗi lệch chữ trong Select */
+/* Settings & Select */
 .settings-content { padding: 20px; text-align: center; }
 .setting-group { margin-bottom: 25px; }
 .setting-group label { display: block; font-size: 11px; opacity: 0.5; margin-bottom: 10px; text-transform: uppercase; }
 .aoi-select { 
-    width: 100%; padding: 12px; border-radius: 10px; 
+    width: 45%; padding: 12px; border-radius: 10px; 
     background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); 
     color: var(--text); outline: none; 
     text-align: center;
-    text-align-last: center; /* FIX: Căn giữa chữ cho dropdown */
-    appearance: none; /* Xóa mũi tên mặc định để cân đối hơn */
+    text-align-last: center;
+    appearance: none;
 }
 
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 300; padding: 20px; overflow-y: auto; backdrop-filter: blur(10px); }
@@ -88,4 +88,4 @@ body {
 
 .loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1000; }
 
-@media (max-width: 600px) { .side-drawer { width: 80%; } }
+@media (max-width: 600px) { .side-drawer { width: 55%; } }
