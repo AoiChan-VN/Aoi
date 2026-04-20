@@ -62,6 +62,41 @@ body {
     letter-spacing: 1px;
 }
 
+/* Thanh tiêu đề nhóm */
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.group-header:hover { background: rgba(255, 255, 255, 0.08); }
+.group-header.active { color: var(--accent); }
+
+/* Mũi tên xoay khi mở */
+.group-header .arrow { transition: 0.3s; opacity: 0.5; }
+.group-header.active .arrow { transform: rotate(180deg); opacity: 1; }
+
+/* Khung chứa bài viết - Mặc định ẩn */
+.group-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out; /* Tạo hiệu ứng trượt */
+    padding: 0 5px;
+}
+
+.group-content.show {
+    max-height: 2000px; /* Cho phép mở rộng tối đa */
+    margin-bottom: 15px;
+    padding-top: 10px;
+}
+
 /* Căn giữa Search */
 .search-box { padding: 10px 20px; text-align: center; }
 .search-box input { width: 100%; padding: 12px; border-radius: 10px; border: none; background: var(--card-bg); color: var(--text); outline: none; text-align: center; }
