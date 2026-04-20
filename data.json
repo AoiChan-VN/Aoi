@@ -21,7 +21,7 @@
           },
           {
             "title": "📚〈Hướng dẫn〉",
-            "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤.",
+            "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤",
             "file": "info.md"
           }
         ]
@@ -33,6 +33,20 @@
             "title": "〈BETA〉v1",
             "desc": "➥ ❗Bản thử nghiệm❔",
             "file": "beta.md"
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "categories": [
+      {
+        "group_name": "🍒〈Aoi〉",
+        "posts": [
+          {
+            "title": "〈Support〉",
+            "desc": "➥No Data",
+            "file": "en-EN.md"
           }
         ]
       }
