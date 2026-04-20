@@ -85,6 +85,8 @@ body {
     text-align: center;
     text-align-last: center;
     appearance: none;
+    display: block;
+    cursor: pointer;
 }
 
 .aoi-select:hover {
