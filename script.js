@@ -48,7 +48,7 @@ const render = async () => {
             group.posts.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">CHI TIẾT →</div>`;
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">chi tiết</div>`;
                 card.querySelector('.card-footer').onclick = (e) => {
                     e.stopPropagation(); // Ngăn việc bấm nút mà lại đóng nhóm
                     openDoc(item.file);
