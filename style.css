@@ -96,9 +96,8 @@ body {
 
 .aoi-select { 
     width: 140%;
-    padding: 8px 10px;
-    margin: 0 auto;
-    border-radius: 8px;
+    padding: 8px 5px;
+    border-radius: 10px;
     background: var(--card-bg);
     border: 1px solid rgba(255,255,255,0.1);
     color: var(--text);
@@ -107,7 +106,6 @@ body {
     text-align: center;
     text-align-last: center;
     appearance: none;
-    display: block;
     cursor: pointer;
 }
 
