@@ -1,34 +1,40 @@
 {
   "vi": {
-    "posts": [
+    "categories": [
       {
-        "title": "🍒〈Aoi〉 📦Plugin",
-        "desc": "➥Plugins Server Minecraft.",
-        "file": "plugin.md"
+        "group_name": "🍒〈Aoi〉Spigot | Paper",
+        "posts": [
+          {
+            "title": "🍒〈Aoi〉 📦Plugin",
+            "desc": "➥Plugins Server Minecraft.",
+            "file": "plugin.md"
+          },
+          {
+            "title": "🔧〈Cập nhập〉",
+            "desc": "➥Những nâng cấp và thay đổi mới...",
+            "file": "update.md"
+          },
+          {
+            "title": "📢〈Thông báo〉",
+            "desc": "➥🤷",
+            "file": "broadcast.md"
+          },
+          {
+            "title": "📚〈Hướng dẫn〉",
+            "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤.",
+            "file": "info.md"
+          }
+        ]
       },
       {
-        "title": "🔧〈Cập nhập〉",
-        "desc": "➥Những nâng cấp và thay đổi mới...",
-        "file": "update.md"
-      },
-      {
-        "title": "📢〈Thông báo〉",
-        "desc": "➥🤷",
-        "file": "broadcast.md"
-      },
-      {
-        "title": "📚〈Hướng dẫn〉",
-        "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤.",
-        "file": "info.md"
-      }
-    ]
-  },
-  "en": {
-    "posts": [
-      {
-        "title": "Aoi Anti-Lag System",
-        "desc": "Server performance optimization plugin.",
-        "file": "anti-lag.md"
+        "group_name": "🧬〈Thử nghiệm〉",
+        "posts": [
+          {
+            "title": "〈BETA〉v1",
+            "desc": "➥ ❗Bản thử nghiệm❔",
+            "file": "beta.md"
+          }
+        ]
       }
     ]
   }
