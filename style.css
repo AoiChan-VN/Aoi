@@ -162,14 +162,26 @@ body {
 }
 
 .group-content.show {
-    max-height: 1500px; /* Cho phép mở rộng tối đa */
+    max-height: 2000px; /* Cho phép mở rộng tối đa */
     margin-bottom: 15px;
     padding-top: 10px;
 }
 
 /* Căn giữa Search */
-.search-box { padding: 10px 20px; text-align: center; }
-.search-box input { width: 100%; padding: 12px; border-radius: 10px; border: none; background: var(--card-bg); color: var(--text); outline: none; text-align: center; }
+.search-box {
+    padding: 10px 20px;
+    text-align: center;
+}
+.search-box input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text);
+    outline: none;
+    text-align: center;
+}
 
 .grid-menu {
     width: 100%;
