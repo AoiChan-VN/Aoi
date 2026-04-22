@@ -77,9 +77,9 @@ body {
     display: block;
 }
 
-/* Nút bên phải */
+/* Settings */
 .settings-right {
-    margin-left: auto; /* Đảm bảo luôn nằm bên phải */
+    margin-left: auto;
 } 
 
 .footer-hero { position: fixed; bottom: 30px; width: 100%; text-align: center; }
@@ -95,9 +95,7 @@ body {
     background: var(--bg-glass);
     backdrop-filter: blur(25px);
     transition: transform 0.4s ease;
-    z-index: 200; /* Cao hơn Top Bar (150) để đè lên hoàn toàn */
-    
-    /* Căn giữa nội dung bên trong */
+    z-index: 200;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -110,7 +108,7 @@ body {
 /* Drawer Header */
 .drawer-header {
     width: 100%;
-    padding: 40px 0 20px 0; /* Tăng padding top để không bị dính mép trên */
+    padding: 40px 0 20px 0;
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--accent);
@@ -126,7 +124,7 @@ body {
     font-weight: bold;
     color: var(--text);
     opacity: 0.4;
-    text-align: left; /* Tên nhóm để căn trái */
+    text-align: left;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
@@ -146,7 +144,6 @@ body {
 }
 
 .group-header:hover { background: rgba(255, 255, 255, 0.08); }
-
 .group-header.active { color: var(--accent); }
 
 /* Mũi tên xoay khi mở */
@@ -162,7 +159,7 @@ body {
 }
 
 .group-content.show {
-    max-height: 2000px; /* Cho phép mở rộng tối đa */
+    max-height: 2000px;
     margin-bottom: 15px;
     padding-top: 10px;
 }
@@ -172,6 +169,7 @@ body {
     padding: 10px 20px;
     text-align: center;
 }
+
 .search-box input {
     width: 100%;
     padding: 12px;
