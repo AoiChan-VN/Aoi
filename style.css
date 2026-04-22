@@ -22,6 +22,7 @@
 body {
     font-family: -apple-system, sans-serif; /* Phông chữ */
     color: var(--text);
+    background: radial-gradient(circle at 20% 30%, #1a1f3a, #05070f 70%);
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
@@ -47,7 +48,17 @@ body {
 .copyright { font-size: 10px; opacity: 0.4; line-height: 1.5; }
 
 /* Side Drawer */
-.side-drawer { position: fixed; top: 0; width: 320px; height: 100%; background: var(--bg-glass); backdrop-filter: blur(25px); transition: transform 0.4s ease; z-index: 200; }
+.side-drawer {
+    position: fixed;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    background: rgba(10,15,30,0.7);
+    backdrop-filter: blur(20px);
+    transition: transform 0.4s ease;
+    z-index: 200;
+}
+
 .side-drawer.left { left: 0; transform: translateX(-100%); }
 .side-drawer.right { right: 0; transform: translateX(100%); }
 .side-drawer.show { transform: translateX(0); }
@@ -117,11 +128,31 @@ body {
 .grid-menu { padding: 15px; height: calc(100% - 160px); overflow-y: auto; }
 
 /* Căn giữa Card */
-.card { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); text-align: center; }
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(100,150,255,0.25);
+}
+
 .card h3 { font-size: 0.95rem; color: var(--accent); margin-bottom: 8px; }
 .card p { font-size: 0.8rem; opacity: 0.6; line-height: 1.4; }
 .card-footer { margin-top: 15px; font-weight: bold; font-size: 0.75rem; cursor: pointer; display: inline-block; padding: 6px 15px; border-radius: 20px; border: 1px solid var(--accent); color: var(--accent); transition: 0.3s; }
 .card-footer:hover { background: var(--accent); color: #fff; }
+
+.option-card.active {
+  border: 1px solid #7c9cff;
+  box-shadow:
+    0 0 10px rgba(124,156,255,0.6),
+    0 0 25px rgba(124,156,255,0.3);
+}
 
 /* Settings & Select */
 .settings-content { padding: 20px; text-align: center; }
