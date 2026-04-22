@@ -50,8 +50,8 @@ body {
     padding: 0 15px;
     z-index: 1000;
     box-sizing: border-box;
-    background: var(--bg-glass);
-    backdrop-filter: blur(15px);
+    background: transparent;
+    backdrop-filter: none;
 }
 
 /* Cụm bên trái: 3 gạch + Logo */
