@@ -19,36 +19,68 @@
 }
 
 body {
-    font-family: -apple-system, sans-serif; /* Phông chữ */
-    color: var(--text);
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    height: 100vh; overflow: hidden; /* Khớp màn hình / ẩn thanh cuộn ngoài */
-    transition: background 0.5s ease;
-}
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    
+    background-size: cover !important;     /* Ảnh phủ kín */
+    background-position: center !important; /* Căn giữa ảnh */
+    background-repeat: no-repeat !important; /* Không lặp lại */
+    background-attachment: fixed;          /* Giữ ảnh đứng yên khi menu trượt */
+    
+    display: flex;
+    flex-direction: column;
+} 
 
 .click-area { position: fixed; inset: 0; z-index: 140; display: none; }
 .click-area.show { display: block; }
 
 /* Thanh điều hướng */
-.top-bar { 
-    position: fixed; top: 0; width: 100%; height: 60px; 
-    display: flex; justify-content: flex-start; align-items: center; 
-    padding: 0 20px; z-index: 150; gap: 15px;
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between; /* Đẩy cụm trái và cụm phải ra 2 đầu */
+    align-items: center;
+    padding: 0 15px;
+    z-index: 1000;
+    box-sizing: border-box;
     background: var(--bg-glass);
+    backdrop-filter: blur(15px);
+}
+
+/* Cụm bên trái: 3 gạch + Logo */
+.left-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa nút ☰ và Logo */
 }
 
 .nav-btn {
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 26px;
-    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
-.logo-center img { height: 30px; display: block; }
-.settings-right { margin-left: auto; }
+.logo-center img {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+/* Nút bên phải */
+.settings-right {
+    margin-left: auto; /* Đảm bảo luôn nằm bên phải */
+} 
 
 .footer-hero { position: fixed; bottom: 30px; width: 100%; text-align: center; }
 .footer-logo-small { width: 50px; opacity: 0.6; margin-bottom: 5px; }
