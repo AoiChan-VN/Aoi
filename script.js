@@ -63,13 +63,18 @@ const render = async () => {
             // 3. Sự kiện bấm để đóng/mở
             header.onclick = () => {
                 const isOpen = container.classList.contains('show');
+                
                 // Đóng tất cả các nhóm khác (nếu muốn chỉ mở 1 cái duy nhất)
-                document.querySelectorAll('.group-content').forEach(c => c.classList.remove('show'));
+                document.querySelectorAll('.group-content').forEach(c => 
+                    c.classList.remove('show'));
+                    c.style.maxHeight = null;
+                });
                 document.querySelectorAll('.group-header').forEach(h => h.classList.remove('active'));
                 
                 if (!isOpen) {
                     container.classList.add('show');
                     header.classList.add('active');
+                    container.style.maxHeight = container.scrollHeight + "px";
                 }
             };
 
