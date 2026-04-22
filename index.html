@@ -2,52 +2,49 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>AOI System</title>
+    <title>AOI Documentation</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Sidebar trái -->
-    <nav class="sidebar">
-        <div class="logo">AOI</div>
-        <div class="nav-item active">Trang chủ</div>
-        <div class="nav-item">Tài liệu</div>
-        <div class="nav-item">Yêu thích</div>
-        <div class="nav-item">Ghi chú</div>
-    </nav>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-box">A</div>
+            <span style="font-weight:700; letter-spacing:-1px; font-size:1.2rem;">AOI</span>
+        </div>
+        <nav class="nav-group">
+            <a href="#" class="nav-link active">🏠 Trang chủ</a>
+            <a href="#" class="nav-link">📚 Tài liệu</a>
+            <a href="#" class="nav-link">⭐ Yêu thích</a>
+            <a href="#" class="nav-link">📝 Ghi chú</a>
+        </nav>
+    </aside>
 
-    <!-- Khu vực chính -->
-    <main class="main">
-        <input type="text" class="search-bar" placeholder="Tìm kiếm bài viết...">
-        
-        <div id="content-area">
-            <!-- Data tự đổ vào đây -->
+    <main class="main-content">
+        <div class="search-container">
+            <svg style="position:absolute; left:12px; top:12px;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b949e" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" class="search-input" placeholder="Tìm kiếm bài viết...">
         </div>
 
-        <div id="detail-view" class="detail-view">
-            <!-- Nội dung chi tiết hiện ở đây -->
-        </div>
+        <div id="grid-render"></div>
+        <div id="detail-box" class="detail-area"></div>
     </main>
 
-    <!-- Cài đặt phải -->
-    <aside class="settings">
-        <div style="margin-bottom:2rem; display:flex; justify-content:space-between;">
-            <span>Cài đặt</span> <span>✕</span>
+    <aside class="right-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Cài đặt</span>
+            <span style="color:var(--text-dim)">✕</span>
         </div>
 
-        <div class="setting-group">
-            <span class="setting-label">Ngôn ngữ</span>
-            <div class="toggle-box">
-                <div class="toggle-btn active">Tiếng Việt</div>
-                <div class="toggle-btn">English</div>
-            </div>
+        <div class="setting-title">Ngôn ngữ</div>
+        <div class="btn-group">
+            <div class="btn-choice active">Tiếng Việt</div>
+            <div class="btn-choice" style="opacity:0.5;">English</div>
         </div>
 
-        <div class="setting-group">
-            <span class="setting-label">Giao diện</span>
-            <div class="toggle-box">
-                <div class="toggle-btn active">Dark</div>
-                <div class="toggle-btn">Light</div>
-            </div>
+        <div class="setting-title">Giao diện</div>
+        <div class="btn-group">
+            <div class="btn-choice active">Dark</div>
+            <div class="btn-choice" style="opacity:0.5;">Light</div>
         </div>
     </aside>
 
