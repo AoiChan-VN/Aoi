@@ -1,55 +1,25 @@
 {
-  "vi": {
-    "categories": [
-      {
-        "group_name": "🍒〈Aoi〉Spigot | Paper",
-        "posts": [
-          {
-            "title": "🍒〈Aoi〉 📦Plugin",
-            "desc": "➥Plugins Server Minecraft.",
-            "file": "plugin.md"
-          },
-          {
-            "title": "🔧〈Cập nhập〉",
-            "desc": "➥Những nâng cấp và thay đổi mới...",
-            "file": "update.md"
-          },
-          {
-            "title": "📢〈Thông báo〉",
-            "desc": "➥🤷",
-            "file": "broadcast.md"
-          },
-          {
-            "title": "📚〈Hướng dẫn〉",
-            "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤",
-            "file": "info.md"
-          }
-        ]
-      },
-      {
-        "group_name": "🧬〈Thử nghiệm〉",
-        "posts": [
-          {
-            "title": "〈BETA〉v1",
-            "desc": "➥ ❗Bản thử nghiệm❔",
-            "file": "beta.md"
-          }
-        ]
-      }
-    ]
-  },
-  "en": {
-    "categories": [
-      {
-        "group_name": "🍒〈Aoi〉",
-        "posts": [
-          {
-            "title": "〈Support〉",
-            "desc": "➥No Data",
-            "file": "en-EN.md"
-          }
-        ]
-      }
-    ]
-  }
+  "categories": [
+    {
+      "id": 1,
+      "name": "Khởi đầu",
+      "icon": "purple",
+      "items": [
+        {
+          "id": "1.1",
+          "title": "Hệ thế giới này",
+          "desc": "Tổng quan về thế giới, con người và quy luật cơ bản.",
+          "image": "https://unsplash.com",
+          "content": "Nội dung bài viết về hệ thế giới này... (Hỗ trợ xuống dòng bằng \n)"
+        },
+        {
+          "id": "1.2",
+          "title": "Con đường thức tỉnh",
+          "desc": "Những dấu hiệu và giai đoạn hành trình.",
+          "image": "https://unsplash.com",
+          "content": "Thức tỉnh không phải là một đích đến, mà là hành trình quay về bản chất thật."
+        }
+      ]
+    }
+  ]
 }
