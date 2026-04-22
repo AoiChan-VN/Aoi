@@ -1,53 +1,54 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const response = await fetch('./data.json'); // Kết nối file JSON nội bộ
-        const data = await response.json();
-        renderApp(data);
-    } catch (error) {
-        console.error("Không thể tải dữ liệu:", error);
-    }
-});
+async function initApp() {
+    const res = await fetch('./data.json');
+    const data = await res.json();
+    renderContent(data.categories);
 
-function renderApp(data) {
-    const container = document.getElementById('main-content');
-    let html = '';
-
-    data.categories.forEach(cat => {
-        html += `
-            <section class="mb-12">
-                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-${cat.icon}-500"></span>
-                    ${cat.id}. ${cat.name}
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    ${cat.items.map(item => `
-                        <div class="glass-card p-5 cursor-pointer" onclick="showDetail('${item.id}', '${encodeURIComponent(JSON.stringify(item))}')">
-                            <img src="${item.image}" class="w-full h-32 object-cover rounded-lg mb-4 bg-gray-800">
-                            <h3 class="font-bold mb-1">${item.id}. ${item.title}</h3>
-                            <p class="text-sm text-gray-500 line-clamp-2">${item.desc}</p>
-                            <div class="mt-4 text-blue-400 text-xs font-semibold">Chi tiết ></div>
-                        </div>
-                    `).join('')}
-                </div>
-            </section>
-        `;
+    // Xử lý tìm kiếm
+    document.getElementById('search-input').addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = data.categories.map(cat => ({
+            ...cat,
+            items: cat.items.filter(i => i.title.toLowerCase().includes(term))
+        }));
+        renderContent(filtered);
     });
-    container.innerHTML = html;
 }
 
-function showDetail(id, itemStr) {
-    const item = JSON.parse(decodeURIComponent(itemStr));
-    const detailBox = document.getElementById('detail-box');
-    
-    document.getElementById('detail-id').innerText = id;
-    document.getElementById('detail-title').innerText = item.title;
-    document.getElementById('detail-content').innerText = item.content;
-    
-    detailBox.style.display = 'block';
-    detailBox.scrollIntoView({ behavior: 'smooth' });
+function renderContent(categories) {
+    const container = document.getElementById('main-flow');
+    container.innerHTML = categories.map(cat => `
+        <div class="mb-12">
+            <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+                <span style="color: ${cat.color}">✦</span> ${cat.id}. ${cat.name}
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                ${cat.items.map(item => `
+                    <div class="premium-card" onclick="viewDetail('${item.id}', '${encodeURIComponent(JSON.stringify(item))}')">
+                        <img src="${item.image}" class="card-icon">
+                        <div class="text-sm text-gray-400 mb-1">${item.id}. ${item.title}</div>
+                        <p class="text-xs text-gray-500 leading-relaxed">${item.desc}</p>
+                        <div class="mt-4 text-blue-400 text-xs">Chi tiết ></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
 }
 
-function closeDetail() {
-    document.getElementById('detail-box').style.display = 'none';
+function viewDetail(id, dataStr) {
+    const item = JSON.parse(decodeURIComponent(dataStr));
+    const detail = document.getElementById('detail-section');
+    detail.classList.remove('hidden');
+    detail.innerHTML = `
+        <div class="flex justify-between items-center mb-4">
+            <span class="text-blue-400 font-mono"># ${item.id}. ${item.title}</span>
+            <button onclick="this.parentElement.parentElement.classList.add('hidden')">✕</button>
+        </div>
+        <h1 class="text-4xl font-bold mb-6">${item.title}</h1>
+        <div class="progress-container"><div class="progress-bar"></div></div>
+        <p class="text-gray-300 italic text-lg leading-loose">${item.content}</p>
+    `;
+    detail.scrollIntoView({ behavior: 'smooth' });
 }
- 
+
+initApp();
