@@ -6,6 +6,10 @@
     <title>🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <!-- iOS support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body class="theme-dark">
     <div id="loader" class="loader-line"></div>
@@ -16,16 +20,6 @@
         <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
     </nav>
-    
-    <!-- Thông tin footer -->
-    <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
-        <div class="copyright">
-            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
-            <p>Gmail: aoichan@gmail.com</p>
-            <p>© 2026</p>
-        </div>
-    </footer>
 
     <aside id="menu-drawer" class="side-drawer left">
         <div class="drawer-header">【Bài viết】</div>
@@ -59,6 +53,15 @@
         <button class="close-view" onclick="closeDoc()">✘</button>
         <div class="modal-content" id="md-render-area"></div>
     </div>
+    
+    <footer class="footer-hero">
+        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
+        <div class="copyright">
+            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
+            <p>Gmail: aoichan@gmail.com</p>
+            <p>© 2026</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
