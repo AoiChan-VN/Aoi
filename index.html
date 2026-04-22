@@ -1,68 +1,50 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f172a">
-    <!-- iOS support -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AOI UI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-dark">
-    <div id="loader" class="loader-line"></div>
-    <div id="global-click-area" class="click-area" onclick="closeAll()"></div>
+<body>
 
-    <nav class="top-bar">
-        <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
-        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
-        <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
-    </nav>
+<div class="top-bar">
+  <button class="nav-btn" onclick="toggleSide('settings', event)">⚙️</button>
+</div>
 
-    <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">【Bài viết】</div>
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." oninput="searchPosts()">
-        </div>
-        <div id="content-grid" class="grid-menu"></div>
-    </aside>
+<!-- SETTINGS -->
+<div id="settings" class="side-drawer right">
+  <div class="drawer-header">Cài đặt</div>
 
-    <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header">【Cài đặt】</div>
-        <div class="settings-content">
-            <div class="setting-group">
-                <label>【Ngôn ngữ】</label>
-                <select id="lang-switch" class="aoi-select">
-                    <option value="vi">「VN」</option>
-                    <option value="en">「EN」</option>
-                </select>
-            </div>
-            <div class="setting-group">
-                <label>【Giao diện】</label>
-                <select id="theme-select" class="aoi-select">
-                    <option value="dark">「Tối」</option>
-                    <option value="light">「Sáng」</option>
-                </select>
-            </div>
-        </div>
-    </aside>
+  <div class="settings-content">
 
-    <div id="viewer" class="modal hidden">
-        <button class="close-view" onclick="closeDoc()">✘</button>
-        <div class="modal-content" id="md-render-area"></div>
+    <div class="setting-group">
+      <label>Ngôn ngữ</label>
+      <div class="setting-options" id="lang-options">
+        <div class="option-card" data-value="vi">🇻🇳 Tiếng Việt</div>
+        <div class="option-card" data-value="en">🇺🇸 English</div>
+      </div>
     </div>
-    
-    <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
-        <div class="copyright">
-            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
-            <p>Gmail: aoichan@gmail.com</p>
-            <p>© 2026</p>
-        </div>
-    </footer>
 
-    <script src="script.js"></script>
+    <div class="setting-group">
+      <label>Giao diện</label>
+      <div class="setting-options" id="theme-options">
+        <div class="option-card" data-value="dark">🌙 Dark</div>
+        <div class="option-card" data-value="light">☀️ Light</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DEMO CONTENT -->
+<div class="grid-menu">
+  <div class="card">
+    <h3>Bài viết mẫu</h3>
+    <p>Hover thử để thấy hiệu ứng</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
