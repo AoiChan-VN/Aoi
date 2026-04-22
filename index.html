@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AOI UI</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AOI UI</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="top-bar">
+  <button class="nav-btn" onclick="toggleSide('menu', event)">☰</button>
+  <div class="logo">AOI</div>
   <button class="nav-btn" onclick="toggleSide('settings', event)">⚙️</button>
 </div>
 
-<!-- SETTINGS -->
+<!-- LEFT MENU -->
+<div id="menu" class="side-drawer left">
+  <div class="drawer-header">MENU</div>
+  <div class="drawer-content">
+    <div class="menu-item">Trang chủ</div>
+    <div class="menu-item">Danh mục</div>
+    <div class="menu-item">Giới thiệu</div>
+  </div>
+</div>
+
+<!-- RIGHT SETTINGS -->
 <div id="settings" class="side-drawer right">
   <div class="drawer-header">Cài đặt</div>
 
@@ -37,12 +50,39 @@
   </div>
 </div>
 
-<!-- DEMO CONTENT -->
-<div class="grid-menu">
-  <div class="card">
-    <h3>Bài viết mẫu</h3>
-    <p>Hover thử để thấy hiệu ứng</p>
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="closeAll()"></div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <div class="group">
+    <div class="group-header">📂 Nhóm 1 <span>▾</span></div>
+    <div class="group-content">
+      <div class="card">
+        <h3>Bài viết 1</h3>
+        <p>Mô tả ngắn nội dung...</p>
+        <div class="btn">Chi tiết</div>
+      </div>
+      <div class="card">
+        <h3>Bài viết 2</h3>
+        <p>Mô tả ngắn nội dung...</p>
+        <div class="btn">Chi tiết</div>
+      </div>
+    </div>
   </div>
+
+  <div class="group">
+    <div class="group-header">📂 Nhóm 2 <span>▾</span></div>
+    <div class="group-content">
+      <div class="card">
+        <h3>Bài viết 3</h3>
+        <p>Mô tả ngắn nội dung...</p>
+        <div class="btn">Chi tiết</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
