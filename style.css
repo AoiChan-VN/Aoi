@@ -38,44 +38,44 @@
 
 /* Thiết lập cơ bản */
 * { box-sizing: border-box; /* Căn kích thước khung / Ngăn tràn khung*/
-   margin: 0; padding: 0; /* Khoảng cách trình duyệt */
-   -webkit-tap-highlight-color: transparent; /* Xóa vệt màu khi bấm trên điện thoại */
+   margin: 0; padding: 0; /* Khoảng cách trình duyệt */
+   -webkit-tap-highlight-color: transparent; /* Xóa vệt màu khi bấm trên điện thoại */
 }
 
 body {
-    font-family: -apple-system, sans-serif; /* Phông chữ */
-    color: var(--text);
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    height: 100vh; overflow: hidden; /* Khớp màn hình / ẩn thanh cuộn ngoài */
-    transition: background 0.5s ease;
+    font-family: -apple-system, sans-serif; /* Phông chữ */
+    color: var(--text);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    height: 100vh; overflow: hidden; /* Khớp màn hình / ẩn thanh cuộn ngoài */
+    transition: background 0.5s ease;
 }
 
 .click-area { position: fixed; inset: 0; z-index: 140; display: none; }
 .click-area.show { display: block; }
 
 /* Thanh điều hướng */
-.top-bar { 
-    position: fixed; top: 0; width: 100%; height: 60px; 
-    display: flex; justify-content: flex-start; align-items: center; 
-    padding: 0 20px; z-index: 150; gap: 15px;
+.top-bar { 
+    position: fixed; top: 0; width: 100%; height: 60px; 
+    display: flex; justify-content: flex-start; align-items: center; 
+    padding: 0 20px; z-index: 150; gap: 15px;
 }
 
 /* Navbar */
 .navbar {
-    background: var(--bg-glass);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border-bottom: 1px solid var(--card-border);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--card-border);
 }
 
 .nav-btn {
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 26px;
-    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 26px;
+    cursor: pointer;
 }
 
 .logo-center img { height: 30px; display: block; }
@@ -93,40 +93,40 @@ body {
 
 /* Căn giữa Header */
 .drawer-header {
-    padding: 35px 20px 15px 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--accent);
-    text-align: center;
-    letter-spacing: 1px;
+    padding: 35px 20px 15px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-align: center;
+    letter-spacing: 1px;
 }
 
 /* CSS nhóm tiêu đề */
 .group-label {
-    width: 100%;
-    padding: 15px 5px 10px 5px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: var(--text);
-    opacity: 0.4;
-    text-align: left; /* Tên nhóm để căn trái cho chuyên nghiệp */
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    width: 100%;
+    padding: 15px 5px 10px 5px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text);
+    opacity: 0.4;
+    text-align: left; /* Tên nhóm để căn trái cho chuyên nghiệp */
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Thanh tiêu đề nhóm */
 .group-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 5px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: bold;
-    transition: 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: 0.3s;
 }
 .group-header:hover { background: rgba(255, 255, 255, 0.08); }
 .group-header.active { color: var(--accent); }
@@ -137,16 +137,16 @@ body {
 
 /* Khung chứa bài viết - Mặc định ẩn */
 .group-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out; /* Tạo hiệu ứng trượt */
-    padding: 0 5px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out; /* Tạo hiệu ứng trượt */
+    padding: 0 5px;
 }
 
 .group-content.show {
-    max-height: 2000px; /* Cho phép mở rộng tối đa */
-    margin-bottom: 15px;
-    padding-top: 10px;
+    max-height: 1500px; /* Cho phép mở rộng tối đa */
+    margin-bottom: 15px;
+    padding-top: 10px;
 }
 
 /* Căn giữa Search */
@@ -157,18 +157,13 @@ body {
 
 /* Căn giữa Card */
 .card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 12px;
-    border: 1px solid var(--card-border); /* border: 1px solid rgba(255,255,255,0.03); */
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow), var(--glow);
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    border: 1px solid var(--card-border); /* border: 1px solid rgba(255,255,255,0.03); */
+    text-align: center;
+    box-shadow: var(--shadow);
 }
 
 .card h3 { font-size: 0.95rem; color: var(--accent); margin-bottom: 8px; }
@@ -182,15 +177,15 @@ body {
 .setting-group label { display: block; font-size: 11px; opacity: 0.5; margin-bottom: 10px; text-transform: uppercase; }
 
 /* Khung bọc */
-.aoi-select { 
-    width: 50%; /* Độ rộng khung */
-    padding: 10px; /* Độ cao/độ dày khung */
-    border-radius: 10px; /* Bo góc khung */
-    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); 
-    color: var(--text); outline: none; 
-    text-align: center;
-    text-align-last: center;
-    appearance: none;
+.aoi-select { 
+    width: 50%; /* Độ rộng khung */
+    padding: 10px; /* Độ cao/độ dày khung */
+    border-radius: 10px; /* Bo góc khung */
+    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); 
+    color: var(--text); outline: none; 
+    text-align: center;
+    text-align-last: center;
+    appearance: none;
 }
 
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 300; padding: 20px; overflow-y: auto; backdrop-filter: blur(10px); }
@@ -201,4 +196,4 @@ body {
 .loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1000; }
 
 /* Di động */
-@media (max-width: 600px) { .side-drawer { width: 50%; } }
+@media (max-width: 600px) { .side-drawer { width: 50%; } } 
