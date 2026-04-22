@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
-    <!-- iOS support -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body class="theme-dark">
     <div id="loader" class="loader-line"></div>
     <div id="global-click-area" class="click-area" onclick="closeAll()"></div>
 
     <nav class="top-bar">
-        <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
-        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
+        <div class="left-group">
+            <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
+            <div class="logo-center">
+                <img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi">
+            </div>
+        </div>
+        
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
     </nav>
 
