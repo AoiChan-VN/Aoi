@@ -2,42 +2,49 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>AOI Knowledge</title>
+    <title>AOI - Premium Knowledge Base</title>
     <script src="https://tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="flex">
+<body>
     <!-- Sidebar -->
-    <aside class="w-64 h-screen sticky top-0 p-6 border-r border-gray-800 hidden md:block">
-        <div class="text-2xl font-bold text-blue-500 mb-10">AOI</div>
-        <div class="space-y-4">
-            <div class="sidebar-item p-3 text-blue-400 bg-blue-500/10">🏠 Trang chủ</div>
-            <div class="sidebar-item p-3 text-gray-500">📚 Tài liệu</div>
-        </div>
+    <aside class="sidebar hidden md:block">
+        <div class="text-3xl font-bold mb-12 text-blue-500">AOI</div>
+        <nav class="space-y-6 text-gray-400">
+            <div class="text-blue-400">Trang chủ</div>
+            <div>Tài liệu</div>
+            <div>Ghi chú</div>
+        </nav>
     </aside>
 
-    <main class="flex-1 p-8 lg:p-12">
-        <!-- Search Bar -->
-        <div class="mb-10 max-w-md">
-            <input type="text" placeholder="Tìm kiếm bài viết..." class="w-full bg-gray-900 border border-gray-700 rounded-full py-2 px-6 focus:outline-none focus:border-blue-500">
-        </div>
-
-        <!-- Render nội dung từ data.json vào đây -->
-        <div id="main-content"></div>
-
-        <!-- Detail View (Nội dung chi tiết khi click) -->
-        <div id="detail-box" class="detail-view glass-card p-8 mt-10 relative">
-            <button onclick="closeDetail()" class="absolute top-4 right-6 text-gray-500 hover:text-white">✕ Close</button>
-            <div id="detail-id" class="text-blue-400 font-mono text-sm mb-2"></div>
-            <h1 id="detail-title" class="text-3xl font-bold mb-6"></h1>
-            <div class="w-full bg-blue-500/20 h-1 rounded-full mb-6">
-                <div class="bg-blue-500 h-full w-full"></div>
-            </div>
-            <p id="detail-content" class="text-gray-300 leading-relaxed whitespace-pre-line"></p>
+    <!-- Main Section -->
+    <main class="flex-1 p-10 overflow-y-auto">
+        <div class="max-w-5xl mx-auto">
+            <input id="search-input" type="text" placeholder="Tìm kiếm bài viết..." 
+                   class="w-full max-w-md bg-gray-900 border border-gray-800 rounded-full py-3 px-6 mb-12 focus:border-blue-500 outline-none">
+            
+            <div id="main-flow"></div>
+            
+            <!-- Preview Section từ ảnh -->
+            <div id="detail-section" class="hidden premium-card mt-20 p-12"></div>
         </div>
     </main>
+
+    <!-- Settings Panel (Bên phải) -->
+    <aside class="settings-panel hidden lg:block text-sm">
+        <div class="mb-8">Cài đặt</div>
+        <div class="mb-4 text-gray-500 uppercase text-[10px]">Ngôn ngữ</div>
+        <div class="grid grid-cols-2 gap-2 mb-8">
+            <div class="p-2 border border-blue-500 rounded bg-blue-500/10 text-center">Tiếng Việt</div>
+            <div class="p-2 border border-gray-800 rounded text-center">English</div>
+        </div>
+        <div class="mb-4 text-gray-500 uppercase text-[10px]">Giao diện</div>
+        <div class="grid grid-cols-2 gap-2">
+            <div class="p-4 border border-blue-500 rounded text-center">Dark</div>
+            <div class="p-4 border border-gray-800 rounded text-center">Light</div>
+        </div>
+    </aside>
 
     <script src="js/app.js"></script>
 </body>
 </html>
- 
