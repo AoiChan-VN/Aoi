@@ -95,20 +95,27 @@ body {
 
 /* Thanh tiêu đề nhóm */
 .group-header {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     margin-bottom: 5px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: bold;
     transition: 0.3s;
 }
-.group-header:hover { background: rgba(255, 255, 255, 0.08); }
-.group-header.active { color: var(--accent); }
+.group-header:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.group-header.active {
+    color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
 
 /* Mũi tên xoay khi mở */
 .group-header .arrow { transition: 0.3s; opacity: 0.5; }
@@ -163,11 +170,28 @@ body {
 .card-footer { margin-top: 15px; font-weight: bold; font-size: 0.75rem; cursor: pointer; display: inline-block; padding: 6px 15px; border-radius: 20px; border: 1px solid var(--accent); color: var(--accent); transition: 0.3s; }
 .card-footer:hover { background: var(--accent); color: #fff; }
 
+.option-card {
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.04);
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.option-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.08);
+}
+
 .option-card.active {
-  border: 1px solid #7c9cff;
-  box-shadow:
-    0 0 10px rgba(124,156,255,0.6),
-    0 0 25px rgba(124,156,255,0.3);
+    border: 1px solid var(--accent);
+
+    box-shadow:
+        0 0 10px var(--accent-glow),
+        0 0 30px rgba(124,156,255,0.25);
+
+    background: rgba(255,255,255,0.08);
 }
 
 /* Settings & Select */
