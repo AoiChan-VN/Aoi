@@ -6,7 +6,7 @@ const state = {
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
     
-    /const bgImg = state.theme === 'dark' 
+    const bgImg = state.theme === 'dark' 
         ? 'assets/aoi-theme/Theme-Reading.webp' 
         : 'assets/aoi-theme/Theme-Pale.webp';
     
