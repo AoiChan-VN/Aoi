@@ -3,62 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
+    
+    <!-- CSS & Fonts -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Manifest cho PWA (Để cài đặt thành App) -->
+    <link rel="manifest" href="manifest.json">
 </head>
 <body class="theme-dark">
+    <!-- Hiệu ứng Loader -->
     <div id="loader" class="loader-line"></div>
+    
+    <!-- Lớp nền mờ khi mở Menu -->
     <div id="global-click-area" class="click-area" onclick="closeAll()"></div>
 
+    <!-- Thanh công cụ chuẩn Mobile App -->
     <nav class="top-bar">
-        <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
-        <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
-        <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
+        <button onclick="toggleSide('menu-drawer', event)" class="nav-btn" aria-label="Menu">☰</button>
+        <div class="logo-center">
+            <img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi Logo">
+        </div>
+        <button onclick="toggleSide('settings-drawer', event)" class="nav-btn" aria-label="Settings">⚙️</button>
     </nav>
     
-    <!-- Thông tin footer -->
+    <!-- Menu Bài Viết (Bên trái) -->
+    <aside id="menu-drawer" class="side-drawer left">
+        <div class="drawer-header">【 Bài Viết 】</div>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm nội dung...">
+        </div>
+        <div id="content-grid" class="grid-menu">
+            <!-- Dữ liệu được AoiApp render tại đây -->
+        </div>
+    </aside>
+
+    <!-- Menu Cài Đặt (Bên phải) -->
+    <aside id="settings-drawer" class="side-drawer right">
+        <div class="drawer-header">【 Cài Đặt 】</div>
+        <div class="settings-content">
+            <div class="setting-group">
+                <label>Ngôn ngữ hệ thống</label>
+                <select id="lang-switch" class="aoi-select">
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label>Chế độ hiển thị</label>
+                <select id="theme-select" class="aoi-select">
+                    <option value="dark">Chế độ Tối</option>
+                    <option value="light">Chế độ Sáng</option>
+                </select>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Trình xem nội dung (Modal Viewer) -->
+    <div id="viewer" class="modal hidden">
+        <button class="close-view" onclick="closeDoc()">✕</button>
+        <div class="modal-content" id="md-render-area">
+            <!-- Nội dung Markdown render tại đây -->
+        </div>
+    </div>
+
+    <!-- Footer cố định -->
     <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
+        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small" alt="Aoi Small">
         <div class="copyright">
-            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
-            <p>Gmail: aoichan@gmail.com</p>
-            <p>© 2026</p>
+            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷 ❤ Premium</p>
+            <p>© 2026 Personal App</p>
         </div>
     </footer>
 
-    <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header">【Bài viết】</div>
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." oninput="searchPosts()">
-        </div>
-        <div id="content-grid" class="grid-menu"></div>
-    </aside>
-
-    <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header">【Cài đặt】</div>
-        <div class="settings-content">
-            <div class="setting-group">
-                <label>【Ngôn ngữ】</label>
-                <select id="lang-switch" class="aoi-select">
-                    <option value="vi">「VN」</option>
-                    <option value="en">「EN」</option>
-                </select>
-            </div>
-            <div class="setting-group">
-                <label>【Giao diện】</label>
-                <select id="theme-select" class="aoi-select">
-                    <option value="dark">「Tối」</option>
-                    <option value="light">「Sáng」</option>
-                </select>
-            </div>
-        </div>
-    </aside>
-
-    <div id="viewer" class="modal hidden">
-        <button class="close-view" onclick="closeDoc()">✘</button>
-        <div class="modal-content" id="md-render-area"></div>
-    </div>
-
+    <!-- Khởi chạy Script -->
     <script src="script.js"></script>
 </body>
 </html>
