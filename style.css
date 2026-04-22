@@ -228,6 +228,7 @@ body {
 .card h3 {
     font-size: 0.95rem;
     margin-bottom: 8px;
+    color: var(--accent);
 
     background: var(--gradient);
     -webkit-background-clip: text;
