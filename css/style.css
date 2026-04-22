@@ -1,0 +1,49 @@
+:root {
+    --bg: #0b0e14;
+    --card-bg: rgba(22, 27, 34, 0.6);
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #58a6ff;
+}
+
+body {
+    background-color: var(--bg);
+    color: #c9d1d9;
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.detail-view {
+    display: none; /* Mặc định ẩn */
+    border-top: 2px solid var(--accent);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar-item {
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 8px;
+}
+
+.sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+ 
