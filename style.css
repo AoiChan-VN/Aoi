@@ -1,0 +1,103 @@
+:root {
+    --accent: #ff2d55;
+    --text: #ffffff;
+    --bg-glass: rgba(10, 10, 10, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.08);
+}
+
+.theme-light {
+    --accent: #007aff;
+    --text: #1d1d1f;
+    --bg-glass: rgba(255, 255, 255, 0.9);
+    --card-bg: rgba(0, 0, 0, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+    width: 100vw; height: 100vh; overflow: hidden;
+    font-family: -apple-system, sans-serif;
+    color: var(--text);
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    transition: background 0.5s ease;
+}
+
+.top-bar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 15px; z-index: 150; background: transparent;
+}
+
+.left-group { display: flex; align-items: center; gap: 10px; }
+.nav-btn { background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; }
+.logo-center img { height: 28px; width: auto; }
+
+.side-drawer {
+    position: fixed; top: 0; width: 320px; height: 100%;
+    background: var(--bg-glass); backdrop-filter: blur(30px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200; display: flex; flex-direction: column;
+}
+.side-drawer.left { left: 0; transform: translateX(-100%); }
+.side-drawer.right { right: 0; transform: translateX(100%); }
+.side-drawer.show { transform: translateX(0); }
+
+.drawer-header { padding: 40px 0 10px 0; text-align: center; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
+
+.search-box { width: 100%; padding: 10px 20px; display: flex; justify-content: center; }
+.search-box input {
+    width: 90%; padding: 12px; border-radius: 10px; border: none;
+    background: var(--card-bg); color: var(--text); text-align: center; outline: none;
+}
+
+.grid-menu { flex: 1; width: 100%; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+
+.group-header {
+    width: 90%; display: flex; justify-content: space-between; align-items: center;
+    padding: 15px; margin-top: 8px; background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px; cursor: pointer; transition: 0.3s;
+}
+.group-header.active { color: var(--accent); }
+.group-header .arrow { transition: transform 0.3s; }
+.group-header.active .arrow { transform: rotate(180deg); }
+
+.group-content {
+    width: 90%; max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.card {
+    width: 100%; background: var(--card-bg); padding: 15px;
+    border-radius: 12px; margin-top: 10px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+.card h3 { font-size: 0.9rem; color: var(--accent); margin-bottom: 5px; }
+.card p { font-size: 0.75rem; opacity: 0.6; }
+.card-footer {
+    margin-top: 10px; font-size: 0.7rem; font-weight: bold;
+    padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
+    color: var(--accent); cursor: pointer; display: inline-block;
+}
+
+.drawer-footer {
+    width: 100%; padding: 20px; text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.1);
+}
+.footer-logo-inside { width: 40px; opacity: 0.8; margin-bottom: 5px; filter: drop-shadow(0 0 5px var(--accent)); }
+.copyright-inside { font-size: 9px; opacity: 0.4; line-height: 1.4; }
+
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; padding: 20px; overflow-y: auto; }
+.modal.hidden { display: none; }
+.close-view { position: fixed; top: 20px; right: 20px; font-size: 30px; color: #fff; background: none; border: none; }
+.modal-content { max-width: 700px; margin: 60px auto; color: #fff; line-height: 1.8; }
+
+.click-area { position: fixed; inset: 0; z-index: 140; display: none; }
+.click-area.show { display: block; }
+.loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1100; }
+
+@media (max-width: 600px) { .side-drawer { width: 60%; } }
+ 
