@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body class="theme-dark">
     <div id="loader" class="loader-line"></div>
@@ -15,11 +16,8 @@
     <nav class="top-bar">
         <div class="left-group">
             <button onclick="toggleSide('menu-drawer', event)" class="nav-btn">☰</button>
-            <div class="logo-center">
-                <img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi">
-            </div>
+            <div class="logo-center"><img src="assets/aoi-logo/Aoi-Logo.png" alt="Aoi"></div>
         </div>
-        
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
     </nav>
 
@@ -29,6 +27,7 @@
             <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." oninput="searchPosts()">
         </div>
         <div id="content-grid" class="grid-menu"></div>
+        <!-- Footer sẽ được JS tự động chèn vào đây -->
     </aside>
 
     <aside id="settings-drawer" class="side-drawer right">
@@ -55,15 +54,6 @@
         <button class="close-view" onclick="closeDoc()">✘</button>
         <div class="modal-content" id="md-render-area"></div>
     </div>
-    
-    <footer class="footer-hero">
-        <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-small">
-        <div class="copyright">
-            <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
-            <p>Gmail: aoichan@gmail.com</p>
-            <p>© 2026</p>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
