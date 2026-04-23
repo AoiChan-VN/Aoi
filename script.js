@@ -9,7 +9,8 @@ const applyTheme = () => {
         ? 'assets/aoi-theme/Theme-Reading.webp' 
         : 'assets/aoi-theme/Theme-Pale.webp';
     document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${bgImg}')`;
-    if(document.getElementById('theme-select')) document.getElementById('theme-select').value = state.theme;
+    const ts = document.getElementById('theme-select');
+    if(ts) ts.value = state.theme;
 };
 
 const closeAll = () => {
@@ -56,7 +57,6 @@ const render = async () => {
                 const isOpen = container.classList.contains('show');
                 document.querySelectorAll('.group-content').forEach(c => { c.classList.remove('show'); c.style.maxHeight = '0'; });
                 document.querySelectorAll('.group-header').forEach(h => h.classList.remove('active'));
-                
                 if (!isOpen) {
                     container.classList.add('show');
                     header.classList.add('active');
@@ -66,6 +66,16 @@ const render = async () => {
             grid.appendChild(header);
             grid.appendChild(container);
         });
+
+        // Chèn Footer vào đáy Menu
+        const menu = document.getElementById('menu-drawer');
+        if (!menu.querySelector('.drawer-footer')) {
+            const f = document.createElement('div');
+            f.className = 'drawer-footer';
+            f.innerHTML = `<img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-inside">
+                <div class="copyright-inside"><p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p><p>© 2026</p></div>`;
+            menu.appendChild(f);
+        }
     } catch (e) { console.error(e); }
 };
 
@@ -81,8 +91,8 @@ const searchPosts = () => {
         const header = group.previousElementSibling;
         if (keyword && hasMatch) {
             header.style.display = 'flex';
-            group.style.maxHeight = group.scrollHeight + "px";
             header.classList.add('active');
+            group.style.maxHeight = group.scrollHeight + "px";
         } else if (keyword && !hasMatch) {
             header.style.display = 'none';
             group.style.maxHeight = '0';
@@ -96,15 +106,15 @@ const searchPosts = () => {
 
 const openDoc = async (file) => {
     closeAll();
-    const loader = document.getElementById('loader');
-    loader.style.width = '100%';
+    const ld = document.getElementById('loader');
+    ld.style.width = '100%';
     try {
         const res = await fetch(`./content/${file}`);
         const text = await res.text();
         document.getElementById('md-render-area').innerHTML = text.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\n/gim, '<br>');
         document.getElementById('viewer').classList.remove('hidden');
     } catch (e) { alert("Lỗi tải file"); }
-    setTimeout(() => loader.style.width = '0', 400);
+    setTimeout(() => ld.style.width = '0', 400);
 };
 
 const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
