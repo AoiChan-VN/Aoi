@@ -25,7 +25,6 @@ body {
     transition: background 0.5s ease;
 }
 
-/* Top Bar */
 .top-bar {
     position: fixed; top: 0; left: 0; width: 100%; height: 60px;
     display: flex; justify-content: space-between; align-items: center;
@@ -36,28 +35,25 @@ body {
 .nav-btn { background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; }
 .logo-center img { height: 28px; width: auto; }
 
-/* Side Drawer */
 .side-drawer {
     position: fixed; top: 0; width: 320px; height: 100%;
     background: var(--bg-glass); backdrop-filter: blur(30px);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 200; display: flex; flex-direction: column; align-items: center;
+    z-index: 200; display: flex; flex-direction: column;
 }
 .side-drawer.left { left: 0; transform: translateX(-100%); }
 .side-drawer.right { right: 0; transform: translateX(100%); }
 .side-drawer.show { transform: translateX(0); }
 
-.drawer-header { padding: 40px 0 10px 0; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
+.drawer-header { padding: 40px 0 10px 0; text-align: center; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
 
-/* Search Box */
 .search-box { width: 100%; padding: 10px 20px; display: flex; justify-content: center; }
 .search-box input {
     width: 90%; padding: 12px; border-radius: 10px; border: none;
     background: var(--card-bg); color: var(--text); text-align: center; outline: none;
 }
 
-/* Accordion Menu */
-.grid-menu { width: 100%; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+.grid-menu { flex: 1; width: 100%; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
 
 .group-header {
     width: 90%; display: flex; justify-content: space-between; align-items: center;
@@ -74,7 +70,6 @@ body {
     display: flex; flex-direction: column; align-items: center;
 }
 
-/* Card */
 .card {
     width: 100%; background: var(--card-bg); padding: 15px;
     border-radius: 12px; margin-top: 10px; text-align: center;
@@ -84,18 +79,24 @@ body {
 .card p { font-size: 0.75rem; opacity: 0.6; }
 .card-footer {
     margin-top: 10px; font-size: 0.7rem; font-weight: bold;
-    padding: 5px 12px; border-radius: 15px; border: 1px solid var(--accent);
+    padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     color: var(--accent); cursor: pointer; display: inline-block;
 }
 
-/* Viewer Modal */
+.drawer-footer {
+    width: 100%; padding: 20px; text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.1);
+}
+.footer-logo-inside { width: 40px; opacity: 0.8; margin-bottom: 5px; filter: drop-shadow(0 0 5px var(--accent)); }
+.copyright-inside { font-size: 9px; opacity: 0.4; line-height: 1.4; }
+
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; padding: 20px; overflow-y: auto; }
 .modal.hidden { display: none; }
 .close-view { position: fixed; top: 20px; right: 20px; font-size: 30px; color: #fff; background: none; border: none; }
-.modal-content { max-width: 700px; margin: 60px auto; color: #fff; line-height: 1.6; }
+.modal-content { max-width: 700px; margin: 60px auto; color: #fff; line-height: 1.8; }
 
 .click-area { position: fixed; inset: 0; z-index: 140; display: none; }
 .click-area.show { display: block; }
 .loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1100; }
 
-@media (max-width: 600px) { .side-drawer { width: 80%; } }
+@media (max-width: 600px) { .side-drawer { width: 85%; } }
