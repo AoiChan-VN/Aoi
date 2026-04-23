@@ -6,12 +6,12 @@ const state = {
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
     const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale.webp';
-    document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${bgImg}')`;
+    document.body.style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${bgImg}') center/cover no-repeat fixed`;
     if(document.getElementById('theme-select')) document.getElementById('theme-select').value = state.theme;
 };
 
 const closeAll = () => {
-    document.querySelectorAll('.side-drawer').forEach(d => { d.classList.remove('show'); });
+    document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('show'));
     document.getElementById('global-click-area').classList.remove('show');
 };
 
@@ -45,8 +45,8 @@ const render = async () => {
             group.posts.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">chi tiết</div>`;
-                card.querySelector('.card-footer').onclick = (e) => { e.stopPropagation(); openDoc(item.file); };
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">Khám phá →</div>`;
+                card.onclick = () => openDoc(item.file);
                 container.appendChild(card);
             });
 
@@ -57,7 +57,7 @@ const render = async () => {
                 if (!isOpen) {
                     container.classList.add('show');
                     header.classList.add('active');
-                    container.style.maxHeight = container.scrollHeight + "px";
+                    container.style.maxHeight = container.scrollHeight + 40 + "px";
                 }
             };
             grid.appendChild(header);
@@ -66,44 +66,39 @@ const render = async () => {
     } catch (e) { console.error(e); }
 };
 
-const searchPosts = () => {
-    const keyword = document.getElementById('search-input').value.toLowerCase();
-    document.querySelectorAll('.group-content').forEach(group => {
-        let hasMatch = false;
-        group.querySelectorAll('.card').forEach(card => {
-            const match = card.innerText.toLowerCase().includes(keyword);
-            card.style.display = match ? 'block' : 'none';
-            if(match) hasMatch = true;
-        });
-        const header = group.previousElementSibling;
-        if (keyword && hasMatch) {
-            header.style.display = 'flex';
-            header.classList.add('active');
-            group.style.maxHeight = group.scrollHeight + "px";
-        } else if (keyword && !hasMatch) {
-            header.style.display = 'none';
-            group.style.maxHeight = '0';
-        } else {
-            header.style.display = 'flex';
-            header.classList.remove('active');
-            group.style.maxHeight = '0';
-        }
-    });
-};
-
 const openDoc = async (file) => {
     closeAll();
-    document.getElementById('loader').style.width = '100%';
+    const ld = document.getElementById('loader');
+    ld.style.width = '100%';
     try {
         const res = await fetch(`./content/${file}`);
         const text = await res.text();
-        document.getElementById('md-render-area').innerHTML = text.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\n/gim, '<br>');
+        const area = document.getElementById('md-render-area');
+        area.innerHTML = text.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\n/gim, '<br>');
         document.getElementById('viewer').classList.remove('hidden');
-    } catch (e) { alert("Lỗi tải file"); }
-    setTimeout(() => document.getElementById('loader').style.width = '0', 400);
+    } catch (e) { alert("Lỗi tải nội dung"); }
+    setTimeout(() => ld.style.width = '0', 400);
 };
 
 const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
+
+const searchPosts = () => {
+    const keyword = document.getElementById('search-input').value.toLowerCase();
+    document.querySelectorAll('.group-content').forEach(group => {
+        let matchCount = 0;
+        group.querySelectorAll('.card').forEach(card => {
+            const match = card.innerText.toLowerCase().includes(keyword);
+            card.style.display = match ? 'block' : 'none';
+            if(match) matchCount++;
+        });
+        const header = group.previousElementSibling;
+        header.style.display = (keyword && matchCount === 0) ? 'none' : 'flex';
+        if(keyword && matchCount > 0) {
+            group.classList.add('show');
+            group.style.maxHeight = group.scrollHeight + "px";
+        }
+    });
+};
 
 window.onload = () => {
     applyTheme(); render();
