@@ -1,0 +1,94 @@
+:root {
+    --accent: #ff2d55; --text: #ffffff;
+    --bg-glass: rgba(10, 10, 10, 0.85); --card-bg: rgba(255, 255, 255, 0.08);
+}
+.theme-light {
+    --accent: #007aff; --text: #1d1d1f;
+    --bg-glass: rgba(255, 255, 255, 0.9); --card-bg: rgba(0, 0, 0, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+    width: 100vw; height: 100vh; overflow: hidden;
+    font-family: -apple-system, sans-serif; color: var(--text);
+    background-size: cover !important; background-position: center !important;
+    background-repeat: no-repeat !important; background-attachment: fixed !important;
+}
+
+.top-bar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 15px; z-index: 150;
+}
+.left-group { display: flex; align-items: center; gap: 10px; }
+.nav-btn { background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; }
+.logo-center img { height: 28px; width: auto; }
+
+/* Side Drawer - Dùng Grid để ép vùng giữa cuộn */
+.side-drawer {
+    position: fixed; top: 0; width: 320px; height: 100%;
+    background: var(--bg-glass); backdrop-filter: blur(30px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200; display: grid; grid-template-rows: auto auto 1fr auto; overflow: hidden;
+}
+.side-drawer.left { left: 0; transform: translateX(-100%); }
+.side-drawer.right { right: 0; transform: translateX(100%); }
+.side-drawer.show { transform: translateX(0); }
+
+.drawer-header { padding: 40px 0 10px; text-align: center; font-weight: bold; color: var(--accent); }
+.search-box { padding: 10px 20px; }
+.search-box input {
+    width: 100%; padding: 12px; border-radius: 10px; border: none;
+    background: var(--card-bg); color: var(--text); text-align: center; outline: none;
+}
+
+/* Vùng cuộn chính */
+.grid-menu {
+    overflow-y: auto !important; -webkit-overflow-scrolling: touch;
+    padding: 10px; display: flex; flex-direction: column; align-items: center;
+}
+
+.group-header {
+    width: 95%; display: flex; justify-content: space-between; align-items: center;
+    padding: 15px; margin-top: 8px; background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px; cursor: pointer;
+}
+.group-header.active { color: var(--accent); }
+.group-header .arrow { transition: 0.3s; }
+.group-header.active .arrow { transform: rotate(180deg); }
+
+.group-content {
+    width: 95%; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.card {
+    width: 100%; background: var(--card-bg); padding: 15px; border-radius: 12px;
+    margin-top: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.03);
+}
+.card h3 { font-size: 0.9rem; color: var(--accent); margin-bottom: 5px; }
+.card p { font-size: 0.75rem; opacity: 0.6; }
+.card-footer {
+    margin-top: 10px; font-size: 0.7rem; font-weight: bold; padding: 5px 15px;
+    border-radius: 20px; border: 1px solid var(--accent); color: var(--accent); cursor: pointer;
+}
+
+.drawer-footer {
+    padding: 12px; text-align: center; background: rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+.footer-logo-inside { width: 32px; opacity: 0.5; margin-bottom: 4px; }
+.copyright-inside { font-size: 9px; opacity: 0.3; }
+
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; padding: 20px; overflow-y: auto; }
+.modal.hidden { display: none; }
+.close-view { position: fixed; top: 20px; right: 20px; font-size: 30px; color: #fff; background: none; border: none; }
+.modal-content { max-width: 700px; margin: 60px auto; color: #fff; line-height: 1.8; }
+
+.click-area { position: fixed; inset: 0; z-index: 140; display: none; }
+.click-area.show { display: block; }
+.loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1100; }
+
+@media (max-width: 600px) { .side-drawer { width: 85%; } }
+ 
