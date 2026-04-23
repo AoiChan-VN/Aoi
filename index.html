@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>𝓐𝓸𝓲𝓒𝓱𝓪𝓷</title>
-    <!-- Thư viện Marked.js để render Markdown chuyên nghiệp -->
-    <script src="https://jsdelivr.net"></script>
+    <title>🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Translate Script -->
+    <script type="text/javascript" src="https://google.com"></script>
 </head>
-<body>
-    <div id="loader" class="loader-line" style="position:fixed; top:0; height:2px; background:#ff2d55; transition:0.3s; z-index:1000;"></div>
+<body class="theme-dark show-bg">
+    <!-- Hidden Google Translate Element -->
+    <div id="google_translate_element" style="display:none"></div>
+
+    <div id="loader" class="loader-line"></div>
 
     <nav class="top-bar">
         <div class="nav-left">
-            <button onclick="ctrl.toggleSide('menu-drawer')" class="nav-btn">☰</button>
-            <div class="avatar-circle"><img src="assets/aoi-img/Aoi-Logo.png" alt="logo"></div>
+            <button onclick="toggleSide('menu-drawer')" class="nav-btn">☰</button>
+            <div class="avatar-circle"><img src="assets/aoi-img/Aoi-Logo.png"></div>
         </div>
         <div class="nav-right">
-            <button onclick="ctrl.toggleSide('settings-drawer')" class="nav-btn">⚙️</button>
+            <button onclick="toggleSide('settings-drawer')" class="nav-btn">⚙️</button>
         </div>
     </nav>
     
@@ -25,40 +28,40 @@
         <div id="content-grid" class="post-grid"></div>
     </main>
 
-    <aside id="menu-drawer" class="side-drawer left">
-        <div class="drawer-header" style="padding:40px 20px 10px; font-weight:bold; color:var(--accent)" data-i18n="menu_title"></div>
-        <div id="menu-list" class="grid-menu"></div>
-    </aside>
-
     <aside id="settings-drawer" class="side-drawer right">
-        <div class="drawer-header" style="padding:40px 20px 10px; font-weight:bold; color:var(--accent)" data-i18n="settings_title"></div>
-        <div class="setting-group" style="padding:20px; border-bottom:0.5px solid var(--border); display:flex; justify-content:space-between;">
-            <label data-i18n="lang_label"></label>
-            <select id="lang-select" onchange="ctrl.updateLang(this.value)">
-                <option value="vi">Tiếng Việt</option>
-                <option value="en">English</option>
-            </select>
-        </div>
-        <div class="setting-group" style="padding:20px; border-bottom:0.5px solid var(--border); display:flex; justify-content:space-between;">
-            <label data-i18n="bg_label"></label>
-            <input type="checkbox" id="bg-toggle" onchange="ctrl.updateSettings()">
-        </div>
-        <div class="setting-group" style="padding:20px;">
-            <label data-i18n="theme_label"></label>
-            <select id="theme-select" onchange="ctrl.updateSettings()">
-                <option value="dark" data-i18n="theme_dark"></option>
-                <option value="light" data-i18n="theme_light"></option>
-            </select>
+        <div class="drawer-header">【 Cài đặt 】</div>
+        <div class="settings-content">
+            <div class="setting-group">
+                <label>Ngôn ngữ</label>
+                <select id="lang-select" class="aoi-select" onchange="changeLanguage(this.value)">
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label>Ảnh nền</label>
+                <label class="switch">
+                    <input type="checkbox" id="bg-toggle" checked onchange="updateSettings()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-group">
+                <label>Giao diện</label>
+                <select id="theme-select" class="aoi-select" onchange="updateSettings()">
+                    <option value="dark">Tối</option>
+                    <option value="light">Sáng</option>
+                </select>
+            </div>
         </div>
     </aside>
 
-    <div id="global-overlay" onclick="ctrl.closeAll()"></div>
+    <div id="global-overlay" onclick="closeAll()"></div>
     <div id="viewer" class="modal hidden">
-        <button onclick="ctrl.closeDoc()" style="position:fixed; top:20px; right:20px; background:none; border:none; color:white; font-size:30px;">✕</button>
+        <button class="close-view" onclick="closeDoc()">✕</button>
         <div class="modal-content" id="md-render-area"></div>
     </div>
 
-    <!-- Khai báo Module -->
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
