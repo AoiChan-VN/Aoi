@@ -66,16 +66,6 @@ const render = async () => {
             grid.appendChild(header);
             grid.appendChild(container);
         });
-
-        // Chèn Footer vào đáy Menu
-        const menu = document.getElementById('menu-drawer');
-        if (!menu.querySelector('.drawer-footer')) {
-            const f = document.createElement('div');
-            f.className = 'drawer-footer';
-            f.innerHTML = `<img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-inside">
-                <div class="copyright-inside"><p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p><p>© 2026</p></div>`;
-            menu.appendChild(f);
-        }
     } catch (e) { console.error(e); }
 };
 
@@ -124,3 +114,4 @@ window.onload = () => {
     document.getElementById('theme-select').onchange = (e) => { state.theme = e.target.value; localStorage.setItem('aoi_theme', state.theme); applyTheme(); };
     document.getElementById('lang-switch').onchange = (e) => { state.lang = e.target.value; localStorage.setItem('aoi_lang', state.lang); render(); };
 };
+ 
