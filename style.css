@@ -95,11 +95,16 @@ body {
 }
 
 .drawer-footer {
-    width: 100%; padding: 20px; text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.1);
+    width: 100%;
+    padding: 12px 10px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    background: rgba(0,0,0,0.15);
 }
-.footer-logo-inside { width: 40px; opacity: 0.8; margin-bottom: 5px; filter: drop-shadow(0 0 5px var(--accent)); }
-.copyright-inside { font-size: 9px; opacity: 0.4; line-height: 1.4; }
+
+.footer-logo-inside { width: 32px; opacity: 0.8; margin-bottom: 4px; filter: none !important; }
+
+.copyright-inside { font-size: 9px; opacity: 0.4; line-height: 1.2; color: var(--text) ; letter-spacing: 0.5px; }
 
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; padding: 20px; overflow-y: auto; }
 .modal.hidden { display: none; }
