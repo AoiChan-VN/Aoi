@@ -28,7 +28,7 @@ body {
     transition: 0.4s;
 }
 
-body.show-bg { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/aoi-theme/Theme-Reading.webp'); }
+body.show-bg { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/aoi-img/Theme-Reading.webp'); }
 
 /* Top Bar */
 .top-bar {
