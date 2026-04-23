@@ -6,7 +6,7 @@ const state = {
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
     const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale.webp';
-    document.body.style.background = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${bgImg}') center/cover no-repeat fixed`;
+    document.body.style.background = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgImg}') center/cover no-repeat fixed`;
     if(document.getElementById('theme-select')) document.getElementById('theme-select').value = state.theme;
 };
 
@@ -38,14 +38,13 @@ const render = async () => {
             const header = document.createElement('div');
             header.className = 'group-header';
             header.innerHTML = `<span>${group.group_name}</span><span class="arrow">▾</span>`;
-            
             const container = document.createElement('div');
             container.className = 'group-content';
             
             group.posts.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">Khám phá →</div>`;
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">Chi tiết →</div>`;
                 card.onclick = () => openDoc(item.file);
                 container.appendChild(card);
             });
@@ -57,7 +56,7 @@ const render = async () => {
                 if (!isOpen) {
                     container.classList.add('show');
                     header.classList.add('active');
-                    container.style.maxHeight = container.scrollHeight + 40 + "px";
+                    container.style.maxHeight = container.scrollHeight + "px";
                 }
             };
             grid.appendChild(header);
@@ -66,43 +65,40 @@ const render = async () => {
     } catch (e) { console.error(e); }
 };
 
-const openDoc = async (file) => {
-    closeAll();
-    const ld = document.getElementById('loader');
-    ld.style.width = '100%';
-    try {
-        const res = await fetch(`./content/${file}`);
-        const text = await res.text();
-        const area = document.getElementById('md-render-area');
-        area.innerHTML = text.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\n/gim, '<br>');
-        document.getElementById('viewer').classList.remove('hidden');
-    } catch (e) { alert("Lỗi tải nội dung"); }
-    setTimeout(() => ld.style.width = '0', 400);
-};
-
-const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
-
 const searchPosts = () => {
     const keyword = document.getElementById('search-input').value.toLowerCase();
     document.querySelectorAll('.group-content').forEach(group => {
-        let matchCount = 0;
+        let hasMatch = false;
         group.querySelectorAll('.card').forEach(card => {
             const match = card.innerText.toLowerCase().includes(keyword);
             card.style.display = match ? 'block' : 'none';
-            if(match) matchCount++;
+            if(match) hasMatch = true;
         });
         const header = group.previousElementSibling;
-        header.style.display = (keyword && matchCount === 0) ? 'none' : 'flex';
-        if(keyword && matchCount > 0) {
+        header.style.display = (keyword && !hasMatch) ? 'none' : 'flex';
+        if(keyword && hasMatch) {
             group.classList.add('show');
             group.style.maxHeight = group.scrollHeight + "px";
         }
     });
 };
 
+const openDoc = async (file) => {
+    closeAll();
+    document.getElementById('loader').style.width = '100%';
+    try {
+        const res = await fetch(`./content/${file}`);
+        const text = await res.text();
+        document.getElementById('md-render-area').innerHTML = text.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/\n/gim, '<br>');
+        document.getElementById('viewer').classList.remove('hidden');
+    } catch (e) { alert("Lỗi tải file"); }
+    setTimeout(() => document.getElementById('loader').style.width = '0', 400);
+};
+
+const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
+
 window.onload = () => {
     applyTheme(); render();
     document.getElementById('theme-select').onchange = (e) => { state.theme = e.target.value; localStorage.setItem('aoi_theme', state.theme); applyTheme(); };
     document.getElementById('lang-switch').onchange = (e) => { state.lang = e.target.value; localStorage.setItem('aoi_lang', state.lang); render(); };
 };
- 
