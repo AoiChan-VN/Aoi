@@ -1,94 +1,85 @@
-import { translations } from './lang.js';
+// Cấu hình Google Translate
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'vi',
+        includedLanguages: 'en,ja,vi', // thêm tiếng nào thì điền mã vào đây
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
 
-const state = {
-    lang: localStorage.getItem('aoi_lang') || 'vi',
-    theme: localStorage.getItem('aoi_theme') || 'dark',
-    bg: localStorage.getItem('aoi_bg') !== 'false'
+const changeLanguage = (lang) => {
+    const googleSelect = document.querySelector('.goog-te-combo');
+    if (googleSelect) {
+        googleSelect.value = lang;
+        googleSelect.dispatchEvent(new Event('change'));
+    }
 };
 
-// Cấu hình Marked (Tùy chỉnh để render xuống dòng chuẩn)
-marked.setOptions({ gfm: true, breaks: true });
-
-const translateUI = () => {
-    const dict = translations[state.lang];
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        el.innerText = dict[el.getAttribute('data-i18n')];
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        el.placeholder = dict[el.getAttribute('data-i18n-placeholder')];
-    });
+const state = {
+    theme: localStorage.getItem('aoi_theme') || 'dark',
+    bg: localStorage.getItem('aoi_bg') !== 'false'
 };
 
 const applySettings = () => {
     document.body.className = `theme-${state.theme} ${state.bg ? 'show-bg' : ''}`;
     document.getElementById('bg-toggle').checked = state.bg;
     document.getElementById('theme-select').value = state.theme;
-    document.getElementById('lang-select').value = state.lang;
-    translateUI();
 };
 
-// Đưa hàm ra phạm vi global để HTML có thể gọi
-window.ctrl = {
-    updateSettings: () => {
-        state.theme = document.getElementById('theme-select').value;
-        state.bg = document.getElementById('bg-toggle').checked;
-        localStorage.setItem('aoi_theme', state.theme);
-        localStorage.setItem('aoi_bg', state.bg);
-        applySettings();
-    },
-    updateLang: (val) => {
-        state.lang = val;
-        localStorage.setItem('aoi_lang', val);
-        applySettings();
-        render();
-    },
-    toggleSide: (id) => {
-        document.getElementById(id).classList.toggle('show');
-        document.getElementById('global-overlay').classList.toggle('show');
-    },
-    closeAll: () => {
-        document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('show'));
-        document.getElementById('global-overlay').classList.remove('show');
-    },
-    openDoc: async (file) => {
-        window.ctrl.closeAll();
-        const loader = document.getElementById('loader');
-        loader.style.width = '100%';
-        try {
-            const res = await fetch(`./content/${file}`);
-            const text = await res.text();
-            // Sử dụng Marked.js thay vì replace thủ công
-            document.getElementById('md-render-area').innerHTML = marked.parse(text);
-            document.getElementById('viewer').classList.remove('hidden');
-        } catch (e) { 
-            alert(translations[state.lang].error_load); 
-        }
-        setTimeout(() => loader.style.width = '0', 400);
-    },
-    closeDoc: () => document.getElementById('viewer').classList.add('hidden')
+const updateSettings = () => {
+    state.theme = document.getElementById('theme-select').value;
+    state.bg = document.getElementById('bg-toggle').checked;
+    localStorage.setItem('aoi_theme', state.theme);
+    localStorage.setItem('aoi_bg', state.bg);
+    applySettings();
 };
 
+const toggleSide = (id) => {
+    document.getElementById(id).classList.toggle('show');
+    document.getElementById('global-overlay').classList.toggle('show');
+};
+
+const closeAll = () => {
+    document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('show'));
+    document.getElementById('global-overlay').classList.remove('show');
+};
+
+// Data giờ chỉ cần 1 danh sách phẳng, không phân cấp ngôn ngữ
 const render = async () => {
     try {
         const res = await fetch('./data.json');
-        const posts = await res.json();
+        const posts = await res.json(); // Giả sử file data.json chỉ là mảng [{}, {}]
+        
         const grid = document.getElementById('content-grid');
-        const dict = translations[state.lang];
-
         grid.innerHTML = posts.map(item => `
             <div class="card">
-                <img src="${item.thumb}" class="card-img" alt="thumb">
+                <img src="${item.thumb}" class="card-img">
                 <div class="card-info">
-                    <h3>${item.title[state.lang] || item.title['vi']}</h3>
-                    <p>${item.desc[state.lang] || item.desc['vi']}</p>
-                    <button class="btn-detail" onclick="ctrl.openDoc('${item.file[state.lang] || item.file['vi']}')">
-                        ${dict.detail_btn}
-                    </button>
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                    <button class="btn-detail" onclick="openDoc('${item.file}')">Chi tiết</button>
                 </div>
             </div>
         `).join('');
-    } catch (e) { console.error("Render Error:", e); }
+    } catch (e) { console.error("Lỗi data", e); }
 };
 
-window.onload = () => { applySettings(); render(); };
- 
+const openDoc = async (file) => {
+    const loader = document.getElementById('loader');
+    loader.style.width = '100%';
+    try {
+        const res = await fetch(`./content/${file}`);
+        const text = await res.text();
+        document.getElementById('md-render-area').innerHTML = text.replace(/\n/g, '<br>');
+        document.getElementById('viewer').classList.remove('hidden');
+    } catch (e) { alert("Lỗi tải"); }
+    setTimeout(() => loader.style.width = '0', 400);
+};
+
+const closeDoc = () => document.getElementById('viewer').classList.add('hidden');
+
+window.onload = () => {
+    applySettings();
+    render();
+};
