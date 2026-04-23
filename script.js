@@ -6,12 +6,12 @@ const state = {
 const applyTheme = () => {
     document.body.className = `theme-${state.theme}`;
     const bgImg = state.theme === 'dark' ? 'assets/aoi-theme/Theme-Reading.webp' : 'assets/aoi-theme/Theme-Pale.webp';
-    document.body.style.background = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${bgImg}') center/cover no-repeat fixed`;
+    document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${bgImg}')`;
     if(document.getElementById('theme-select')) document.getElementById('theme-select').value = state.theme;
 };
 
 const closeAll = () => {
-    document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('show'));
+    document.querySelectorAll('.side-drawer').forEach(d => { d.classList.remove('show'); });
     document.getElementById('global-click-area').classList.remove('show');
 };
 
@@ -38,14 +38,15 @@ const render = async () => {
             const header = document.createElement('div');
             header.className = 'group-header';
             header.innerHTML = `<span>${group.group_name}</span><span class="arrow">▾</span>`;
+            
             const container = document.createElement('div');
             container.className = 'group-content';
             
             group.posts.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">Chi tiết →</div>`;
-                card.onclick = () => openDoc(item.file);
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><div class="card-footer">chi tiết</div>`;
+                card.querySelector('.card-footer').onclick = (e) => { e.stopPropagation(); openDoc(item.file); };
                 container.appendChild(card);
             });
 
@@ -75,10 +76,17 @@ const searchPosts = () => {
             if(match) hasMatch = true;
         });
         const header = group.previousElementSibling;
-        header.style.display = (keyword && !hasMatch) ? 'none' : 'flex';
-        if(keyword && hasMatch) {
-            group.classList.add('show');
+        if (keyword && hasMatch) {
+            header.style.display = 'flex';
+            header.classList.add('active');
             group.style.maxHeight = group.scrollHeight + "px";
+        } else if (keyword && !hasMatch) {
+            header.style.display = 'none';
+            group.style.maxHeight = '0';
+        } else {
+            header.style.display = 'flex';
+            header.classList.remove('active');
+            group.style.maxHeight = '0';
         }
     });
 };
