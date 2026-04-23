@@ -100,4 +100,4 @@ body {
 .click-area.show { display: block; }
 .loader-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0; transition: 0.3s; z-index: 1100; }
 
-@media (max-width: 600px) { .side-drawer { width: 55%; } }
+@media (max-width: 600px) { .side-drawer { width: 85%; } }
