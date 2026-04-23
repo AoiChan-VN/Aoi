@@ -21,15 +21,25 @@
         <button onclick="toggleSide('settings-drawer', event)" class="nav-btn settings-right">⚙️</button>
     </nav>
 
+    <!-- Menu bên trái -->
     <aside id="menu-drawer" class="side-drawer left">
         <div class="drawer-header">【Bài viết】</div>
         <div class="search-box">
             <input type="text" id="search-input" placeholder="🔎 Tìm kiếm..." oninput="searchPosts()">
         </div>
+        
         <div id="content-grid" class="grid-menu"></div>
-        <div class=drawer-header></div>
+        
+        <div class="drawer-footer">
+            <img src="assets/aoi-logo/Aoi-Logo.png" class="footer-logo-inside">
+            <div class="copyright-inside">
+                <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤</p>
+                <p>© 2026</p>
+            </div>
+        </div>
     </aside>
 
+    <!-- Cài đặt bên phải -->
     <aside id="settings-drawer" class="side-drawer right">
         <div class="drawer-header">【Cài đặt】</div>
         <div class="settings-content">
