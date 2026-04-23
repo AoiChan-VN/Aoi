@@ -1,3 +1,21 @@
+// Cấu hình Google Translate
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'vi',
+        includedLanguages: 'en,ja,vi', // Muốn thêm tiếng nào thì điền mã vào đây
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+
+const changeLanguage = (lang) => {
+    const googleSelect = document.querySelector('.goog-te-combo');
+    if (googleSelect) {
+        googleSelect.value = lang;
+        googleSelect.dispatchEvent(new Event('change'));
+    }
+};
+
 const state = {
     theme: localStorage.getItem('aoi_theme') || 'dark',
     bg: localStorage.getItem('aoi_bg') !== 'false'
@@ -27,16 +45,16 @@ const closeAll = () => {
     document.getElementById('global-overlay').classList.remove('show');
 };
 
+// Data giờ chỉ cần 1 danh sách phẳng, không phân cấp ngôn ngữ
 const render = async () => {
     try {
         const res = await fetch('./data.json');
-        const data = await res.json();
-        const posts = data.vi.posts;
+        const posts = await res.json(); // Giả sử file data.json chỉ là mảng [{}, {}]
         
         const grid = document.getElementById('content-grid');
         grid.innerHTML = posts.map(item => `
             <div class="card">
-                <img src="${item.thumb || 'assets/default.jpg'}" class="card-img">
+                <img src="${item.thumb}" class="card-img">
                 <div class="card-info">
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
@@ -44,7 +62,7 @@ const render = async () => {
                 </div>
             </div>
         `).join('');
-    } catch (e) { console.error("Data error", e); }
+    } catch (e) { console.error("Lỗi data", e); }
 };
 
 const openDoc = async (file) => {
@@ -55,7 +73,7 @@ const openDoc = async (file) => {
         const text = await res.text();
         document.getElementById('md-render-area').innerHTML = text.replace(/\n/g, '<br>');
         document.getElementById('viewer').classList.remove('hidden');
-    } catch (e) { alert("Không thể tải nội dung"); }
+    } catch (e) { alert("Lỗi tải"); }
     setTimeout(() => loader.style.width = '0', 400);
 };
 
