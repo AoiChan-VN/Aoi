@@ -1,77 +1,33 @@
 export function parseMarkdown(md) {
-let html = md;
+    let html = md.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-// Escape HTML
-html = html
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+    // Code block & Inline code
+    html = html.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-// Code block
-html = html.replace(/```([\s\S]*?)```/g, (_, code) => {
-    return `<pre><code>${code.trim()}</code></pre>`;
-});
+    // Headers
+    html = html.replace(/^### (.*)$/gim, '<h3>$1</h3>')
+               .replace(/^## (.*)$/gim, '<h2>$1</h2>')
+               .replace(/^# (.*)$/gim, '<h1>$1</h1>');
 
-// Inline code
-html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // Bold / Italic
+    html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+               .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+               .replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-// Headers
-html = html.replace(/^### (.*)$/gim, '<h3>$1</h3>');
-html = html.replace(/^## (.*)$/gim, '<h2>$1</h2>');
-html = html.replace(/^# (.*)$/gim, '<h1>$1</h1>');
+    // Links & Images
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" onerror="this.style.display=\'none\'">')
+               .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 
-// Bold / Italic
-html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    // Blockquote & Lists
+    html = html.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
+    
+    // Tối ưu List để tránh lỗi ngắt dòng
+    html = html.replace(/^\- (.*)$/gim, '<ul><li>$1</li></ul>').replace(/<\/ul>\s*<ul>/g, '');
 
-// Links
-html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
-);
-
-// Images + fallback
-html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,
-    '<img src="$2" alt="$1" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
-);
-
-// Blockquote
-html = html.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
-
-// Lists
-const lines = html.split('\n');
-let result = [];
-let inUL = false;
-
-lines.forEach(line => {
-    if (/^\- /.test(line)) {
-        if (!inUL) {
-            result.push('<ul>');
-            inUL = true;
-        }
-        result.push(`<li>${line.replace(/^\- /, '')}</li>`);
-    } else {
-        if (inUL) {
-            result.push('</ul>');
-            inUL = false;
-        }
-        result.push(line);
-    }
-});
-
-if (inUL) result.push('</ul>');
-
-html = result.join('\n');
-
-// Paragraph
-html = html
-    .split(/\n{2,}/)
-    .map(block => {
-        if (/^<\/?(h\d|ul|pre|blockquote)/.test(block)) return block;
+    // Paragraph
+    return html.split(/\n{2,}/).map(block => {
+        if (/^<\/?(h\d|ul|pre|blockquote|img)/.test(block)) return block;
         return `<p>${block.trim()}</p>`;
-    })
-    .join('');
-
-return html;
-
+    }).join('');
 }
