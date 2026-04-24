@@ -1,11 +1,13 @@
 export function parseMarkdown(md) {
-    let html = md.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    let html = md;
 
-    // Code block & Inline code
+    // Code block
     html = html.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
+    
+    // Inline code
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    // Headers
+    // Headers (Hỗ trợ từ h1 đến h3)
     html = html.replace(/^### (.*)$/gim, '<h3>$1</h3>')
                .replace(/^## (.*)$/gim, '<h2>$1</h2>')
                .replace(/^# (.*)$/gim, '<h1>$1</h1>');
@@ -16,18 +18,19 @@ export function parseMarkdown(md) {
                .replace(/\*(.*?)\*/g, '<em>$1</em>');
 
     // Links & Images
-    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" onerror="this.style.display=\'none\'">')
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 
-    // Blockquote & Lists
+    // Blockquote
     html = html.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
     
-    // Tối ưu List để tránh lỗi ngắt dòng
+    // Lists (Tối ưu hóa hiển thị)
     html = html.replace(/^\- (.*)$/gim, '<ul><li>$1</li></ul>').replace(/<\/ul>\s*<ul>/g, '');
 
-    // Paragraph
+    // Xử lý Paragraph: Chỉ bọc thẻ <p> cho những dòng chưa có thẻ HTML bao quanh
     return html.split(/\n{2,}/).map(block => {
-        if (/^<\/?(h\d|ul|pre|blockquote|img)/.test(block)) return block;
+        // Nếu block đã bắt đầu bằng một thẻ HTML (như <div>, <h1>, <ul>), trả về luôn
+        if (/^\s*<[a-z1-6]/i.test(block.trim())) return block;
         return `<p>${block.trim()}</p>`;
     }).join('');
 }
