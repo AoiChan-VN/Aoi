@@ -12,30 +12,25 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  aoi-web:
     runs-on: ubuntu-latest
+    environment: 
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v6
       - uses: actions/configure-pages@v5
 
       - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v4
         with:
-           path: .
+          path: .
           
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    environment: 
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
-    steps:
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
         uses: strumwolf/delete-deployment-environment@v3
