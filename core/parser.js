@@ -7,54 +7,71 @@ html = html
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-// Code block ``` ```
-html = html.replace(/```([\s\S]*?)```/g, (match, code) => {
+// Code block
+html = html.replace(/```([\s\S]*?)```/g, (_, code) => {
     return `<pre><code>${code.trim()}</code></pre>`;
 });
 
-// Inline code `
-html = html.replace(/`([^`]+)`/g, (match, code) => {
-    return `<code>${code}</code>`;
-});
+// Inline code
+html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
 // Headers
-html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+html = html.replace(/^### (.*)$/gim, '<h3>$1</h3>');
+html = html.replace(/^## (.*)$/gim, '<h2>$1</h2>');
+html = html.replace(/^# (.*)$/gim, '<h1>$1</h1>');
 
-// Bold & Italic
+// Bold / Italic
 html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
 html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-// Links [text](url)
-html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-    return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-});
+// Links
+html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+);
 
-// Images ![alt](src)
-html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
-    return `<img src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
-});
+// Images + fallback
+html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,
+    '<img src="$2" alt="$1" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">'
+);
 
 // Blockquote
-html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+html = html.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
 
-// Unordered list
-html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
-html = html.replace(/(<li>.*<\/li>)/gims, '<ul>$1</ul>');
+// Lists
+const lines = html.split('\n');
+let result = [];
+let inUL = false;
 
-// Ordered list
-html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+lines.forEach(line => {
+    if (/^\- /.test(line)) {
+        if (!inUL) {
+            result.push('<ul>');
+            inUL = true;
+        }
+        result.push(`<li>${line.replace(/^\- /, '')}</li>`);
+    } else {
+        if (inUL) {
+            result.push('</ul>');
+            inUL = false;
+        }
+        result.push(line);
+    }
+});
+
+if (inUL) result.push('</ul>');
+
+html = result.join('\n');
 
 // Paragraph
-html = html.replace(/\n{2,}/g, '</p><p>');
-html = `<p>${html}</p>`;
-
-// Cleanup empty tags
-html = html.replace(/<p><\/p>/g, '');
+html = html
+    .split(/\n{2,}/)
+    .map(block => {
+        if (/^<\/?(h\d|ul|pre|blockquote)/.test(block)) return block;
+        return `<p>${block.trim()}</p>`;
+    })
+    .join('');
 
 return html;
 
 }
- 
