@@ -12,7 +12,8 @@ permissions:
   id-token: write
 
 jobs:
-  aoi-web:
+  aoichan:
+    name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
     runs-on: ubuntu-latest
     environment: 
       name: github-pages
