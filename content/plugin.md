@@ -1,7 +1,7 @@
 <div align="center">
-  <p>▭▭▭▭▭▭▭▭▭▭▭▭▭▭▭</p>
-  <p>⊰〖Tu Tiên〗⊱</p>
-  <p>▭▭▭▭▭▭▭▭▭▭▭▭▭▭▭</p>
+    <h1>
+      ⊰〖Tu Tiên〗⊱
+    </h1>
 </div>
 
 <div align="center">
