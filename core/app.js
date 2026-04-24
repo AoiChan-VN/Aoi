@@ -14,6 +14,7 @@ class AoiApp {
 
     init() {
         this.cacheDOM();
+        if (!this.dom.contentGrid) return; // Bảo vệ nếu DOM chưa sẵn sàng
         this.bindEvents();
         this.initSettings();
         this.applyTheme();
@@ -23,59 +24,68 @@ class AoiApp {
     }
 
     cacheDOM() {
-        const ids = [
-            'content-grid', 'loader', 'theme-select', 'lang-select', 'bg-toggle', 
-            'viewer', 'viewer-content', 'overlay', 'menu-left',
-            'close-viewer', 'menu-btn', 'close-menu', 'open-settings-sub', 'settings-sub-panel'
-        ];
-        ids.forEach(id => {
-            const camelId = id.replace(/-([a-z])/g, g => g.toUpperCase());
-            this.dom[camelId] = document.getElementById(id);
-        });
+        // Danh sách ID chính xác tuyệt đối từ HTML
+        const elements = {
+            contentGrid: 'content-grid',
+            loader: 'loader',
+            themeSelect: 'theme-select',
+            langSelect: 'lang-select',
+            bgToggle: 'bg-toggle',
+            viewer: 'viewer',
+            viewerContent: 'viewer-content',
+            overlay: 'overlay',
+            menuLeft: 'menu-left',
+            closeViewer: 'close-viewer',
+            menuBtn: 'menu-btn',
+            closeMenu: 'close-menu',
+            openSettingsSub: 'open-settings-sub',
+            settingsSubPanel: 'settings-sub-panel'
+        };
+
+        for (const [key, id] of Object.entries(elements)) {
+            this.dom[key] = document.getElementById(id);
+        }
     }
 
     bindEvents() {
-        this.dom.menuBtn.addEventListener('click', () => this.toggleMenu(true));
-        this.dom.closeMenu.addEventListener('click', () => this.toggleMenu(false));
-        this.dom.overlay.addEventListener('click', () => this.toggleMenu(false));
+        this.dom.menuBtn.onclick = () => this.toggleMenu(true);
+        this.dom.closeMenu.onclick = () => this.toggleMenu(false);
+        this.dom.overlay.onclick = () => this.toggleMenu(false);
+        this.dom.closeViewer.onclick = () => this.closeViewer();
         
-        this.dom.openSettingsSub.addEventListener('click', () => {
+        this.dom.openSettingsSub.onclick = () => {
             this.dom.settingsSubPanel.classList.toggle('hidden');
-        });
+        };
 
-        this.dom.themeSelect.addEventListener('change', () => {
+        this.dom.themeSelect.onchange = () => {
             this.state.theme = this.dom.themeSelect.value;
             localStorage.setItem('aoi_theme', this.state.theme);
             this.applyTheme();
-        });
+        };
 
-        this.dom.langSelect.addEventListener('change', () => {
+        this.dom.langSelect.onchange = () => {
             this.state.lang = this.dom.langSelect.value;
             localStorage.setItem('aoi_lang', this.state.lang);
             this.applyLanguage();
             this.renderPosts();
-        });
+        };
 
-        this.dom.bgToggle.addEventListener('change', () => {
+        this.dom.bgToggle.onchange = () => {
             this.state.bg = this.dom.bgToggle.checked;
             localStorage.setItem('aoi_bg', this.state.bg);
             this.applyTheme();
-        });
+        };
 
-        this.dom.contentGrid.addEventListener('click', (e) => {
+        this.dom.contentGrid.onclick = (e) => {
             const card = e.target.closest('.card');
             if (card) this.openPost(card.dataset.file);
-        });
-
-        this.dom.closeViewer.addEventListener('click', () => {
-            this.dom.viewer.classList.add('hidden');
-            document.body.style.overflow = '';
-        });
+        };
     }
 
     applyTheme() {
         document.body.className = `theme-${this.state.theme}`;
         if (this.state.bg) document.body.classList.add('show-bg');
+        else document.body.classList.remove('show-bg');
     }
 
     applyLanguage() {
@@ -118,6 +128,11 @@ class AoiApp {
         this.dom.loader.style.width = '0';
     }
 
+    closeViewer() {
+        this.dom.viewer.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
     toggleMenu(open) {
         this.dom.menuLeft.classList.toggle('show', open);
         this.dom.overlay.classList.toggle('show', open);
@@ -133,3 +148,4 @@ class AoiApp {
 
 const app = new AoiApp();
 window.addEventListener('DOMContentLoaded', () => app.init());
+ 
