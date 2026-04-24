@@ -3,168 +3,131 @@ import { languages } from '../data/languages.js';
 import { parseMarkdown } from './parser.js';
 
 class AoiApp {
-constructor() {
-this.state = {
-theme: localStorage.getItem('aoi_theme') || 'dark',
-bg: localStorage.getItem('aoi_bg') !== 'false',
-lang: localStorage.getItem('aoi_lang') || 'vi'
-};
+    constructor() {
+        this.state = {
+            theme: localStorage.getItem('aoi_theme') || 'dark',
+            bg: localStorage.getItem('aoi_bg') !== 'false',
+            lang: localStorage.getItem('aoi_lang') || 'vi'
+        };
+        this.dom = {};
+    }
 
-    this.dom = {};
-}
-
-init() {
-    this.cacheDOM();
-    this.bindEvents();
-    this.initSettings();
-    this.applyTheme();
-    this.renderLanguageOptions();
-    this.applyLanguage();
-    this.renderPosts();
-}
-
-cacheDOM() {
-    this.dom.grid = document.getElementById('content-grid');
-    this.dom.loader = document.getElementById('loader');
-    this.dom.themeSelect = document.getElementById('theme-select');
-    this.dom.langSelect = document.getElementById('lang-select');
-    this.dom.bgToggle = document.getElementById('bg-toggle');
-    this.dom.viewer = document.getElementById('viewer');
-    this.dom.viewerContent = document.getElementById('viewer-content');
-    this.dom.overlay = document.getElementById('overlay');
-    this.dom.settingsDrawer = document.getElementById('settings-drawer');
-    this.dom.closeViewer = document.getElementById('close-viewer');
-    this.dom.settingsBtn = document.getElementById('settings-btn');
-}
-
-bindEvents() {
-    this.dom.grid.addEventListener('click', (e) => {
-        const card = e.target.closest('.card');
-        if (!card) return;
-        this.openPost(card.dataset.file);
-    });
-
-    this.dom.themeSelect.addEventListener('change', () => {
-        this.state.theme = this.dom.themeSelect.value;
-        localStorage.setItem('aoi_theme', this.state.theme);
+    init() {
+        this.cacheDOM();
+        this.bindEvents();
+        this.initSettings();
         this.applyTheme();
-    });
-
-    this.dom.langSelect.addEventListener('change', () => {
-        this.state.lang = this.dom.langSelect.value;
-        localStorage.setItem('aoi_lang', this.state.lang);
+        this.renderLanguageOptions();
         this.applyLanguage();
         this.renderPosts();
-    });
-
-    this.dom.bgToggle.addEventListener('change', () => {
-        this.state.bg = this.dom.bgToggle.checked;
-        localStorage.setItem('aoi_bg', this.state.bg);
-        this.applyTheme();
-    });
-
-    this.dom.settingsBtn.addEventListener('click', () => this.toggleDrawer(true));
-    this.dom.overlay.addEventListener('click', () => this.toggleDrawer(false));
-    this.dom.closeViewer.addEventListener('click', () => this.closeViewer());
-}
-
-initSettings() {
-    this.dom.themeSelect.value = this.state.theme;
-    this.dom.bgToggle.checked = this.state.bg;
-}
-
-applyTheme() {
-    document.body.className = '';
-    document.body.classList.add(`theme-${this.state.theme}`);
-
-    if (this.state.bg) {
-        document.body.classList.add('show-bg');
     }
-}
 
-renderLanguageOptions() {
-    const fragment = document.createDocumentFragment();
+    cacheDOM() {
+        const ids = ['content-grid', 'loader', 'theme-select', 'lang-select', 'bg-toggle', 'viewer', 'viewer-content', 'overlay', 'settings-drawer', 'close-viewer', 'settings-btn', 'menu-btn'];
+        ids.forEach(id => {
+            const camelId = id.replace(/-([a-z])/g, g => g[1].toUpperCase());
+            this.dom[camelId] = document.getElementById(id);
+        });
+    }
 
-    Object.keys(languages).forEach(key => {
-        const option = document.createElement('option');
-        option.value = key;
-        option.textContent = languages[key].name;
-        fragment.appendChild(option);
-    });
+    bindEvents() {
+        this.dom.contentGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            if (card) this.openPost(card.dataset.file);
+        });
 
-    this.dom.langSelect.innerHTML = '';
-    this.dom.langSelect.appendChild(fragment);
-    this.dom.langSelect.value = this.state.lang;
-}
+        this.dom.themeSelect.addEventListener('change', () => {
+            this.state.theme = this.dom.themeSelect.value;
+            localStorage.setItem('aoi_theme', this.state.theme);
+            this.applyTheme();
+        });
 
-applyLanguage() {
-    const dict = languages[this.state.lang];
+        this.dom.langSelect.addEventListener('change', () => {
+            this.state.lang = this.dom.langSelect.value;
+            localStorage.setItem('aoi_lang', this.state.lang);
+            this.applyLanguage();
+            this.renderPosts(); // Re-render để cập nhật text trong card
+        });
 
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (dict[key]) el.textContent = dict[key];
-    });
-}
+        this.dom.bgToggle.addEventListener('change', () => {
+            this.state.bg = this.dom.bgToggle.checked;
+            localStorage.setItem('aoi_bg', this.state.bg);
+            this.applyTheme();
+        });
 
-renderPosts() {
-    const fragment = document.createDocumentFragment();
-    const dict = languages[this.state.lang];
+        this.dom.settingsBtn.addEventListener('click', () => this.toggleDrawer(true));
+        this.dom.menuBtn.addEventListener('click', () => this.toggleDrawer(true));
+        this.dom.overlay.addEventListener('click', () => this.toggleDrawer(false));
+        this.dom.closeViewer.addEventListener('click', () => this.closeViewer());
+    }
 
-    posts.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.dataset.file = item.file;
+    initSettings() {
+        this.dom.themeSelect.value = this.state.theme;
+        this.dom.bgToggle.checked = this.state.bg;
+        this.dom.langSelect.value = this.state.lang;
+    }
 
-        card.innerHTML = `
-            <img src="${item.thumb}" class="card-img" loading="lazy"
-                 onerror="this.src='./assets/img/fallback.webp'">
-            <div class="card-info">
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-                <button class="btn">${dict.detail_btn}</button>
+    applyTheme() {
+        document.body.className = `theme-${this.state.theme}`;
+        if (this.state.bg) document.body.classList.add('show-bg');
+    }
+
+    renderLanguageOptions() {
+        this.dom.langSelect.innerHTML = Object.keys(languages)
+            .map(key => `<option value="${key}">${languages[key].name}</option>`)
+            .join('');
+    }
+
+    applyLanguage() {
+        const dict = languages[this.state.lang];
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (dict[key]) el.textContent = dict[key];
+        });
+    }
+
+    renderPosts() {
+        const dict = languages[this.state.lang];
+        this.dom.contentGrid.innerHTML = posts.map(item => `
+            <div class="card" data-file="${item.file}">
+                <img src="${item.thumb}" class="card-img" loading="lazy" onerror="this.src='./assets/img/fallback.webp'">
+                <div class="card-info">
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                    <button class="btn">${dict.detail_btn}</button>
+                </div>
             </div>
-        `;
-
-        fragment.appendChild(card);
-    });
-
-    this.dom.grid.innerHTML = '';
-    this.dom.grid.appendChild(fragment);
-}
-
-async openPost(file) {
-    this.dom.loader.style.width = '40%';
-
-    try {
-        const res = await fetch(`content/${file}`);
-        this.dom.loader.style.width = '80%';
-
-        const text = await res.text();
-
-        this.dom.viewerContent.innerHTML = parseMarkdown(text);
-        this.dom.viewer.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    } catch {
-        alert('Load failed');
+        `).join('');
     }
 
-    requestAnimationFrame(() => {
-        this.dom.loader.style.width = '0';
-    });
-}
+    async openPost(file) {
+        this.dom.loader.style.width = '40%';
+        try {
+            const res = await fetch(`./content/${file}`);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            this.dom.viewerContent.innerHTML = parseMarkdown(text);
+            this.dom.viewer.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            this.dom.loader.style.width = '100%';
+        } catch {
+            alert('Không thể tải nội dung!');
+        }
+        setTimeout(() => { this.dom.loader.style.width = '0'; }, 300);
+    }
 
-closeViewer() {
-    this.dom.viewer.classList.add('hidden');
-    document.body.style.overflow = '';
-}
+    closeViewer() {
+        this.dom.viewer.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
 
-toggleDrawer(open) {
-    this.dom.settingsDrawer.classList.toggle('show', open);
-    this.dom.overlay.classList.toggle('show', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-}
-
+    toggleDrawer(open) {
+        this.dom.settingsDrawer.classList.toggle('show', open);
+        this.dom.overlay.classList.toggle('show', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
 }
 
 const app = new AoiApp();
 window.addEventListener('DOMContentLoaded', () => app.init());
+ 
