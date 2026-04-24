@@ -1,0 +1,87 @@
+/* =========================
+DARK THEME (Default)
+========================= */
+:root {
+--bg: #0b0b0c;
+--surface: rgba(255, 255, 255, 0.04);
+--border: rgba(255, 255, 255, 0.08);
+
+--text-main: #f5f5f7;
+--text-sub: #8e8e93;
+
+--accent: #7c7cff;
+
+}
+
+/* =========================
+LIGHT THEME
+========================= */
+.theme-light {
+--bg: #f5f5f7;
+--surface: rgba(0, 0, 0, 0.03);
+--border: rgba(0, 0, 0, 0.08);
+
+--text-main: #1c1c1e;
+--text-sub: #6e6e73;
+
+--accent: #5a67ff;
+
+}
+
+/* =========================
+GLOBAL BACKGROUND CONTROL
+========================= */
+body {
+background-color: var(--bg);
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =========================
+SUBTLE GLOW (Premium feel)
+========================= */
+.card:hover {
+box-shadow:
+0 8px 20px rgba(0, 0, 0, 0.25),
+0 0 0 1px var(--border);
+}
+
+/* =========================
+BUTTON ACCENT TOUCH
+========================= */
+.btn {
+color: var(--accent);
+}
+
+/* =========================
+SELECTION COLOR
+========================= */
+::selection {
+background: var(--accent);
+color: #fff;
+}
+
+/* =========================
+SMOOTH TRANSITIONS
+========================= */
+
+* {
+  transition:
+  background-color 0.25s ease,
+  color 0.25s ease,
+  border-color 0.25s ease;
+  }
+
+/* =========================
+MOBILE PERFORMANCE TUNING
+========================= */
+@media (max-width: 768px) {
+.viewer {
+backdrop-filter: blur(20px);
+}
+
+.drawer {
+    backdrop-filter: blur(16px);
+}
+
+}
+ 
