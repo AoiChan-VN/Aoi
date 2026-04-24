@@ -90,11 +90,12 @@ class AoiApp {
         const dict = languages[this.state.lang];
         this.dom.contentGrid.innerHTML = posts.map(item => `
             <div class="card" data-file="${item.file}">
-                <img src="${item.thumb}" class="card-img" loading="lazy" onerror="this.src='./assets/img/fallback.webp'">
+                <img src="${item.thumb}" class="card-img" loading="lazy" 
+                     onerror="this.src='https://placeholder.com'">
                 <div class="card-info">
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
-                    <button class="btn">${dict.detail_btn}</button>
+                    <div class="btn">${dict.detail_btn}</div>
                 </div>
             </div>
         `).join('');
