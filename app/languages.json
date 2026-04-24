@@ -1,0 +1,30 @@
+{
+    "vi": {
+        "setting_title": "【 Cài đặt 】",
+        "lang_label": "Ngôn ngữ",
+        "bg_label": "Ảnh nền",
+        "theme_label": "Giao diện",
+        "theme_dark": "Tối",
+        "theme_light": "Sáng",
+        "detail_btn": "Chi tiết"
+    },
+    "en": {
+        "setting_title": "【 Settings 】",
+        "lang_label": "Language",
+        "bg_label": "Background",
+        "theme_label": "Appearance",
+        "theme_dark": "Dark",
+        "theme_light": "Light",
+        "detail_btn": "Detail"
+    },
+    "ja": {
+        "setting_title": "【 設定 】",
+        "lang_label": "言語",
+        "bg_label": "背景",
+        "theme_label": "テーマ",
+        "theme_dark": "ダーク",
+        "theme_light": "ライト",
+        "detail_btn": "詳細"
+    }
+}
+ 
