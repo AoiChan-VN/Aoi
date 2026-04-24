@@ -33,10 +33,8 @@ cacheDOM() {
     this.dom.viewerContent = document.getElementById('viewer-content');
     this.dom.overlay = document.getElementById('overlay');
     this.dom.settingsDrawer = document.getElementById('settings-drawer');
-
-    this.dom.menuBtn = document.getElementById('menu-btn');
-    this.dom.settingsBtn = document.getElementById('settings-btn');
     this.dom.closeViewer = document.getElementById('close-viewer');
+    this.dom.settingsBtn = document.getElementById('settings-btn');
 }
 
 bindEvents() {
@@ -65,18 +63,9 @@ bindEvents() {
         this.applyTheme();
     });
 
-    this.dom.settingsBtn.addEventListener('click', () => {
-        this.toggleDrawer(true);
-    });
-
-    this.dom.overlay.addEventListener('click', () => {
-        this.toggleDrawer(false);
-        this.closeViewer();
-    });
-
-    this.dom.closeViewer.addEventListener('click', () => {
-        this.closeViewer();
-    });
+    this.dom.settingsBtn.addEventListener('click', () => this.toggleDrawer(true));
+    this.dom.overlay.addEventListener('click', () => this.toggleDrawer(false));
+    this.dom.closeViewer.addEventListener('click', () => this.closeViewer());
 }
 
 initSettings() {
@@ -86,7 +75,6 @@ initSettings() {
 
 applyTheme() {
     document.body.className = '';
-
     document.body.classList.add(`theme-${this.state.theme}`);
 
     if (this.state.bg) {
@@ -97,7 +85,7 @@ applyTheme() {
 renderLanguageOptions() {
     const fragment = document.createDocumentFragment();
 
-    Object.keys(languages).forEach((key) => {
+    Object.keys(languages).forEach(key => {
         const option = document.createElement('option');
         option.value = key;
         option.textContent = languages[key].name;
@@ -114,9 +102,7 @@ applyLanguage() {
 
     document.querySelectorAll('[data-key]').forEach(el => {
         const key = el.getAttribute('data-key');
-        if (dict[key]) {
-            el.textContent = dict[key];
-        }
+        if (dict[key]) el.textContent = dict[key];
     });
 }
 
@@ -130,12 +116,8 @@ renderPosts() {
         card.dataset.file = item.file;
 
         card.innerHTML = `
-            <img 
-                src="${item.thumb}" 
-                class="card-img" 
-                loading="lazy" 
-                decoding="async"
-            >
+            <img src="${item.thumb}" class="card-img" loading="lazy"
+                 onerror="this.src='./assets/img/fallback.webp'">
             <div class="card-info">
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
@@ -151,18 +133,18 @@ renderPosts() {
 }
 
 async openPost(file) {
-    this.dom.loader.style.width = '30%';
+    this.dom.loader.style.width = '40%';
 
     try {
-        const res = await fetch(`./content/${file}`);
-        this.dom.loader.style.width = '70%';
+        const res = await fetch(`content/${file}`);
+        this.dom.loader.style.width = '80%';
 
         const text = await res.text();
-        this.dom.loader.style.width = '100%';
 
         this.dom.viewerContent.innerHTML = parseMarkdown(text);
         this.dom.viewer.classList.remove('hidden');
-    } catch (e) {
+        document.body.style.overflow = 'hidden';
+    } catch {
         alert('Load failed');
     }
 
@@ -173,22 +155,16 @@ async openPost(file) {
 
 closeViewer() {
     this.dom.viewer.classList.add('hidden');
+    document.body.style.overflow = '';
 }
 
 toggleDrawer(open) {
-    if (open) {
-        this.dom.settingsDrawer.classList.add('show');
-        this.dom.overlay.classList.add('show');
-    } else {
-        this.dom.settingsDrawer.classList.remove('show');
-        this.dom.overlay.classList.remove('show');
-    }
+    this.dom.settingsDrawer.classList.toggle('show', open);
+    this.dom.overlay.classList.toggle('show', open);
+    document.body.style.overflow = open ? 'hidden' : '';
 }
 
 }
 
 const app = new AoiApp();
-
-window.addEventListener('DOMContentLoaded', () => {
-app.init();
-});
+window.addEventListener('DOMContentLoaded', () => app.init());
