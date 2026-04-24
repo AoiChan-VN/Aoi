@@ -25,7 +25,7 @@ text-rendering: optimizeLegibility;
 /* Background */
 body.show-bg {
 background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.6)),
-url('../assets/img/bg.webp');
+url('../assets/img/Theme.webp');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
