@@ -1,4 +1,6 @@
-# Hướng dẫn
+<div align="center">
+  〖Hướng dẫn〗
+</div>
 
 〈 dành cho người mới 〉
 > 1. Download plugin về máy.
