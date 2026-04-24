@@ -1,0 +1,26 @@
+[
+  {
+    "title": "🍒〈Aoi〉 📦Plugin",
+    "desc": "➥Plugins Server Minecraft.",
+    "thumb": "assets/",
+    "file": "plugin.md"
+  },
+  {
+    "title": "🔧〈Cập nhập〉",
+    "desc": "➥Những nâng cấp và thay đổi mới...",
+    "thumb": "assets/",
+    "file": "update.md"
+  },
+  {
+    "title": "📢〈Thông báo〉",
+    "desc": "➥🤷",
+    "thumb": "assets/",
+    "file": "broadcast.md"
+  },
+  {
+    "title": "📚〈Hướng dẫn〉",
+    "desc": "➥Tài liệu hướng dẫn của 𝓐𝓸𝓲𝓒𝓱𝓪𝓷❤.",
+    "thumb": "assets/",
+    "file": "info.md"
+  }
+] 
