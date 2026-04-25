@@ -11,6 +11,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   aoichan:
     name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
@@ -25,13 +28,13 @@ jobs:
       - uses: actions/configure-pages@v5
 
       - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: .
           
       - name: Triển khai ➺【GitHub Pages】
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
         run: |
