@@ -2,7 +2,7 @@
 .top-bar { position: fixed; top: 0; left: 0; width: 100%; height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; z-index: 100; background: var(--surface); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
 .nav-left { display: flex; align-items: center; gap: 12px; }
 
-/* Nav */
+/* Nút 3 gạch bo góc kiểu GitHub */
 .nav-btn {
     width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
     font-size: 20px; border: 1px solid var(--border); border-radius: 6px;
@@ -30,41 +30,55 @@
 }
 .card:hover .btn { background: var(--accent); color: #fff !important; }
 
-/* Drawer bo góc & Logo đồng bộ */
+/* Overlay (Màn hình xám mờ) */
+.overlay { 
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+    display: none; z-index: 500; /* Thấp hơn Drawer */
+    backdrop-filter: blur(4px); 
+}
+.overlay.show { display: block; }
+
+/* Drawer (Menu Trái) - QUAN TRỌNG: z-index phải cao hơn overlay */
 .drawer.left { 
-    left: 0; width: 280px; border-right: 1px solid var(--border); transform: translateX(-100%); 
+    position: fixed; top: 0; left: 0; 
+    width: 280px; height: 100%;
+    background: var(--bg); /* Dùng màu nền chính để không bị trong suốt quá */
+    border-right: 1px solid var(--border); 
+    transform: translateX(-100%); 
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000; /* Cao nhất để nổi lên trên lớp xám */
     border-top-right-radius: 16px; border-bottom-right-radius: 16px;
+    display: flex; flex-direction: column;
 }
 .drawer.show { transform: translateX(0); }
+
 .menu-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .avatar-mini { width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 1px solid var(--border); }
 .avatar-mini img { width: 100%; height: 100%; object-fit: cover; }
 .close-btn-mini { font-size: 20px; cursor: pointer; color: var(--text-sub); background: none; border: none; padding: 5px; }
 
-.menu-links { padding: 10px; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.menu-links { padding: 10px; flex: 1; display: flex; flex-direction: column; gap: 5px; overflow-y: auto; }
 .menu-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; font-size: 0.9rem; border:none; background:none; color:inherit; cursor:pointer; text-align:left; width: 100%; }
-.menu-item:hover { background: var(--border); }
+.menu-item:hover { background: var(--surface); }
 .divider { border: none; border-top: 1px solid var(--border); margin: 10px 15px; opacity: 0.3; }
 
 /* Settings Sub-Panel */
-.settings-sub { padding: 10px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); }
+.settings-sub { padding: 10px; background: var(--surface); border-top: 1px solid var(--border); }
 .settings-sub.hidden { display: none; }
 .setting { padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
 .select { padding: 4px 8px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--text-main); font-family: inherit; }
 .menu-footer { padding: 20px; text-align: center; font-size: 0.75rem; color: var(--text-sub); font-weight: 500; }
 
-/* Viewer Center Content */
+/* Viewer */
+.viewer { position: fixed; inset: 0; background: var(--bg); padding: 60px 20px; overflow-y: auto; z-index: 1500; }
+.viewer.hidden { display: none; }
+.close-btn { position: fixed; top: 15px; right: 15px; font-size: 26px; cursor: pointer; color: var(--text-sub); background: none; border: none; z-index: 1600; }
 .viewer-content { text-align: center; max-width: 720px; margin: 0 auto; line-height: 1.7; }
 .viewer-content h1, .viewer-content h2, .viewer-content p { text-align: center; }
 .viewer-content img { display: block; margin: 20px auto; border-radius: 12px; max-width: 100%; }
 .viewer-content pre { text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0; }
 
-/* Global Elements */
-.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 150; backdrop-filter: blur(4px); }
-.overlay.show { display: block; }
-.viewer { position: fixed; inset: 0; background: var(--bg); padding: 60px 20px; overflow-y: auto; z-index: 300; }
-.viewer.hidden { display: none; }
-.close-btn { position: fixed; top: 15px; right: 15px; font-size: 26px; cursor: pointer; color: var(--text-sub); background: none; border: none; z-index: 310; }
+/* Switch Toggle */
 .switch { position: relative; width: 34px; height: 18px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; inset: 0; background: #555; border-radius: 20px; transition: 0.3s; cursor: pointer; }
