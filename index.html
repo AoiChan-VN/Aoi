@@ -37,24 +37,24 @@
         </div>
         
         <div class="menu-links">
-            <button class="menu-item">🏠 Home</button>
-            <button class="menu-item">📚 Docs</button>
+            <button class="menu-item">🏠〈Trang chủ〉</button>
+            <button class="menu-item">ⓘ〈Thông tin〉</button>
             <hr class="divider">
             <button id="open-settings-sub" class="menu-item">
-                ⚙️ <span data-key="setting_title">〈Cài đặt〉</span>
+                <span data-key="setting_title">⚙〈Cài đặt〉</span>
             </button>
         </div>
 
         <div id="settings-sub-panel" class="settings-sub hidden">
             <div class="setting">
-                <label data-key="lang_label">〈Ngôn ngữ〉</label>
+                <label data-key="lang_label">🌏〈Ngôn ngữ〉</label>
                 <select id="lang-select" class="select"></select>
             </div>
             <div class="setting">
-                <label data-key="theme_label">〈Giao diện〉</label>
+                <label data-key="theme_label">🖥〈Giao diện〉</label>
                 <select id="theme-select" class="select">
-                    <option value="dark">︵»𝓓𝓪𝓻𝓴︵</option>
-                    <option value="light">︵»𝓛𝓲𝓰𝓱𝓽︵</option>
+                    <option value="dark">👻︵»𝓓𝓪𝓻𝓴︵</option>
+                    <option value="light">🌤️︵»𝓛𝓲𝓰𝓱𝓽︵</option>
                 </select>
             </div>
             <div class="setting">
@@ -65,7 +65,7 @@
                 </label>
             </div>
             <div class="menu-footer">
-                <p>𝓐𝓸𝓲𝓒𝓱𝓪𝓷 © 2026</p>
+                <p>︵»𝓐𝓸𝓲𝓒𝓱𝓪𝓷 © 2026«︵</p>
             </div>
         </div>
     </aside>
@@ -73,8 +73,13 @@
     <div id="overlay" class="overlay"></div>
 
     <div id="viewer" class="viewer hidden">
-        <button id="close-viewer" class="close-btn">✕</button>
-        <div id="viewer-content" class="viewer-content"></div>
+        <div class="viewer-window">
+            <div id="viewer-header" class="viewer-header">
+                <span class="viewer-title">📖〈Bài viết〉</span>
+                <button id="close-viewer" class="close-btn-modal">✘</button>
+            </div>
+            <div id="viewer-content" class="viewer-content"></div>
+        </div>
     </div>
 
     <script type="module" src="./core/app.js"></script>
