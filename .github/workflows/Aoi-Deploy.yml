@@ -21,7 +21,7 @@ jobs:
     
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
 
       - name: Artifacts ➺ Deploy
@@ -34,11 +34,15 @@ jobs:
         uses: actions/deploy-pages@v4
         
       - name: 🗑️ 𝐎𝐋𝐃 deployment
-        uses: strumwolf/delete-deployment-environment@v3
-        with:
-          token: ${{ secrets.AOI_ACTIONS }}
-          environment: github-pages
-          onlyRemoveDeployments: true
+        run: |
+          gh api repos/${{ github.repository }}/deployments \
+            --jq '.[] | select(.environment=="github-pages") | .id' \
+            | while read id; do
+                echo "🗑️ deleting deployment $id"
+                gh api repos/${{ github.repository }}/deployments/$id -X DELETE
+              done
+        env:
+          GH_TOKEN: ${{ secrets.AOI_ACTIONS }} 
         
       - name: 🗑️ 𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
         run: |
