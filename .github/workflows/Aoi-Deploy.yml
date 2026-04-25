@@ -1,8 +1,9 @@
 name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡ ωєв
 
 on:
-  # push:
-    # branches: ["main"]
+  push:
+    branches: ["main"]
+    
   workflow_dispatch:
 
 permissions:
@@ -24,11 +25,11 @@ jobs:
     
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
 
       - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
           
