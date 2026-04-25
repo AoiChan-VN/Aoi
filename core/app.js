@@ -21,7 +21,7 @@ class AoiApp {
         this.renderLanguageOptions();
         this.applyLanguage();
         this.renderPosts();
-        this.initDraggable(); // Kích hoạt tính năng kéo bảng
+        this.initDraggable();
     }
 
     cacheDOM() {
@@ -43,7 +43,6 @@ class AoiApp {
             openSettingsSub: 'open-settings-sub',
             settingsSubPanel: 'settings-sub-panel'
         };
-
         for (const [key, id] of Object.entries(elements)) {
             this.dom[key] = typeof id === 'string' ? document.getElementById(id) : id;
         }
@@ -54,11 +53,8 @@ class AoiApp {
         this.dom.closeMenu.onclick = () => this.toggleMenu(false);
         this.dom.overlay.onclick = () => this.toggleMenu(false);
         this.dom.closeViewer.onclick = () => this.closeViewer();
+        this.dom.openSettingsSub.onclick = () => this.dom.settingsSubPanel.classList.toggle('hidden');
         
-        this.dom.openSettingsSub.onclick = () => {
-            this.dom.settingsSubPanel.classList.toggle('hidden');
-        };
-
         this.dom.themeSelect.onchange = () => {
             this.state.theme = this.dom.themeSelect.value;
             localStorage.setItem('aoi_theme', this.state.theme);
@@ -84,49 +80,60 @@ class AoiApp {
         };
     }
 
-    // Tính năng kéo bảng bài viết (Drag & Drop)
+    async openPost(file) {
+        this.dom.loader.style.width = '40%';
+        try {
+            const res = await fetch(`./content/${file}`);
+            if (!res.ok) throw new Error("👻「404」");
+
+            const text = await res.text();
+            this.dom.viewerContent.innerHTML = parseMarkdown(text);
+            
+            // Reset vị trí bảng về trung tâm
+            this.dom.viewerWindow.style.left = '50%';
+            this.dom.viewerWindow.style.top = '50%';
+            this.dom.viewerWindow.style.transform = 'translate(-50%, -50%)';
+            
+            this.dom.viewer.classList.remove('hidden');
+        } catch (err) {
+            alert('📖 〈 Dữ liệu không tồn tại 〉');
+        }
+        this.dom.loader.style.width = '0';
+    }
+
+    closeViewer() {
+        this.dom.viewer.classList.add('hidden');
+    }
+
     initDraggable() {
         const header = this.dom.viewerHeader;
-        const windowEl = this.dom.viewerWindow;
-        if (!header || !windowEl) return;
+        const win = this.dom.viewerWindow;
+        if (!header || !win) return;
 
-        let isDragging = false;
-        let offset = { x: 0, y: 0 };
+        let isDragging = false, offset = { x: 0, y: 0 };
 
-        const startDragging = (e) => {
+        const start = (e) => {
             if (e.target.closest('.close-btn-modal')) return;
             isDragging = true;
-            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-            
-            offset.x = clientX - windowEl.offsetLeft;
-            offset.y = clientY - windowEl.offsetTop;
+            const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            offset.x = cx - win.offsetLeft;
+            offset.y = cy - win.offsetTop;
             header.style.cursor = 'grabbing';
         };
 
-        const drag = (e) => {
+        const move = (e) => {
             if (!isDragging) return;
-            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-
-            windowEl.style.position = 'absolute';
-            windowEl.style.margin = '0';
-            windowEl.style.left = (clientX - offset.x) + 'px';
-            windowEl.style.top = (clientY - offset.y) + 'px';
+            const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            win.style.left = cx - offset.x + 'px';
+            win.style.top = cy - offset.y + 'px';
         };
 
-        const stopDragging = () => {
-            isDragging = false;
-            header.style.cursor = 'move';
-        };
+        const stop = () => { isDragging = false; header.style.cursor = 'move'; };
 
-        header.onmousedown = startDragging;
-        document.onmousemove = drag;
-        document.onmouseup = stopDragging;
-
-        header.ontouchstart = startDragging;
-        document.ontouchmove = drag;
-        document.ontouchend = stopDragging;
+        header.onmousedown = start; document.onmousemove = move; document.onmouseup = stop;
+        header.ontouchstart = start; document.ontouchmove = move; document.ontouchend = stop;
     }
 
     applyTheme() {
@@ -163,35 +170,9 @@ class AoiApp {
         `).join('');
     }
 
-    async openPost(file) {
-        this.dom.loader.style.width = '40%';
-        try {
-            const res = await fetch(`./content/${file}`);
-            if (!res.ok) throw new Error("Không tìm thấy tập tin");
-            const text = await res.text();
-            this.dom.viewerContent.innerHTML = parseMarkdown(text);
-            this.dom.viewer.classList.remove('hidden');
-            // Reset vị trí bảng về giữa khi mở bài mới
-            this.dom.viewerWindow.style.left = '50%';
-            this.dom.viewerWindow.style.top = '50%';
-            this.dom.viewerWindow.style.transform = 'translate(-50%, -50%)';
-            this.dom.wiewerWindow.style.position = 'fixed';
-            
-        } catch (error) {
-            console.error("Aoi Error:", error);
-            alert('🍒: Không thể tải bài viết (Dữ liệu không tồn tại)!');
-        }
-        this.dom.loader.style.width = '0';
-    }
-
-    closeViewer() {
-        this.dom.viewer.classList.add('hidden');
-    }
-
     toggleMenu(open) {
         this.dom.menuLeft.classList.toggle('show', open);
         this.dom.overlay.classList.toggle('show', open);
-        document.body.style.overflow = open ? 'hidden' : '';
         if(!open) this.dom.settingsSubPanel.classList.add('hidden');
     }
 
@@ -203,3 +184,4 @@ class AoiApp {
 
 const app = new AoiApp();
 window.addEventListener('DOMContentLoaded', () => app.init());
+ 
