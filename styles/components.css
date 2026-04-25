@@ -50,23 +50,26 @@
 
 /* Viewer - Cửa sổ nổi */
 .viewer { 
-    position: fixed; inset: 0;
+    position: fixed; 
+    top: 0; left: 0; width: 100vw; height: 100vh;
     pointer-events: none;
-    display: flex; align-items: center; justify-content: center; 
+    display: flex;
+    align-items: center; justify-content: center; 
     z-index: 1500;
-    padding: 20px;
 }
 
 .viewer-window {
     pointer-events: auto;
-    width: 100%; max-width: 450px;
-    max-height: 70vh; 
+    width: 90%; max-width: 450px;
+    max-height: 75vh; 
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 16px; 
     display: flex; flex-direction: column;
     box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    position: relative;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50, -50);
 }
 
 /* Thanh tiêu đề (Visual) */
@@ -106,3 +109,8 @@
 .slider::before { content: ""; position: absolute; width: 12px; height: 12px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.3s; }
 .switch input:checked + .slider { background: var(--accent); }
 .switch input:checked + .slider::before { transform: translateX(16px); }
+
+@media (max-width: 480px) {
+    .viewer { background: none; }
+    .viewer-window { width: 95%; max-height: 80vh; }
+}
