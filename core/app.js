@@ -14,7 +14,7 @@ class AoiApp {
 
     init() {
         this.cacheDOM();
-        if (!this.dom.contentGrid) return; // Bảo vệ nếu DOM chưa sẵn sàng
+        if (!this.dom.contentGrid) return;
         this.bindEvents();
         this.initSettings();
         this.applyTheme();
@@ -24,7 +24,6 @@ class AoiApp {
     }
 
     cacheDOM() {
-        // Danh sách ID chính xác tuyệt đối từ HTML
         const elements = {
             contentGrid: 'content-grid',
             loader: 'loader',
@@ -41,7 +40,6 @@ class AoiApp {
             openSettingsSub: 'open-settings-sub',
             settingsSubPanel: 'settings-sub-panel'
         };
-
         for (const [key, id] of Object.entries(elements)) {
             this.dom[key] = document.getElementById(id);
         }
@@ -52,30 +50,23 @@ class AoiApp {
         this.dom.closeMenu.onclick = () => this.toggleMenu(false);
         this.dom.overlay.onclick = () => this.toggleMenu(false);
         this.dom.closeViewer.onclick = () => this.closeViewer();
-        
-        this.dom.openSettingsSub.onclick = () => {
-            this.dom.settingsSubPanel.classList.toggle('hidden');
-        };
-
+        this.dom.openSettingsSub.onclick = () => this.dom.settingsSubPanel.classList.toggle('hidden');
         this.dom.themeSelect.onchange = () => {
             this.state.theme = this.dom.themeSelect.value;
             localStorage.setItem('aoi_theme', this.state.theme);
             this.applyTheme();
         };
-
         this.dom.langSelect.onchange = () => {
             this.state.lang = this.dom.langSelect.value;
             localStorage.setItem('aoi_lang', this.state.lang);
             this.applyLanguage();
             this.renderPosts();
         };
-
         this.dom.bgToggle.onchange = () => {
             this.state.bg = this.dom.bgToggle.checked;
             localStorage.setItem('aoi_bg', this.state.bg);
             this.applyTheme();
         };
-
         this.dom.contentGrid.onclick = (e) => {
             const card = e.target.closest('.card');
             if (card) this.openPost(card.dataset.file);
