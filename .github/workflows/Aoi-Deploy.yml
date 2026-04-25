@@ -1,8 +1,8 @@
 name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡ ωєв
 
 on:
-  push:
-    branches: ["main"]
+  # push:
+    # branches: ["main"]
   workflow_dispatch:
 
 permissions:
