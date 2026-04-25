@@ -14,7 +14,7 @@ class AoiApp {
 
     init() {
         this.cacheDOM();
-        if (!this.dom.contentGrid) return;
+        if (!this.dom.contentGrid) return; 
         this.bindEvents();
         this.initSettings();
         this.applyTheme();
@@ -24,6 +24,7 @@ class AoiApp {
     }
 
     cacheDOM() {
+        // Danh sách ID khớp 100% với file HTML mới của anh
         const elements = {
             contentGrid: 'content-grid',
             loader: 'loader',
@@ -40,33 +41,51 @@ class AoiApp {
             openSettingsSub: 'open-settings-sub',
             settingsSubPanel: 'settings-sub-panel'
         };
+
         for (const [key, id] of Object.entries(elements)) {
             this.dom[key] = document.getElementById(id);
         }
     }
 
     bindEvents() {
-        this.dom.menuBtn.onclick = () => this.toggleMenu(true);
-        this.dom.closeMenu.onclick = () => this.toggleMenu(false);
-        this.dom.overlay.onclick = () => this.toggleMenu(false);
-        this.dom.closeViewer.onclick = () => this.closeViewer();
-        this.dom.openSettingsSub.onclick = () => this.dom.settingsSubPanel.classList.toggle('hidden');
+        // Điều khiển Menu Trái
+        if (this.dom.menuBtn) this.dom.menuBtn.onclick = () => this.toggleMenu(true);
+        if (this.dom.closeMenu) this.dom.closeMenu.onclick = () => this.toggleMenu(false);
+        if (this.dom.overlay) this.dom.overlay.onclick = () => this.toggleMenu(false);
+        
+        // Mở bảng Cài đặt con trong Menu
+        if (this.dom.openSettingsSub) {
+            this.dom.openSettingsSub.onclick = () => {
+                this.dom.settingsSubPanel.classList.toggle('hidden');
+            };
+        }
+
+        // Đóng trình xem bài viết
+        if (this.dom.closeViewer) this.dom.closeViewer.onclick = () => this.closeViewer();
+
+        // Thay đổi Giao diện
         this.dom.themeSelect.onchange = () => {
             this.state.theme = this.dom.themeSelect.value;
             localStorage.setItem('aoi_theme', this.state.theme);
             this.applyTheme();
         };
+
+        // Thay đổi Ngôn ngữ
         this.dom.langSelect.onchange = () => {
             this.state.lang = this.dom.langSelect.value;
             localStorage.setItem('aoi_lang', this.state.lang);
             this.applyLanguage();
-            this.renderPosts();
+            this.renderPosts(); // Cập nhật lại nút "Chi tiết" theo ngôn ngữ mới
         };
+
+        // Bật/Tắt Ảnh nền
         this.dom.bgToggle.onchange = () => {
             this.state.bg = this.dom.bgToggle.checked;
             localStorage.setItem('aoi_bg', this.state.bg);
             this.applyTheme();
         };
+
+        // Bấm vào Card để mở bài viết
         this.dom.contentGrid.onclick = (e) => {
             const card = e.target.closest('.card');
             if (card) this.openPost(card.dataset.file);
@@ -111,12 +130,16 @@ class AoiApp {
         this.dom.loader.style.width = '40%';
         try {
             const res = await fetch(`./content/${file}`);
+            if (!res.ok) throw new Error();
             const text = await res.text();
             this.dom.viewerContent.innerHTML = parseMarkdown(text);
             this.dom.viewer.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-        } catch { alert('Load failed'); }
-        this.dom.loader.style.width = '0';
+            this.dom.loader.style.width = '100%';
+        } catch { 
+            alert('Không thể tải bài viết!'); 
+        }
+        setTimeout(() => { this.dom.loader.style.width = '0'; }, 300);
     }
 
     closeViewer() {
@@ -128,6 +151,7 @@ class AoiApp {
         this.dom.menuLeft.classList.toggle('show', open);
         this.dom.overlay.classList.toggle('show', open);
         document.body.style.overflow = open ? 'hidden' : '';
+        // Đóng luôn bảng cài đặt khi thoát menu để lần sau mở lại cho gọn
         if(!open) this.dom.settingsSubPanel.classList.add('hidden');
     }
 
@@ -139,4 +163,3 @@ class AoiApp {
 
 const app = new AoiApp();
 window.addEventListener('DOMContentLoaded', () => app.init());
- 
