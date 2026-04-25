@@ -32,10 +32,14 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 
-/* Mobile fix */
-@media (max-width: 768px) {
+/* Mobile */
+@media (max-width: 480px) {
 body.show-bg {
 background-attachment: scroll;
+}
+.grid {
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
 }
 }
 
@@ -118,12 +122,13 @@ display: flex;
 justify-content: center;
 }
 
-/* Grid */
+/* Grid *//* Chuyển sang chế độ lưới ô */
 .grid {
 width: 100%;
-max-width: 680px;
-display: flex;
-flex-direction: column;
-gap: 12px;
-}
- 
+max-width: 800px; /* Tăng nhẹ chiều ngang tổng thể */
+display: grid;
+/* Tự động chia cột: tối thiểu 160px mỗi ô */
+grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+gap: 16px;
+padding: 10px;
+} 
