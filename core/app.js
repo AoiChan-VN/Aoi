@@ -167,21 +167,25 @@ class AoiApp {
         this.dom.loader.style.width = '40%';
         try {
             const res = await fetch(`./content/${file}`);
+            if (!res.ok) throw new Error("Không tìm thấy tập tin");
             const text = await res.text();
             this.dom.viewerContent.innerHTML = parseMarkdown(text);
             this.dom.viewer.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
             // Reset vị trí bảng về giữa khi mở bài mới
             this.dom.viewerWindow.style.left = '50%';
             this.dom.viewerWindow.style.top = '50%';
             this.dom.viewerWindow.style.transform = 'translate(-50%, -50%)';
-        } catch { alert('Load failed'); }
+            this.dom.wiewerWindow.style.position = 'fixed';
+            
+        } catch (error) {
+            console.error("Aoi Error:", error);
+            alert('🍒: Không thể tải bài viết (Dữ liệu không tồn tại)!');
+        }
         this.dom.loader.style.width = '0';
     }
 
     closeViewer() {
         this.dom.viewer.classList.add('hidden');
-        document.body.style.overflow = '';
     }
 
     toggleMenu(open) {
