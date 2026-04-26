@@ -50,7 +50,7 @@ class AoiApp {
         document.querySelectorAll('.menu-item')[1].onclick = () => {
             this.toggleMenu(false);
             const dict = languages[this.state.lang];
-            this.popup.open('ⓘ Info', `<div style="text-align:center"><h3>AoiChan App</h3><p>© 2026</p></div>`);
+            this.popup.open('ⓘ Thông tin', `<div style="text-align:center"><h3>︵»𝓐𝓸𝓲𝓒𝓱𝓪𝓷«︵</h3><p>「© 2026」</p></div>`);
         };
 
         this.dom.contentGrid.onclick = (e) => {
@@ -110,7 +110,7 @@ class AoiApp {
             const text = await res.ok ? await res.text() : '## 👻 Error 404\nFile not found.';
             this.popup.open(title, parseMarkdown(text));
         } catch {
-            this.popup.open('Error', 'Could not connect to server.');
+            this.popup.open('🐼', 'Could not connect to server.');
         }
         this.dom.loader.style.width = '0';
     }
