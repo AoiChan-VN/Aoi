@@ -1,20 +1,29 @@
 .popup-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-    z-index: 2000; display: flex; align-items: center; justify-content: center;
-    opacity: 0; visibility: hidden; transition: var(--transition);
+    position: fixed; inset: 0; 
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+    z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s;
 }
 .popup-overlay.show { opacity: 1; visibility: visible; }
-.popup-window {
-    width: 90%; max-width: 450px; background: var(--bg); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); overflow: hidden; transform: translateY(20px); transition: var(--transition);
-}
-.popup-overlay.show .popup-window { transform: translateY(0); }
-.popup-header { padding: 14px 20px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.popup-body { padding: 20px; max-height: 70vh; overflow-y: auto; text-align: center; }
 
-/* Markdown Content Styles trong Pop-up */
-.popup-img { max-width: 100%; border-radius: var(--radius-md); margin: 10px 0; display: block; }
-.popup-text { margin-bottom: 12px; color: var(--text-main); font-size: 0.95rem; text-align: left; }
-.popup-quote { border-left: 4px solid var(--accent); background: var(--surface); padding: 10px 15px; margin: 15px 0; font-style: italic; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; text-align: left; }
-.inline-code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--accent); }
-.code-wrapper { background: #1c1c1e; padding: 15px; border-radius: var(--radius-md); overflow-x: auto; margin: 15px 0; text-align: left; border: 1px solid var(--border); }
+.popup-window {
+    position: fixed; z-index: 1100;
+    width: 90%; max-width: 500px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); display: none; flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.popup-header {
+    padding: 15px 20px; background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: move;
+}
+
+.popup-body {
+    padding: 20px; max-height: 75vh; overflow-y: auto;
+}
+
+/* Markdown nội dung */
+.popup-body img { max-width: 100%; border-radius: 10px; margin: 10px 0; }
+.popup-body p { margin-bottom: 15px; line-height: 1.6; }
