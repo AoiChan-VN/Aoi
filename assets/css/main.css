@@ -1,12 +1,7 @@
-/* Core */
 @import "core/theme.css";
 @import "core/base.css";
-
-/* UI / Elements */
 @import "atoms/buttons.css";
 @import "molecules/navbar.css";
 @import "molecules/card.css";
 @import "molecules/drawer.css";
-
-/* Overlay & Modals */
 @import "organisms/popup.css";
