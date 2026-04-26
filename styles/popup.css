@@ -1,26 +1,27 @@
 .popup-wrapper {
     position: fixed; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    z-index: 2000; pointer-events: none;
-    background: rgba(0,0,0,0.0);
-    backdrop-filter: blur(4px);
-    transition: background 0.3s ease;
+    z-index: 2500;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s;
 }
 
-.popup-wrapper:not(hidden) { pointer-events: auto; background: rgba(0,0,0,0.5); }
-.popup-wrapper.hidden { display: none; }
+.popup-wrapper.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none !important;
+}
 
 .popup-window {
-    pointer-events: auto;
-    width: 90%; max-width: 480px;
-    max-height: 85vh;
+    width: 92%; max-width: 460px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 20px;
     display: flex; flex-direction: column;
     overflow: hidden;
     position: absolute;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
 .popup-header {
@@ -35,12 +36,13 @@
 
 .close-btn-modal {
     background: none; border: none; color: var(--text-sub);
-    font-size: 20px; cursor: pointer; transition: 0.2s;
+    font-size: 22px; cursor: pointer;
 }
-.close-btn-modal:hover { color: #ff5f56; }
 
-.popup-content { padding: 25px; overflow-y: auto; flex: 1; line-height: 1.6; }
+.popup-content { padding: 25px; overflow-y: auto; flex: 1; }
 
-/* CSS cho form trong popup */
 .settings-form { display: flex; flex-direction: column; gap: 15px; }
-.setting-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.setting-item { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding-bottom: 12px; border-bottom: 1px solid var(--border); 
+}
