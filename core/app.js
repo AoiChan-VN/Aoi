@@ -10,43 +10,32 @@ class AoiApp {
             bg: localStorage.getItem('aoi_bg') !== 'false',
             lang: localStorage.getItem('aoi_lang') || 'vi'
         };
-        this.dom = {};
         this.popup = null;
     }
 
     init() {
-        this.cacheDOM();
         this.popup = new Popup('main-popup');
         this.bindEvents();
         this.applySettings();
         this.renderPosts();
     }
 
-    cacheDOM() {
-        this.dom.grid = document.getElementById('content-grid');
-        this.dom.loader = document.getElementById('loader');
-        this.dom.menu = document.getElementById('menu-left');
-        this.dom.overlay = document.getElementById('overlay');
-    }
-
     bindEvents() {
         document.getElementById('menu-btn').onclick = () => this.toggleMenu(true);
         document.getElementById('close-menu').onclick = () => this.toggleMenu(false);
-        this.dom.overlay.onclick = () => this.toggleMenu(false);
-
-        // Mở Settings Popup
+        document.getElementById('overlay').onclick = () => this.toggleMenu(false);
+        
         document.getElementById('open-settings-sub').onclick = () => {
             this.toggleMenu(false);
             this.openSettings();
         };
 
-        // Mở Info Popup
         document.getElementById('info-btn').onclick = () => {
             this.toggleMenu(false);
-            this.popup.show('ⓘ Thông tin', '<div style="text-align:center"><h3>𝓐𝓸𝓲𝓒𝓱𝓪𝓷</h3><p>𝓓𝓮𝓼𝓲𝓰𝓷◡𝓫𝓎◡𝓐𝓸𝓲◡₂₀₂₆</p></div>');
+            this.popup.show('ⓘ Thông tin', '<div style="text-align:center"><h3>𝓐𝓸𝓲𝓒𝓱𝓪𝓷</h3><p>Version 2.0</p></div>');
         };
 
-        this.dom.grid.onclick = (e) => {
+        document.getElementById('content-grid').onclick = (e) => {
             const card = e.target.closest('.card');
             if (card) this.loadPost(card.dataset.file, card.querySelector('h3').textContent);
         };
@@ -61,11 +50,17 @@ class AoiApp {
 
         themeSel.value = this.state.theme;
         bgTog.checked = this.state.bg;
-        langSel.innerHTML = Object.keys(languages).map(k => `<option value="${k}" ${k===this.state.lang?'selected':''}>${languages[k].name}</option>`).join('');
+        langSel.innerHTML = Object.keys(languages).map(k => 
+            `<option value="${k}" ${k === this.state.lang ? 'selected' : ''}>${languages[k].name}</option>`
+        ).join('');
 
         themeSel.onchange = (e) => this.update('theme', e.target.value);
         bgTog.onchange = (e) => this.update('bg', e.target.checked);
-        langSel.onchange = (e) => { this.update('lang', e.target.value); this.renderPosts(); this.popup.hide(); };
+        langSel.onchange = (e) => { 
+            this.update('lang', e.target.value); 
+            this.renderPosts(); 
+            this.popup.hide(); 
+        };
 
         this.popup.show(`⚙ ${dict.setting_title}`, temp, false);
     }
@@ -87,20 +82,22 @@ class AoiApp {
     }
 
     async loadPost(file, title) {
-        this.dom.loader.style.width = '70%';
+        const loader = document.getElementById('loader');
+        loader.style.width = '70%';
         try {
             const res = await fetch(`./content/${file}`);
-            const text = res.ok ? await res.text() : '# 👻【404】';
+            const text = res.ok ? await res.text() : '# 404 Not Found';
             this.popup.show(title, parseMarkdown(text));
-        } catch { alert('🥣 Lỗi tải dữ liệu🍂'); }
-        this.dom.loader.style.width = '0';
+        } catch { alert('Lỗi tải dữ liệu'); }
+        loader.style.width = '0';
     }
 
     renderPosts() {
+        const grid = document.getElementById('content-grid');
         const btnText = languages[this.state.lang].detail_btn || 'Xem';
-        this.dom.grid.innerHTML = posts.map(p => `
+        grid.innerHTML = posts.map(p => `
             <div class="card" data-file="${p.file}">
-                <img src="${p.thumb}" class="card-img" onerror="this.src='./assets/img/fallback.png'"> 
+                <img src="${p.thumb}" class="card-img" onerror="this.src='./assets/img/fallback.png'">
                 <div class="card-info">
                     <h3>${p.title}</h3>
                     <p>${p.desc}</p>
@@ -110,8 +107,10 @@ class AoiApp {
         `).join('');
     }
 
-    toggleMenu(s) { this.dom.menu.classList.toggle('show', s); this.dom.overlay.classList.toggle('show', s); }
+    toggleMenu(show) {
+        document.getElementById('menu-left').classList.toggle('show', show);
+        document.getElementById('overlay').classList.toggle('show', show);
+    }
 }
 const app = new AoiApp();
 window.onload = () => app.init();
- 
