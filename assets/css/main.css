@@ -1,6 +1,11 @@
+/* ..... CORE ..... */
 @import "core/theme.css";
 @import "core/base.css";
+/* ..... ATOMS ..... */
 @import "atoms/buttons.css";
+/* ..... MOLECULES ..... */
 @import "molecules/navbar.css";
 @import "molecules/card.css";
+@import "molecules/drawer.css";
+/* ..... ORGANISMS ..... */
 @import "organisms/popup.css";
