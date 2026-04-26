@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋</title>
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- Đường dẫn chuẩn từ root -->
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body class="theme-dark">
     <div id="loader" class="loader"></div>
@@ -12,7 +13,7 @@
     <header class="top-bar">
         <div class="nav-left">
             <button id="menu-btn" class="btn-base btn-icon">☰</button>
-            <div class="avatar"><img src="./assets/img/Logo.png" alt="logo"></div>
+            <div class="avatar"><img src="assets/img/Logo.png" alt="logo"></div>
         </div>
     </header>
 
@@ -20,45 +21,39 @@
         <div id="content-grid" class="grid"></div>
     </main>
 
+    <!-- Drawer Component -->
     <aside id="menu-left" class="drawer">
         <div class="drawer-header">
-            <div class="avatar"><img src="./assets/img/Logo.png" alt="logo"></div>
-            <button id="close-menu" class="btn-base close-btn-mini">✘</button>
+            <div class="avatar"><img src="assets/img/Logo.png" alt="logo"></div>
+            <button id="close-menu" class="btn-base">✘</button>
         </div>
         <div class="drawer-content">
             <button class="drawer-item">🏠 Trang chủ</button>
             <div class="drawer-divider"></div>
-            <button id="open-settings-sub" class="drawer-item">⚙ Cài đặt</button>
-            <div id="settings-sub-panel" class="settings-sub hidden">
+            <button id="open-settings" class="drawer-item">⚙ Cài đặt</button>
+            <div id="settings-panel" class="settings-sub hidden">
                 <div class="setting">
                     <label>Giao diện</label>
                     <select id="theme-select" class="select">
-                        <option value="dark">👻 𝓓𝓪𝓻𝓴</option>
-                        <option value="light">🌤️ 𝓛𝓲𝓰𝓱𝓽</option>
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
                     </select>
-                </div>
-                <div class="setting">
-                    <label>Ảnh nền</label>
-                    <label class="switch">
-                        <input type="checkbox" id="bg-toggle"><span class="slider"></span>
-                    </label>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- Overlay dùng chung -->
     <div id="overlay" class="popup-overlay"></div>
 
-    <!-- Hệ thống Pop-up -->
+    <!-- Popup Component -->
     <div id="popup-root" class="popup-window">
         <div class="popup-header">
-            <span id="popup-title" class="viewer-title">📖 Chi tiết</span>
-            <button id="close-popup" class="btn-base close-btn-modal">✘</button>
+            <span id="popup-title">📖 Chi tiết</span>
+            <button id="close-popup" class="btn-base">✘</button>
         </div>
         <div id="popup-body" class="popup-body"></div>
     </div>
 
-    <script type="module" src="./core/app.js"></script>
+    <script type="module" src="core/app.js"></script>
 </body>
 </html>
