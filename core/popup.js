@@ -6,7 +6,7 @@ export class Popup {
         this.title = this.el.querySelector('.popup-title');
         this.closeBtn = document.getElementById('close-popup-btn');
         
-        if(this.closeBtn) this.closeBtn.onclick = () => this.hide();
+        if (this.closeBtn) this.closeBtn.onclick = () => this.hide();
         this.initDragging();
     }
 
@@ -15,17 +15,13 @@ export class Popup {
         if (isHTML) this.content.innerHTML = content;
         else { this.content.innerHTML = ''; this.content.appendChild(content); }
         
-        // Reset vị trí
-        this.win.style.left = '50%';
-        this.win.style.top = '50%';
-        this.win.style.transform = 'translate(-50%, -50%)';
-        
+        Object.assign(this.win.style, {
+            left: '50%', top: '50%', transform: 'translate(-50%, -50%)'
+        });
         this.el.classList.remove('hidden');
     }
 
-    hide() { 
-        this.el.classList.add('hidden'); 
-    }
+    hide() { this.el.classList.add('hidden'); }
 
     initDragging() {
         let active = false, ox = 0, oy = 0;
