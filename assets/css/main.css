@@ -1,11 +1,10 @@
-/* ..... CORE ..... */
-@import "core/theme.css";
-@import "core/base.css";
-/* ..... ATOMS ..... */
-@import "atoms/buttons.css";
-/* ..... MOLECULES ..... */
-@import "molecules/navbar.css";
-@import "molecules/card.css";
-@import "molecules/drawer.css";
-/* ..... ORGANISMS ..... */
-@import "organisms/popup.css";
+@import url('core/theme.css');
+@import url('core/base.css');
+
+@import url('atoms/buttons.css');
+
+@import url('molecules/navbar.css');
+@import url('molecules/card.css');
+@import url('molecules/drawer.css');
+
+@import url('organisms/popup.css');
