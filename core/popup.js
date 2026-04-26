@@ -1,61 +1,55 @@
 export class Popup {
     constructor(id) {
-        this.dom = {
-            wrapper: document.getElementById(id),
-            window: document.querySelector(`#${id} .viewer-window`),
-            header: document.querySelector(`#${id} .viewer-header`),
-            content: document.querySelector(`#${id} .viewer-content`),
-            title: document.querySelector(`#${id} .viewer-title`)
-        };
-        this.initDraggable();
+        this.el = document.getElementById(id);
+        this.win = this.el.querySelector('.popup-window');
+        this.header = this.el.querySelector('.popup-header');
+        this.content = this.el.querySelector('.popup-content');
+        this.title = this.el.querySelector('.popup-title');
+        this.initDragging();
     }
 
-    open(title, content, isHTML = true) {
-        this.dom.title.textContent = title || '📖';
-        if (isHTML) {
-            this.dom.content.innerHTML = content;
-        } else {
-            this.dom.content.innerHTML = '';
-            this.dom.content.appendChild(content);
+    show(title, content, isHTML = true) {
+        this.title.textContent = title;
+        if (isHTML) this.content.innerHTML = content;
+        else {
+            this.content.innerHTML = '';
+            this.content.appendChild(content);
         }
         
-        // Reset vị trí & hiện popup
-        Object.assign(this.dom.window.style, {
+        // Reset vị trí trung tâm
+        Object.assign(this.win.style, {
             left: '50%', top: '50%', transform: 'translate(-50%, -50%)'
         });
-        this.dom.wrapper.classList.remove('hidden');
+        this.el.classList.remove('hidden');
     }
 
-    close() {
-        this.dom.wrapper.classList.add('hidden');
+    hide() {
+        this.el.classList.add('hidden');
     }
 
-    initDraggable() {
-        let isDragging = false, offset = { x: 0, y: 0 };
-        const { window: win, header } = this.dom;
-
+    initDragging() {
+        let dragging = false, x = 0, y = 0;
         const start = (e) => {
-            if (e.target.closest('.close-btn-modal')) return;
-            isDragging = true;
-            const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-            const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-            offset.x = cx - win.offsetLeft;
-            offset.y = cy - win.offsetTop;
-            header.style.cursor = 'grabbing';
+            if (e.target.closest('.close-btn')) return;
+            dragging = true;
+            const event = e.type.includes('touch') ? e.touches[0] : e;
+            x = event.clientX - this.win.offsetLeft;
+            y = event.clientY - this.win.offsetTop;
         };
-
         const move = (e) => {
-            if (!isDragging) return;
-            const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-            const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-            win.style.left = `${cx - offset.x}px`;
-            win.style.top = `${cy - offset.y}px`;
-            win.style.transform = 'none';
+            if (!dragging) return;
+            const event = e.type.includes('touch') ? e.touches[0] : e;
+            this.win.style.left = (event.clientX - x) + 'px';
+            this.win.style.top = (event.clientY - y) + 'px';
+            this.win.style.transform = 'none';
         };
+        const stop = () => dragging = false;
 
-        const stop = () => { isDragging = false; header.style.cursor = 'move'; };
-
-        header.onmousedown = start; document.onmousemove = move; document.onmouseup = stop;
-        header.ontouchstart = start; document.ontouchmove = move; document.ontouchend = stop;
+        this.header.onmousedown = start;
+        this.header.ontouchstart = start;
+        document.onmousemove = move;
+        document.ontouchmove = move;
+        document.onmouseup = stop;
+        document.ontouchend = stop;
     }
 }
