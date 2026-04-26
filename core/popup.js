@@ -11,7 +11,7 @@ export class Popup {
     }
 
     open(title, content, isHTML = true) {
-        this.dom.title.textContent = title || '📖';
+        this.dom.title.textContent = title || '︵»📖«︵';
         if (isHTML) this.dom.content.innerHTML = content;
         else {
             this.dom.content.innerHTML = '';
@@ -51,7 +51,7 @@ export class Popup {
             const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
             win.style.left = (cx - offset.x) + 'px';
             win.style.top = (cy - offset.y) + 'px';
-            win.style.transform = 'none'; // Tắt translate khi đang kéo
+            win.style.transform = 'none';
         };
 
         const stop = () => { isDragging = false; header.style.cursor = 'move'; };
