@@ -11,3 +11,10 @@
 .popup-overlay.show .popup-window { transform: translateY(0); }
 .popup-header { padding: 14px 20px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .popup-body { padding: 20px; max-height: 70vh; overflow-y: auto; text-align: center; }
+
+/* Markdown Content Styles trong Pop-up */
+.popup-img { max-width: 100%; border-radius: var(--radius-md); margin: 10px 0; display: block; }
+.popup-text { margin-bottom: 12px; color: var(--text-main); font-size: 0.95rem; text-align: left; }
+.popup-quote { border-left: 4px solid var(--accent); background: var(--surface); padding: 10px 15px; margin: 15px 0; font-style: italic; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; text-align: left; }
+.inline-code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--accent); }
+.code-wrapper { background: #1c1c1e; padding: 15px; border-radius: var(--radius-md); overflow-x: auto; margin: 15px 0; text-align: left; border: 1px solid var(--border); }
