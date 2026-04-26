@@ -2,10 +2,10 @@ export class Popup {
     constructor(id) {
         this.dom = {
             wrapper: document.getElementById(id),
-            window: document.querySelector(`#${id} .popup-window`),
-            header: document.querySelector(`#${id} .popup-header`),
-            content: document.querySelector(`#${id} .popup-content`),
-            title: document.querySelector(`#${id} .popup-title`)
+            window: document.querySelector(`#${id} .viewer-window`),
+            header: document.querySelector(`#${id} .viewer-header`),
+            content: document.querySelector(`#${id} .viewer-content`),
+            title: document.querySelector(`#${id} .viewer-title`)
         };
         this.initDraggable();
     }
