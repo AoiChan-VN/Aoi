@@ -1,21 +1,23 @@
-/* Popup Container */
-.popup-wrapper { 
-    position: fixed; inset: 0; 
-    display: flex; align-items: center; justify-content: center; 
+.popup-wrapper {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
     z-index: 2000; pointer-events: none;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
 }
+.popup-wrapper.hidden { display: none; }
 
 .popup-window {
     pointer-events: auto;
     width: 90%; max-width: 480px;
-    max-height: 80vh; 
+    max-height: 85vh;
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 20px; /* Bo góc mạnh hơn cho đẹp */
+    border-radius: 20px;
     display: flex; flex-direction: column;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     overflow: hidden;
     position: absolute;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .popup-header {
@@ -26,12 +28,16 @@
     cursor: move;
 }
 
-.popup-content { 
-    padding: 20px; 
-    overflow-y: auto; 
-    flex: 1; 
-    scrollbar-width: thin;
-}
+.popup-title { font-size: 0.9rem; font-weight: 700; color: var(--accent); }
 
-.popup-wrapper.hidden { display: none; }
- 
+.close-btn-modal {
+    background: none; border: none; color: var(--text-sub);
+    font-size: 20px; cursor: pointer; transition: 0.2s;
+}
+.close-btn-modal:hover { color: #ff5f56; }
+
+.popup-content { padding: 25px; overflow-y: auto; flex: 1; line-height: 1.6; }
+
+/* CSS cho form trong popup */
+.settings-form { display: flex; flex-direction: column; gap: 15px; }
+.setting-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
