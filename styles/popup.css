@@ -2,9 +2,12 @@
     position: fixed; inset: 0;
     display: flex; align-items: center; justify-content: center;
     z-index: 2000; pointer-events: none;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.0);
     backdrop-filter: blur(4px);
+    transition: background 0.3s ease;
 }
+
+.popup-wrapper:not(hidden) { pointer-events: auto; background: rgba(0,0,0,0.5); }
 .popup-wrapper.hidden { display: none; }
 
 .popup-window {
