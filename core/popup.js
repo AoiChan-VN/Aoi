@@ -2,16 +2,16 @@ export class Popup {
     constructor(id) {
         this.dom = {
             wrapper: document.getElementById(id),
-            window: document.querySelector(`#${id} .viewer-window`),
-            header: document.querySelector(`#${id} .viewer-header`),
-            content: document.querySelector(`#${id} .viewer-content`),
-            title: document.querySelector(`#${id} .viewer-title`)
+            window: document.querySelector(`#${id} .popup-window`),
+            header: document.querySelector(`#${id} .popup-header`),
+            content: document.querySelector(`#${id} .popup-content`),
+            title: document.querySelector(`#${id} .popup-title`)
         };
         this.initDraggable();
     }
 
     open(title, content, isHTML = true) {
-        this.dom.title.textContent = title || '︵»↾📖↿«︵';
+        this.dom.title.textContent = title || '📖';
         if (isHTML) {
             this.dom.content.innerHTML = content;
         } else {
