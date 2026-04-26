@@ -1,10 +1,12 @@
-@import url('core/theme.css');
-@import url('core/base.css');
+/* Core */
+@import "core/theme.css";
+@import "core/base.css";
 
-@import url('atoms/buttons.css');
+/* UI / Elements */
+@import "atoms/buttons.css";
+@import "molecules/navbar.css";
+@import "molecules/card.css";
+@import "molecules/drawer.css";
 
-@import url('molecules/navbar.css');
-@import url('molecules/card.css');
-@import url('molecules/drawer.css');
-
-@import url('organisms/popup.css');
+/* Overlay & Modals */
+@import "organisms/popup.css";
