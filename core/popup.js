@@ -11,7 +11,7 @@ export class Popup {
     }
 
     open(title, content, isHTML = true) {
-        this.dom.title.textContent = title || '︵»📖«︵';
+        this.dom.title.textContent = title || '︵»↾📖↿«︵';
         if (isHTML) this.dom.content.innerHTML = content;
         else {
             this.dom.content.innerHTML = '';
