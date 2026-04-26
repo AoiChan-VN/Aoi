@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷🍒 </title>
-    <!-- CSS Links -->
+    <title> cherry 𝓐𝓸𝓲𝓒𝓱𝓪𝓷 butterfly </title>
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/theme.css">
     <link rel="stylesheet" href="./styles/layout.css">
@@ -26,6 +25,9 @@
         <div id="content-grid" class="grid"></div>
     </main>
 
+    <!-- Overlay phải nằm ngoài Drawer -->
+    <div id="overlay" class="overlay"></div>
+
     <aside id="menu-left" class="drawer">
         <div class="menu-header">
             <div class="avatar-mini"><img src="./assets/img/Logo.png" alt="logo"></div>
@@ -39,20 +41,16 @@
         </div>
     </aside>
 
-    <div id="overlay" class="overlay"></div>
-
-    <!-- POPUP HỆ THỐNG -->
     <div id="main-popup" class="popup-wrapper hidden">
         <div class="popup-window">
             <div class="popup-header">
                 <span class="popup-title">📖</span>
-                <button class="close-btn-modal">✘</button>
+                <button id="close-popup-btn" class="close-btn-modal">✘</button>
             </div>
             <div class="popup-content"></div>
         </div>
     </div>
 
-    <!-- TEMPLATE SETTINGS -->
     <template id="settings-template">
         <div class="settings-form">
             <div class="setting-item">
@@ -62,8 +60,8 @@
             <div class="setting-item">
                 <label data-key="theme_label">Giao diện</label>
                 <select class="select pop-theme-select">
-                    <option value="dark">🎣👻︵»Tối︵</option>
-                    <option value="light">🌤️︵»Sáng︵</option>
+                    <option value="dark">👻 Dark Mode</option>
+                    <option value="light">🌤️ Light Mode</option>
                 </select>
             </div>
             <div class="setting-item">
