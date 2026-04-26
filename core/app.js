@@ -18,30 +18,20 @@ class AoiApp {
         this.cacheDOM();
         this.popup = new Popup('viewer');
         this.bindEvents();
-        this.renderLanguageOptions();
         this.applySettings();
         this.renderPosts();
     }
 
     cacheDOM() {
-        const elements = {
-            contentGrid: 'content-grid',
-            loader: 'loader',
-            themeSelect: 'theme-select',
-            langSelect: 'lang-select',
-            bgToggle: 'bg-toggle',
-            overlay: 'overlay',
-            menuLeft: 'menu-left',
-            menuBtn: 'menu-btn',
-            closeMenu: 'close-menu',
-            closeViewer: 'close-viewer',
-            openSettingsSub: 'open-settings-sub',
-            settingsSubPanel: 'settings-sub-panel',
-            infoBtn: 'info-btn'
-        };
-        for (const [key, id] of Object.entries(elements)) {
-            this.dom[key] = document.getElementById(id);
-        }
+        const ids = [
+            'content-grid', 'loader', 'overlay', 'menu-left', 
+            'menu-btn', 'close-menu', 'close-viewer', 'open-settings-sub'
+        ];
+        ids.forEach(id => {
+            const camelCase = id.replace(/-([a-z])/g, g => g[1].toUpperCase());
+            this.dom[camelCase] = document.getElementById(id);
+        });
+        this.dom.settingsTemplate = document.getElementById('settings-template');
     }
 
     bindEvents() {
@@ -49,20 +39,23 @@ class AoiApp {
         this.dom.closeMenu.onclick = () => this.toggleMenu(false);
         this.dom.overlay.onclick = () => this.toggleMenu(false);
         this.dom.closeViewer.onclick = () => this.popup.close();
-        this.dom.openSettingsSub.onclick = () => this.dom.settingsSubPanel.classList.toggle('hidden');
 
-        // Cài đặt
-        this.dom.themeSelect.onchange = (e) => this.updateState('theme', e.target.value);
-        this.dom.langSelect.onchange = (e) => {
-            this.updateState('lang', e.target.value);
-            this.renderPosts();
+        // Mở Settings dưới dạng Popup
+        this.dom.openSettingsSub.onclick = () => {
+            this.toggleMenu(false);
+            this.openSettingsPopup();
         };
-        this.dom.bgToggle.onchange = (e) => this.updateState('bg', e.target.checked);
 
-        // Grid Click
+        // Mở Thông tin (Nút thứ 2 trong menu)
+        document.querySelectorAll('.menu-item')[1].onclick = () => {
+            this.toggleMenu(false);
+            const dict = languages[this.state.lang];
+            this.popup.open('ⓘ Info', `<div style="text-align:center"><h3>AoiChan App</h3><p>© 2026</p></div>`);
+        };
+
         this.dom.contentGrid.onclick = (e) => {
             const card = e.target.closest('.card');
-            if (card) this.loadContent(card.dataset.file);
+            if (card) this.loadContent(card.dataset.file, card.querySelector('h3').innerText);
         };
     }
 
@@ -73,16 +66,9 @@ class AoiApp {
     }
 
     applySettings() {
-        // Theme
         document.body.className = `theme-${this.state.theme}`;
         this.state.bg ? document.body.classList.add('show-bg') : document.body.classList.remove('show-bg');
         
-        // Sync UI
-        this.dom.themeSelect.value = this.state.theme;
-        this.dom.bgToggle.checked = this.state.bg;
-        this.dom.langSelect.value = this.state.lang;
-
-        // Language
         const dict = languages[this.state.lang];
         document.querySelectorAll('[data-key]').forEach(el => {
             const k = el.getAttribute('data-key');
@@ -90,15 +76,41 @@ class AoiApp {
         });
     }
 
-    async loadContent(file) {
-        this.dom.loader.style.width = '50%';
+    openSettingsPopup() {
+        const dict = languages[this.state.lang];
+        const content = this.dom.settingsTemplate.content.cloneNode(true);
+        
+        const themeSelect = content.querySelector('.pop-theme-select');
+        const langSelect = content.querySelector('.pop-lang-select');
+        const bgToggle = content.querySelector('.pop-bg-toggle');
+
+        // Khởi tạo giá trị
+        themeSelect.value = this.state.theme;
+        bgToggle.checked = this.state.bg;
+        langSelect.innerHTML = Object.keys(languages).map(k => 
+            `<option value="${k}" ${k === this.state.lang ? 'selected' : ''}>${languages[k].name}</option>`
+        ).join('');
+
+        // Sự kiện
+        themeSelect.onchange = (e) => this.updateState('theme', e.target.value);
+        bgToggle.onchange = (e) => this.updateState('bg', e.target.checked);
+        langSelect.onchange = (e) => {
+            this.updateState('lang', e.target.value);
+            this.renderPosts();
+            this.popup.close();
+        };
+
+        this.popup.open(`⚙ ${dict.setting_title}`, content, false);
+    }
+
+    async loadContent(file, title) {
+        this.dom.loader.style.width = '60%';
         try {
             const res = await fetch(`./content/${file}`);
-            if (!res.ok) throw new Error();
-            const text = await res.text();
-            this.popup.open('︵»📖«︵', parseMarkdown(text));
+            const text = await res.ok ? await res.text() : '## 👻 Error 404\nFile not found.';
+            this.popup.open(title, parseMarkdown(text));
         } catch {
-            alert('🥀 Lỗi tải dữ liệu...');
+            this.popup.open('Error', 'Could not connect to server.');
         }
         this.dom.loader.style.width = '0';
     }
@@ -107,19 +119,14 @@ class AoiApp {
         const dict = languages[this.state.lang];
         this.dom.contentGrid.innerHTML = posts.map(item => `
             <div class="card" data-file="${item.file}">
-                <img src="${item.thumb}" class="card-img" alt="thumb">
+                <img src="${item.thumb}" class="card-img" onerror="this.src='./assets/img/fallback.png'">
                 <div class="card-info">
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
-                    <div class="btn">${dict.detail_btn || 'Chi tiết'}</div>
+                    <div class="btn">${dict.detail_btn || 'Open'}</div>
                 </div>
             </div>
         `).join('');
-    }
-
-    renderLanguageOptions() {
-        this.dom.langSelect.innerHTML = Object.keys(languages)
-            .map(k => `<option value="${k}">${languages[k].name}</option>`).join('');
     }
 
     toggleMenu(open) {
