@@ -1,9 +1,10 @@
 /* Card bài viết */
 .card { 
-    display: flex; flex-direction: column; 
+    display: flex; flex-direction: column;
+    height: 100%;
     background: var(--surface); 
     border: 1px solid var(--border); 
-    border-radius: 14px; 
+    border-radius: 12px; 
     overflow: hidden; 
     transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
     cursor: pointer; 
