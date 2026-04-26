@@ -10,65 +10,75 @@ class AoiApp {
             bg: localStorage.getItem('aoi_bg') !== 'false',
             lang: localStorage.getItem('aoi_lang') || 'vi'
         };
-        this.popup = null;
         this.dom = {};
+        this.popup = null;
     }
 
     init() {
         this.cacheDOM();
-        this.popup = new Popup('viewer');
+        this.popup = new Popup('main-popup');
         this.bindEvents();
         this.applySettings();
         this.renderPosts();
     }
 
     cacheDOM() {
-        const ids = [
-            'content-grid', 'loader', 'overlay', 'menu-left', 
-            'menu-btn', 'close-menu', 'close-viewer', 'open-settings-sub'
-        ];
-        ids.forEach(id => {
-            const camelCase = id.replace(/-([a-z])/g, g => g[1].toUpperCase());
-            this.dom[camelCase] = document.getElementById(id);
-        });
-        this.dom.settingsTemplate = document.getElementById('settings-template');
+        this.dom.grid = document.getElementById('content-grid');
+        this.dom.loader = document.getElementById('loader');
+        this.dom.menu = document.getElementById('menu-left');
+        this.dom.overlay = document.getElementById('overlay');
     }
 
     bindEvents() {
-        this.dom.menuBtn.onclick = () => this.toggleMenu(true);
-        this.dom.closeMenu.onclick = () => this.toggleMenu(false);
+        document.getElementById('menu-btn').onclick = () => this.toggleMenu(true);
+        document.getElementById('close-menu').onclick = () => this.toggleMenu(false);
         this.dom.overlay.onclick = () => this.toggleMenu(false);
-        this.dom.closeViewer.onclick = () => this.popup.close();
 
-        // Mở Settings dưới dạng Popup
-        this.dom.openSettingsSub.onclick = () => {
+        // Mở Settings Popup
+        document.getElementById('open-settings-sub').onclick = () => {
             this.toggleMenu(false);
-            this.openSettingsPopup();
+            this.openSettings();
         };
 
-        // Mở Thông tin (Nút thứ 2 trong menu)
-        document.querySelectorAll('.menu-item')[1].onclick = () => {
+        // Mở Info Popup
+        document.getElementById('info-btn').onclick = () => {
             this.toggleMenu(false);
-            const dict = languages[this.state.lang];
-            this.popup.open('ⓘ Thông tin', `<div style="text-align:center"><h3>︵»𝓐𝓸𝓲𝓒𝓱𝓪𝓷«︵</h3><p>「© 2026」</p></div>`);
+            this.popup.show('ⓘ Thông tin', '<div style="text-align:center"><h3>𝓐𝓸𝓲𝓒𝓱𝓪𝓷</h3><p>𝓓𝓮𝓼𝓲𝓰𝓷◡𝓫𝓎◡𝓐𝓸𝓲◡₂₀₂₆</p></div>');
         };
 
-        this.dom.contentGrid.onclick = (e) => {
+        this.dom.grid.onclick = (e) => {
             const card = e.target.closest('.card');
-            if (card) this.loadContent(card.dataset.file, card.querySelector('h3').innerText);
+            if (card) this.loadPost(card.dataset.file, card.querySelector('h3').textContent);
         };
     }
 
-    updateState(key, value) {
-        this.state[key] = value;
-        localStorage.setItem(`aoi_${key}`, value);
+    openSettings() {
+        const dict = languages[this.state.lang];
+        const temp = document.getElementById('settings-template').content.cloneNode(true);
+        const themeSel = temp.querySelector('.pop-theme-select');
+        const langSel = temp.querySelector('.pop-lang-select');
+        const bgTog = temp.querySelector('.pop-bg-toggle');
+
+        themeSel.value = this.state.theme;
+        bgTog.checked = this.state.bg;
+        langSel.innerHTML = Object.keys(languages).map(k => `<option value="${k}" ${k===this.state.lang?'selected':''}>${languages[k].name}</option>`).join('');
+
+        themeSel.onchange = (e) => this.update('theme', e.target.value);
+        bgTog.onchange = (e) => this.update('bg', e.target.checked);
+        langSel.onchange = (e) => { this.update('lang', e.target.value); this.renderPosts(); this.popup.hide(); };
+
+        this.popup.show(`⚙ ${dict.setting_title}`, temp, false);
+    }
+
+    update(key, val) {
+        this.state[key] = val;
+        localStorage.setItem(`aoi_${key}`, val);
         this.applySettings();
     }
 
     applySettings() {
         document.body.className = `theme-${this.state.theme}`;
         this.state.bg ? document.body.classList.add('show-bg') : document.body.classList.remove('show-bg');
-        
         const dict = languages[this.state.lang];
         document.querySelectorAll('[data-key]').forEach(el => {
             const k = el.getAttribute('data-key');
@@ -76,65 +86,32 @@ class AoiApp {
         });
     }
 
-    openSettingsPopup() {
-        const dict = languages[this.state.lang];
-        const content = this.dom.settingsTemplate.content.cloneNode(true);
-        
-        const themeSelect = content.querySelector('.pop-theme-select');
-        const langSelect = content.querySelector('.pop-lang-select');
-        const bgToggle = content.querySelector('.pop-bg-toggle');
-
-        // Khởi tạo giá trị
-        themeSelect.value = this.state.theme;
-        bgToggle.checked = this.state.bg;
-        langSelect.innerHTML = Object.keys(languages).map(k => 
-            `<option value="${k}" ${k === this.state.lang ? 'selected' : ''}>${languages[k].name}</option>`
-        ).join('');
-
-        // Sự kiện
-        themeSelect.onchange = (e) => this.updateState('theme', e.target.value);
-        bgToggle.onchange = (e) => this.updateState('bg', e.target.checked);
-        langSelect.onchange = (e) => {
-            this.updateState('lang', e.target.value);
-            this.renderPosts();
-            this.popup.close();
-        };
-
-        this.popup.open(`⚙ ${dict.setting_title}`, content, false);
-    }
-
-    async loadContent(file, title) {
-        this.dom.loader.style.width = '60%';
+    async loadPost(file, title) {
+        this.dom.loader.style.width = '70%';
         try {
             const res = await fetch(`./content/${file}`);
-            const text = await res.ok ? await res.text() : '## 👻 Error 404\nFile not found.';
-            this.popup.open(title, parseMarkdown(text));
-        } catch {
-            this.popup.open('🐼', 'Could not connect to server.');
-        }
+            const text = res.ok ? await res.text() : '# 👻【404】';
+            this.popup.show(title, parseMarkdown(text));
+        } catch { alert('🥣 Lỗi tải dữ liệu🍂'); }
         this.dom.loader.style.width = '0';
     }
 
     renderPosts() {
-        const dict = languages[this.state.lang];
-        this.dom.contentGrid.innerHTML = posts.map(item => `
-            <div class="card" data-file="${item.file}">
-                <img src="${item.thumb}" class="card-img" onerror="this.src='./assets/img/fallback.png'">
+        const btnText = languages[this.state.lang].detail_btn || 'Xem';
+        this.dom.grid.innerHTML = posts.map(p => `
+            <div class="card" data-file="${p.file}">
+                <img src="${p.thumb}" class="card-img" onerror="this.src='./assets/img/fallback.png'"> 
                 <div class="card-info">
-                    <h3>${item.title}</h3>
-                    <p>${item.desc}</p>
-                    <div class="btn">${dict.detail_btn || 'Open'}</div>
+                    <h3>${p.title}</h3>
+                    <p>${p.desc}</p>
+                    <div class="btn-detail">${btnText}</div>
                 </div>
             </div>
         `).join('');
     }
 
-    toggleMenu(open) {
-        this.dom.menuLeft.classList.toggle('show', open);
-        this.dom.overlay.classList.toggle('show', open);
-    }
+    toggleMenu(s) { this.dom.menu.classList.toggle('show', s); this.dom.overlay.classList.toggle('show', s); }
 }
-
 const app = new AoiApp();
 window.onload = () => app.init();
  
