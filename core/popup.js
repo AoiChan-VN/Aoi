@@ -12,17 +12,17 @@ export class Popup {
 
     open(title, content, isHTML = true) {
         this.dom.title.textContent = title || '︵»↾📖↿«︵';
-        if (isHTML) this.dom.content.innerHTML = content;
-        else {
+        if (isHTML) {
+            this.dom.content.innerHTML = content;
+        } else {
             this.dom.content.innerHTML = '';
             this.dom.content.appendChild(content);
         }
         
-        // Reset vị trí về giữa màn hình
+        // Reset vị trí & hiện popup
         Object.assign(this.dom.window.style, {
             left: '50%', top: '50%', transform: 'translate(-50%, -50%)'
         });
-        
         this.dom.wrapper.classList.remove('hidden');
     }
 
@@ -32,8 +32,7 @@ export class Popup {
 
     initDraggable() {
         let isDragging = false, offset = { x: 0, y: 0 };
-        const win = this.dom.window;
-        const header = this.dom.header;
+        const { window: win, header } = this.dom;
 
         const start = (e) => {
             if (e.target.closest('.close-btn-modal')) return;
@@ -49,8 +48,8 @@ export class Popup {
             if (!isDragging) return;
             const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
             const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-            win.style.left = (cx - offset.x) + 'px';
-            win.style.top = (cy - offset.y) + 'px';
+            win.style.left = `${cx - offset.x}px`;
+            win.style.top = `${cy - offset.y}px`;
             win.style.transform = 'none';
         };
 
@@ -60,4 +59,3 @@ export class Popup {
         header.ontouchstart = start; document.ontouchmove = move; document.ontouchend = stop;
     }
 }
- 
