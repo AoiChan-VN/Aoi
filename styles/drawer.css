@@ -107,10 +107,12 @@
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
     display: none;
+    pointer-events: none;
     z-index: 1400;
 }
 
 .overlay.show {
     display: block;
+    pointer-events: auto;
 }
  
