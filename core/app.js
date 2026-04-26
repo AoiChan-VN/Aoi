@@ -1,6 +1,7 @@
 import { posts } from '../data/posts.js';
 import { languages } from '../data/languages.js';
 import { parseMarkdown } from './parser.js';
+import { Popup } from './popup.js';
 
 class AoiApp {
     constructor() {
@@ -9,19 +10,17 @@ class AoiApp {
             bg: localStorage.getItem('aoi_bg') !== 'false',
             lang: localStorage.getItem('aoi_lang') || 'vi'
         };
+        this.popup = null;
         this.dom = {};
     }
 
     init() {
         this.cacheDOM();
-        if (!this.dom.contentGrid) return;
+        this.popup = new Popup('viewer');
         this.bindEvents();
-        this.initSettings();
-        this.applyTheme();
         this.renderLanguageOptions();
-        this.applyLanguage();
+        this.applySettings();
         this.renderPosts();
-        this.initDraggable();
     }
 
     cacheDOM() {
@@ -31,20 +30,17 @@ class AoiApp {
             themeSelect: 'theme-select',
             langSelect: 'lang-select',
             bgToggle: 'bg-toggle',
-            viewer: 'viewer',
-            viewerContent: 'viewer-content',
-            viewerWindow: document.querySelector('.viewer-window'),
-            viewerHeader: document.getElementById('viewer-header'),
             overlay: 'overlay',
             menuLeft: 'menu-left',
-            closeViewer: 'close-viewer',
             menuBtn: 'menu-btn',
             closeMenu: 'close-menu',
+            closeViewer: 'close-viewer',
             openSettingsSub: 'open-settings-sub',
-            settingsSubPanel: 'settings-sub-panel'
+            settingsSubPanel: 'settings-sub-panel',
+            infoBtn: 'info-btn'
         };
         for (const [key, id] of Object.entries(elements)) {
-            this.dom[key] = typeof id === 'string' ? document.getElementById(id) : id;
+            this.dom[key] = document.getElementById(id);
         }
     }
 
@@ -52,136 +48,86 @@ class AoiApp {
         this.dom.menuBtn.onclick = () => this.toggleMenu(true);
         this.dom.closeMenu.onclick = () => this.toggleMenu(false);
         this.dom.overlay.onclick = () => this.toggleMenu(false);
-        this.dom.closeViewer.onclick = () => this.closeViewer();
+        this.dom.closeViewer.onclick = () => this.popup.close();
         this.dom.openSettingsSub.onclick = () => this.dom.settingsSubPanel.classList.toggle('hidden');
-        
-        this.dom.themeSelect.onchange = () => {
-            this.state.theme = this.dom.themeSelect.value;
-            localStorage.setItem('aoi_theme', this.state.theme);
-            this.applyTheme();
-        };
 
-        this.dom.langSelect.onchange = () => {
-            this.state.lang = this.dom.langSelect.value;
-            localStorage.setItem('aoi_lang', this.state.lang);
-            this.applyLanguage();
+        // Cài đặt
+        this.dom.themeSelect.onchange = (e) => this.updateState('theme', e.target.value);
+        this.dom.langSelect.onchange = (e) => {
+            this.updateState('lang', e.target.value);
             this.renderPosts();
         };
+        this.dom.bgToggle.onchange = (e) => this.updateState('bg', e.target.checked);
 
-        this.dom.bgToggle.onchange = () => {
-            this.state.bg = this.dom.bgToggle.checked;
-            localStorage.setItem('aoi_bg', this.state.bg);
-            this.applyTheme();
-        };
-
+        // Grid Click
         this.dom.contentGrid.onclick = (e) => {
             const card = e.target.closest('.card');
-            if (card) this.openPost(card.dataset.file);
+            if (card) this.loadContent(card.dataset.file);
         };
     }
 
-    async openPost(file) {
-        this.dom.loader.style.width = '40%';
-        try {
-            const res = await fetch(`./content/${file}`);
-            if (!res.ok) throw new Error("👻「404」");
-
-            const text = await res.text();
-            this.dom.viewerContent.innerHTML = parseMarkdown(text);
-            
-            // Reset vị trí bảng về trung tâm
-            this.dom.viewerWindow.style.left = '50%';
-            this.dom.viewerWindow.style.top = '50%';
-            this.dom.viewerWindow.style.transform = 'translate(-50%, -50%)';
-            
-            this.dom.viewer.classList.remove('hidden');
-        } catch (err) {
-            alert('📖 〈 Dữ liệu không tồn tại 〉');
-        }
-        this.dom.loader.style.width = '0';
+    updateState(key, value) {
+        this.state[key] = value;
+        localStorage.setItem(`aoi_${key}`, value);
+        this.applySettings();
     }
 
-    closeViewer() {
-        this.dom.viewer.classList.add('hidden');
-    }
-
-    initDraggable() {
-        const header = this.dom.viewerHeader;
-        const win = this.dom.viewerWindow;
-        if (!header || !win) return;
-
-        let isDragging = false, offset = { x: 0, y: 0 };
-
-        const start = (e) => {
-            if (e.target.closest('.close-btn-modal')) return;
-            isDragging = true;
-            const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-            const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-            offset.x = cx - win.offsetLeft;
-            offset.y = cy - win.offsetTop;
-            header.style.cursor = 'grabbing';
-        };
-
-        const move = (e) => {
-            if (!isDragging) return;
-            const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-            const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-            win.style.left = cx - offset.x + 'px';
-            win.style.top = cy - offset.y + 'px';
-        };
-
-        const stop = () => { isDragging = false; header.style.cursor = 'move'; };
-
-        header.onmousedown = start; document.onmousemove = move; document.onmouseup = stop;
-        header.ontouchstart = start; document.ontouchmove = move; document.ontouchend = stop;
-    }
-
-    applyTheme() {
+    applySettings() {
+        // Theme
         document.body.className = `theme-${this.state.theme}`;
-        if (this.state.bg) document.body.classList.add('show-bg');
-        else document.body.classList.remove('show-bg');
-    }
+        this.state.bg ? document.body.classList.add('show-bg') : document.body.classList.remove('show-bg');
+        
+        // Sync UI
+        this.dom.themeSelect.value = this.state.theme;
+        this.dom.bgToggle.checked = this.state.bg;
+        this.dom.langSelect.value = this.state.lang;
 
-    applyLanguage() {
+        // Language
         const dict = languages[this.state.lang];
         document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (dict[key]) el.textContent = dict[key];
+            const k = el.getAttribute('data-key');
+            if (dict[k]) el.textContent = dict[k];
         });
     }
 
-    renderLanguageOptions() {
-        this.dom.langSelect.innerHTML = Object.keys(languages)
-            .map(key => `<option value="${key}">${languages[key].name}</option>`).join('');
-        this.dom.langSelect.value = this.state.lang;
+    async loadContent(file) {
+        this.dom.loader.style.width = '50%';
+        try {
+            const res = await fetch(`./content/${file}`);
+            if (!res.ok) throw new Error();
+            const text = await res.text();
+            this.popup.open('︵»📖«︵', parseMarkdown(text));
+        } catch {
+            alert('🥀 Lỗi tải dữ liệu...');
+        }
+        this.dom.loader.style.width = '0';
     }
 
     renderPosts() {
         const dict = languages[this.state.lang];
         this.dom.contentGrid.innerHTML = posts.map(item => `
             <div class="card" data-file="${item.file}">
-                <img src="${item.thumb}" class="card-img" onerror="this.src='./assets/img/fallback.webp'">
+                <img src="${item.thumb}" class="card-img" alt="thumb">
                 <div class="card-info">
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
-                    <div class="btn">${dict.detail_btn}</div>
+                    <div class="btn">${dict.detail_btn || 'Chi tiết'}</div>
                 </div>
             </div>
         `).join('');
     }
 
+    renderLanguageOptions() {
+        this.dom.langSelect.innerHTML = Object.keys(languages)
+            .map(k => `<option value="${k}">${languages[k].name}</option>`).join('');
+    }
+
     toggleMenu(open) {
         this.dom.menuLeft.classList.toggle('show', open);
         this.dom.overlay.classList.toggle('show', open);
-        if(!open) this.dom.settingsSubPanel.classList.add('hidden');
-    }
-
-    initSettings() {
-        this.dom.themeSelect.value = this.state.theme;
-        this.dom.bgToggle.checked = this.state.bg;
     }
 }
 
 const app = new AoiApp();
-window.addEventListener('DOMContentLoaded', () => app.init());
+window.onload = () => app.init();
  
