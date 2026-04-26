@@ -59,15 +59,13 @@
     <div id="overlay" class="overlay"></div>
 
     <!-- Pop-up dùng chung (Cửa sổ nổi) -->
-    <div id="viewer" class="viewer hidden">
-        <div class="viewer-window">
-            <div id="viewer-header" class="viewer-header">
-                <span class="viewer-title">︵»↿📖↾«︵</span>
-                <button id="close-viewer" class="close-btn-modal">✘</button>
+    <div id="main-popup" class="popup-wrapper hidden">
+        <div class="popup-window">
+            <div class="popup-header">
+                <span class="popup-title">📖</span>
+                <button class="close-btn" onclick="app.popup.hide()">✘</button>
             </div>
-            <div id="viewer-content" class="viewer-content">
-                <!-- Nội dung động sẽ được đổ vào đây -->
-            </div>
+            <div class="popup-content"></div>
         </div>
     </div>
 
