@@ -1,74 +1,30 @@
-/* =========================
-DARK THEME (Default)
-========================= */
+/* Giao diện Tối (Mặc định) */
 :root {
---bg: #0b0b0c;
---surface: rgba(255, 255, 255, 0.04);
---border: rgba(255, 255, 255, 0.08);
-
---text-main: #f5f5f7;
---text-sub: #8e8e93;
-
---accent: #7c7cff;
-
+    --bg: #0b0b0c;
+    --surface: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #f5f5f7;
+    --text-sub: #8e8e93;
+    --accent: #7c7cff; /* Màu tím đặc trưng của Aoi */
 }
 
-/* =========================
-LIGHT THEME
-========================= */
+/* Giao diện Sáng */
 .theme-light {
---bg: #f5f5f7;
---surface: rgba(0, 0, 0, 0.03);
---border: rgba(0, 0, 0, 0.08);
-
---text-main: #1c1c1e;
---text-sub: #6e6e73;
-
---accent: #5a67ff;
-
+    --bg: #f2f2f7;
+    --surface: #ffffff;
+    --border: rgba(0, 0, 0, 0.1);
+    --text-main: #1c1c1e;
+    --text-sub: #6e6e73;
+    --accent: #5856d6;
 }
 
-/* =========================
-GLOBAL BACKGROUND CONTROL
-========================= */
-body {
-background-color: var(--bg);
-transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* =========================
-SUBTLE GLOW (Premium feel)
-========================= */
-.card:hover {
-box-shadow:
-0 8px 20px rgba(0, 0, 0, 0.25),
-0 0 0 1px var(--border);
-}
-
-/* =========================
-BUTTON ACCENT TOUCH
-========================= */
-.btn {
-color: var(--accent);
-}
-
-/* =========================
-SELECTION COLOR
-========================= */
-::selection {
-background: var(--accent);
-color: #fff;
-}
-
-/* =========================
-SMOOTH TRANSITIONS
-========================= */
-
+/* Hiệu ứng chuyển đổi mượt mà */
 * {
-transition:
-background-color 0.25s ease,
-color 0.25s ease,
-border-color 0.25s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
 }
 
+/* Màu khi bôi đen văn bản */
+::selection {
+    background: var(--accent);
+    color: #ffffff;
 }
