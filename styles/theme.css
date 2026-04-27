@@ -7,13 +7,11 @@ DARK THEME (Default)
 
 /* Màu lớp phủ, thẻ card,... */
 --surface: rgba(255, 255, 255, 0.04);
-
 /* Màu đường kẻ, khung viền,.. */
 --border: rgba(255, 255, 255, 0.08);
 
 /* Màu chữ chính (tiêu đề, nội dung,...) */
 --text-main: #f5f5f7;
-
 /* Màu chữ phụ (Mô tả, chú thích,...) */
 --text-sub: #8e8e93;
 
@@ -27,10 +25,10 @@ LIGHT THEME
 ========================= */
 .theme-light {
   
---bg: #f5f5f7;
+--bg: #ffffff;
   
---surface: rgba(0, 0, 0, 0.03);
---border: rgba(0, 0, 0, 0.08);
+--surface: rgba(255, 255, 255, 0.04);
+--border: rgba(255, 255, 255, 0.08);
 
 --text-main: #1c1c1e;
 --text-sub: #8e8e93;
