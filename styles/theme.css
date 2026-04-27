@@ -17,7 +17,6 @@ DARK THEME (Default)
 
 /* Màu (nút bấm, liên kết, active,..) */
 --accent: #7c7cff;
-
 }
 
 /* =========================
@@ -25,7 +24,7 @@ LIGHT THEME
 ========================= */
 .theme-light {
   
---bg: #ffffff;
+--bg: #faf9f6;
   
 --surface: rgba(255, 255, 255, 0.03);
 --border: rgba(255, 255, 255, 0.08);
@@ -34,7 +33,6 @@ LIGHT THEME
 --text-sub: #8e8e93;
 
 --accent: #7c7cff;
-
 }
 
 /* =========================
@@ -72,7 +70,6 @@ color: #fff;
 /* =========================
 SMOOTH TRANSITIONS
 ========================= */
-
 * {
 transition:
 background-color 0.25s ease,
