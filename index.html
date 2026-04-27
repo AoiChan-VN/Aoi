@@ -2,100 +2,46 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷︵ </title>
-    
-    <!-- CSS Files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌊 𝓐𝓸𝓲𝓒𝓱𝓪𝓷🎐</title>
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/components.css">
     <link rel="stylesheet" href="./styles/theme.css">
 </head>
 <body class="theme-dark">
-    <!-- Thanh tải trang -->
     <div id="loader" class="loader"></div>
 
-    <!-- Thanh điều hướng trên cùng -->
     <header class="top-bar">
         <div class="nav-left">
-            <button id="menu-btn" class="nav-btn">☰</button>
-            <div class="avatar">
-                <img src="./assets/img/Logo.png" alt="logo" onerror="this.src='https://placeholder.com'">
-            </div>
-        </div>
-        <div class="nav-right">
-            <!-- Có thể thêm nút search hoặc user icon ở đây -->
+            <button id="menu-btn" class="nav-btn" aria-label="Menu">☰</button>
+            <div class="avatar"><img src="./assets/img/Logo.png" alt="AoiLogo"></div>
         </div>
     </header>
 
-    <!-- Khu vực nội dung chính -->
     <main class="main">
-        <div id="content-grid" class="grid"></div>
+        <div id="content-grid" class="grid">
+            <!-- Render.js sẽ đổ Card vào đây -->
+        </div>
     </main>
 
-    <!-- Menu ngăn kéo trái -->
+    <!-- Overlay & Drawer chung -->
+    <div id="overlay" class="overlay"></div>
     <aside id="menu-left" class="drawer left">
-        <div class="menu-header">
-            <div class="avatar-mini">
-                <img src="./assets/img/Logo.png" alt="logo">
-            </div>
-            <button id="close-menu" class="close-btn-mini">✘</button>
-        </div>
-        
-        <div class="menu-links">
-            <button class="menu-item" onclick="location.reload()">🏠 Trang chủ</button>
-            <button id="info-btn" class="menu-item">ⓘ Thông tin</button>
-            <hr class="divider">
-            <button id="open-settings-sub" class="menu-item">
-                ⚙ <span data-key="setting_title">Cài đặt</span>
-            </button>
-        </div>
-        
-        <div class="menu-footer">
-            <p>︵»𝓐𝓸𝓲𝓒𝓱𝓪𝓷 © 2026«︵</p>
-        </div>
+        <!-- Content in app.js -->
     </aside>
 
-    <!-- Lớp phủ khi mở menu -->
-    <div id="overlay" class="overlay"></div>
-
-    <!-- Pop-up dùng chung (Cửa sổ nổi) -->
+    <!-- Viewer Modal duy nhất cho toàn App -->
     <div id="viewer" class="viewer hidden">
         <div class="viewer-window">
-            <div id="viewer-header" class="viewer-header">
+            <div class="viewer-header">
                 <span class="viewer-title">📖</span>
                 <button id="close-viewer" class="close-btn-modal">✘</button>
             </div>
-            <div id="viewer-content" class="viewer-content">
-                <!-- Nội dung động sẽ được đổ vào đây -->
-            </div>
+            <div id="viewer-content" class="viewer-content"></div>
         </div>
     </div>
 
-    <!-- Template cho nội dung Settings (Ẩn mặc định) -->
-    <template id="settings-template">
-        <div class="settings-sub-panel">
-            <div class="setting">
-                <label data-key="lang_label">Ngôn ngữ</label>
-                <select class="select pop-lang-select"></select>
-            </div>
-            <div class="setting">
-                <label data-key="theme_label">Giao diện</label>
-                <select class="select pop-theme-select">
-                    <option value="dark">🎣👻◠Tối</option>
-                    <option value="light">🌤️◠Sáng</option>
-                </select>
-            </div>
-            <div class="setting">
-                <label data-key="bg_label">Ảnh nền</label>
-                <label class="switch">
-                    <input type="checkbox" class="pop-bg-toggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-    </template>
-
-    <!-- Script chính -->
-    <script type="module" src="./core/app.js"></script>
+    <!-- Cấu trúc script chạy module -->
+    <script type="module" src="./core/App.js"></script>
 </body>
 </html>
