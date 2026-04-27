@@ -26,15 +26,16 @@ DARK THEME (Default)
 LIGHT THEME
 ========================= */
 .theme-light {
+  
 --bg: #f5f5f7;
   
 --surface: rgba(0, 0, 0, 0.03);
 --border: rgba(0, 0, 0, 0.08);
 
 --text-main: #1c1c1e;
---text-sub: #6e6e73;
+--text-sub: #8e8e93;
 
---accent: #5a67ff;
+--accent: #7c7cff;
 
 }
 
