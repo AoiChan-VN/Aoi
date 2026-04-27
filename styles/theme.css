@@ -1,81 +1,87 @@
-/* =========================
-DARK THEME (Default)
-========================= */
+/* ========================
+   DARK THEME (Luxury Gold)
+   ======================== */
 :root {
-/* Màu nền tổng */
---bg: #0b0b0c;
+  /* Nền đen sâu (Onyx) giúp màu vàng nổi bật */
+  --bg: #050505; 
 
-/* Màu lớp phủ, thẻ card,... */
---surface: rgba(255, 255, 255, 0.04);
-/* Màu đường kẻ, khung viền,.. */
---border: rgba(255, 255, 255, 0.08);
+  /* Lớp phủ dùng màu vàng cực loãng để tạo độ bóng */
+  --surface: rgba(212, 175, 55, 0.05); 
+  /* Viền vàng kim mờ */
+  --border: rgba(212, 175, 55, 0.2); 
 
-/* Màu chữ chính (tiêu đề, nội dung,...) */
---text-main: #f5f5f7;
-/* Màu chữ phụ (Mô tả, chú thích,...) */
---text-sub: #8e8e93;
+  /* Chữ chính trắng ngà (Off-white) */
+  --text-main: #fcfcfc;
+  /* Chữ phụ màu vàng cát mờ */
+  --text-sub: #a69d85;
 
-/* Màu (nút bấm, liên kết, active,..) */
---accent: #7c7cff;
-
+  /* MÀU CHỦ ĐẠO: Vàng Kim (Metallic Gold) */
+  --accent: #d4af37; 
 }
 
 /* =========================
-LIGHT THEME
-========================= */
+   LIGHT THEME (Royal White)
+   ========================= */
 .theme-light {
+  /* Nền trắng kem sang trọng */
+  --bg: #faf9f6; 
   
---bg: #ffffff;
-  
---surface: rgba(255, 255, 255, 0.03);
---border: rgba(255, 255, 255, 0.08);
+  /* Lớp phủ xám cực nhẹ */
+  --surface: rgba(0, 0, 0, 0.02);
+  /* Viền vàng đồng nhạt */
+  --border: rgba(184, 134, 11, 0.15);
 
---text-main: #f5f5f7;
---text-sub: #8e8e93;
+  /* Chữ chính đen than (Charcoal) */
+  --text-main: #1a1a1a;
+  /* Chữ phụ xám ấm */
+  --text-sub: #706f6c;
 
---accent: #7c7cff;
-
+  /* Giữ nguyên màu vàng kim cho nút/link */
+  --accent: #b8860b; 
 }
 
 /* =========================
-GLOBAL BACKGROUND CONTROL
-========================= */
+   GLOBAL BACKGROUND CONTROL
+   ========================= */
 body {
-background-color: var(--bg);
-transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* =========================
-SUBTLE GLOW (Premium feel)
-========================= */
+/* ===========
+   SUBTLE GLOW
+   =========== */
 .card:hover {
-box-shadow:
-0 8px 20px rgba(0, 0, 0, 0.25),
-0 0 0 1px var(--border);
+  box-shadow: 
+  0 10px 30px rgba(212, 175, 55, 0.15), 
+  0 0 0 1px var(--accent);
+  transform: translateY(-2px);
 }
 
-/* =========================
-BUTTON ACCENT TOUCH
-========================= */
+/* ====================
+   BUTTON LUXURY TOUCH
+   ==================== */
 .btn {
-color: var(--accent);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
-/* =========================
-SELECTION COLOR
-========================= */
+/* ===============
+   SELECTION COLOR
+   =============== */
 ::selection {
-background: var(--accent);
-color: #fff;
+  background: var(--accent);
+  color: #fff;
 }
 
-/* =========================
-SMOOTH TRANSITIONS
-========================= */
-
+/* ==================
+   SMOOTH TRANSITIONS
+   ================== */
 * {
-transition:
-background-color 0.25s ease,
-color 0.25s ease,
-border-color 0.25s ease;
+  transition:
+  background-color 0.25s ease,
+  color 0.25s ease,
+  border-color 0.25s ease;
 }
