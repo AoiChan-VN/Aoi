@@ -27,8 +27,8 @@ LIGHT THEME
 --bg: #ffffff;
   
 /* Lớp phủ/Card */
---surface: rgba(255, 255, 255, 0.08);
---border: rgba(255, 255, 255, 0.04);
+--surface: rgba(255, 255, 255, 0.03);
+--border: rgba(255, 255, 255, 0.08);
 
 /* Màu chữ chính */
 --text-main: #f5f5f7;
@@ -36,7 +36,7 @@ LIGHT THEME
 --text-sub: #8e8e93;
 
 /* Màu tím */
---accent: #5856d6; 
+--accent: #7c7cff; 
 }
 
 /* =========================
