@@ -20,19 +20,26 @@ DARK THEME (Default)
 }
 
 /* =========================
-LIGHT THEME
+LIGHT THEME (Sửa lại)
 ========================= */
 .theme-light {
+  /* Nền trắng sáng */
+  --bg: #ffffff;
   
---bg: #ffffff;
+  /* Lớp phủ/Card: dùng màu xám cực nhẹ để tạo chiều sâu */
+  --surface: rgba(0, 0, 0, 0.05);
   
---surface: rgba(242, 242, 247, 0.03);
---border: rgba(0, 0, 0, 0.1);
+  /* Đường kẻ: dùng màu đen nhạt */
+  --border: rgba(0, 0, 0, 0.1);
 
---text-main: #1d1d1f;
---text-sub: #86868b;
+  /* Màu chữ chính: chuyển sang đen sâu để rõ nét */
+  --text-main: #1c1c1e;
+  
+  /* Màu chữ phụ: xám đậm hơn để không bị mất nét */
+  --text-sub: #636366;
 
---accent: #5856d6;
+  /* Giữ nguyên màu tím accent của bạn hoặc làm đậm hơn 1 tông nếu thích */
+  --accent: #5856d6; 
 }
 
 /* =========================
