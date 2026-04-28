@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AoiChan Portfolio 2026</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/themes.css">
+    <title>Aoi Portfolio 2026</title>
+    <link rel="stylesheet" href="./src/styles/main.css">
 </head>
 <body class="theme-dark">
     <div id="loader" class="loader"></div>
-
     <header class="top-bar">
         <div class="nav-left">
             <button id="menu-btn" class="nav-btn">☰</button>
-            <div class="avatar"><img src="./assets/img/avatar.webp" alt="Aoi"></div>
+            <div class="avatar"><img src="./assets/img/avatar.webp" alt="Avatar" onerror="this.src='https://placeholder.com'"></div>
         </div>
         <h1 class="logo">Aoi<span>Portfolio</span></h1>
     </header>
-
-    <main class="main">
-        <section id="content-grid" class="grid"></section>
+    <main class="main-content">
+        <section id="content-grid" class="post-grid"></section>
     </main>
-
-    <!-- Overlay & Sidebar -->
     <div id="overlay" class="overlay"></div>
-    <aside id="menu-left" class="drawer left">
+    <aside id="menu-left" class="side-drawer">
         <div class="menu-header">
-            <div class="avatar-mini"><img src="./assets/img/avatar.webp"></div>
+            <div class="avatar-mini"><img src="./assets/img/avatar.webp" onerror="this.src='https://placeholder.com'"></div>
             <button id="close-menu" class="close-btn-mini">✕</button>
         </div>
         <nav class="menu-links">
@@ -36,8 +31,6 @@
         </nav>
         <footer class="menu-footer" data-key="copyright"></footer>
     </aside>
-
-    <!-- Viewer/Popup -->
     <div id="viewer" class="viewer hidden">
         <article class="viewer-window">
             <header class="viewer-header">
@@ -47,8 +40,6 @@
             <section class="viewer-content custom-scroll"></section>
         </article>
     </div>
-
-    <!-- Template cho Cài đặt -->
     <template id="settings-template">
         <div class="settings-popup">
             <div class="setting">
@@ -71,7 +62,6 @@
             </div>
         </div>
     </template>
-
     <script type="module" src="./src/core/App.js"></script>
 </body>
 </html>
