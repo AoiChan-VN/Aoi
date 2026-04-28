@@ -1,0 +1,19 @@
+export class State {
+    constructor() {
+        this.data = {
+            theme: localStorage.getItem('aoi_theme') || 'dark',
+            bg: localStorage.getItem('aoi_bg') !== 'false',
+            lang: localStorage.getItem('aoi_lang') || 'vi'
+        };
+    }
+
+    update(key, value) {
+        this.data[key] = value;
+        localStorage.setItem(`aoi_${key}`, value);
+    }
+
+    get(key) {
+        return this.data[key];
+    }
+}
+ 
