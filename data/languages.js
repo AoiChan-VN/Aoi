@@ -20,12 +20,13 @@ export const languages = {
         copyright: '© 2026 AoiChan. All rights reserved.'
     },
     'ja': {
-        name: "日本語",
-        setting_title: "設定",
-        lang_label: "言語",
-        theme_label: "テーマ",
-        bg_label: "背景",
-        detail_btn: "詳細を見る"
+        name: '日本語',
+        setting_title: '設定',
+        theme_label: 'テーマ',
+        bg_label: '背景',
+        lang_label: '言語',
+        detail_btn: '詳細を見る',
+        info_title: '',
+        copyright: ''
     }
 };
- 
