@@ -1,0 +1,153 @@
+@import './variables.css';
+
+/* 1. Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, sans-serif);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+body.show-bg {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('../../assets/img/Theme.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* 2. Layout Components */
+.top-bar {
+    position: fixed; top: 0; left: 0; width: 100%;
+    height: var(--header-height);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px; z-index: 1000;
+    background: var(--surface-color);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-content {
+    padding: calc(var(--header-height) + 30px) 20px 40px;
+    max-width: var(--container-width, 1000px);
+    margin: 0 auto;
+}
+
+/* 3. Grid & Cards */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-base);
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card-img {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-info { padding: 15px; text-align: center; }
+.card-info h3 { font-size: 0.95rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-info p { font-size: 0.75rem; color: var(--text-secondary); height: 3em; overflow: hidden; }
+
+/* 4. UI Elements */
+.btn-accent {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 16px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.card:hover .btn-accent {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+/* 5. Drawers & Overlays */
+.side-drawer {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100%;
+    background: var(--bg-color);
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid var(--border-color);
+}
+
+.side-drawer.show { transform: translateX(0); }
+
+.overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+    z-index: 1500;
+    opacity: 0; visibility: hidden;
+    transition: 0.3s;
+}
+
+.overlay.show { opacity: 1; visibility: visible; }
+
+/* 6. Modal Viewer */
+.viewer.hidden { display: none; }
+.viewer-window {
+    position: fixed; z-index: 3000;
+    width: 90%; max-width: 500px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.viewer-header {
+    padding: 15px 20px;
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.viewer-content {
+    padding: 25px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Custom Scrollbar */
+.custom-scroll::-webkit-scrollbar { width: 5px; }
+.custom-scroll::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+/* 7. Responsive */
+@media (max-width: 480px) {
+    .post-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card-info h3 { font-size: 0.85rem; }
+}
+ 
