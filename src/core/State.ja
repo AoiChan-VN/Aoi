@@ -6,14 +6,6 @@ export class State {
             lang: localStorage.getItem('aoi_lang') || 'vi'
         };
     }
-
-    update(key, value) {
-        this.data[key] = value;
-        localStorage.setItem(`aoi_${key}`, value);
-    }
-
-    get(key) {
-        return this.data[key];
-    }
+    update(k, v) { this.data[k] = v; localStorage.setItem(`aoi_${k}`, v); }
+    get(k) { return this.data[k]; }
 }
- 
