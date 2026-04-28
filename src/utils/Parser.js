@@ -17,8 +17,9 @@ export const parseMarkdown = (md) => {
     let html = rules.reduce((acc, [reg, repl]) => acc.replace(reg, repl), md);
     html = html.replace(/<\/ul>\s*<ul>/g, '');
 
-    return html.split(/\n{2,}/).map(block => 
-        /^\s*<[a-z1-6]/i.test(block.trim()) ? block : `<p>${block.trim()}</p>`
-    ).join('');
+    return html.split(/\n{2,}/).map(block => {
+        const trimmed = block.trim();
+        if (/^\s*<[a-z1-6]/i.test(trimmed)) return trimmed;
+        return `<p>${trimmed}</p>`;
+    }).join('');
 };
- 
