@@ -2,100 +2,76 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷︵ </title>
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="./styles/base.css">
-    <link rel="stylesheet" href="./styles/components.css">
-    <link rel="stylesheet" href="./styles/theme.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AoiChan Portfolio 2026</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/themes.css">
 </head>
 <body class="theme-dark">
-    <!-- Thanh tải trang -->
     <div id="loader" class="loader"></div>
 
-    <!-- Thanh điều hướng trên cùng -->
     <header class="top-bar">
         <div class="nav-left">
             <button id="menu-btn" class="nav-btn">☰</button>
-            <div class="avatar">
-                <img src="./assets/img/Logo.png" alt="logo" onerror="this.src='https://placeholder.com'">
-            </div>
+            <div class="avatar"><img src="./assets/img/avatar.webp" alt="Aoi"></div>
         </div>
-        <div class="nav-right">
-            <!-- Có thể thêm nút search hoặc user icon ở đây -->
-        </div>
+        <h1 class="logo">Aoi<span>Portfolio</span></h1>
     </header>
 
-    <!-- Khu vực nội dung chính -->
     <main class="main">
-        <div id="content-grid" class="grid"></div>
+        <section id="content-grid" class="grid"></section>
     </main>
 
-    <!-- Menu ngăn kéo trái -->
+    <!-- Overlay & Sidebar -->
+    <div id="overlay" class="overlay"></div>
     <aside id="menu-left" class="drawer left">
         <div class="menu-header">
-            <div class="avatar-mini">
-                <img src="./assets/img/Logo.png" alt="logo">
-            </div>
-            <button id="close-menu" class="close-btn-mini">✘</button>
+            <div class="avatar-mini"><img src="./assets/img/avatar.webp"></div>
+            <button id="close-menu" class="close-btn-mini">✕</button>
         </div>
-        
-        <div class="menu-links">
-            <button class="menu-item" onclick="location.reload()">🏠 Trang chủ</button>
-            <button id="info-btn" class="menu-item">ⓘ Thông tin</button>
+        <nav class="menu-links">
+            <button class="menu-item" data-key="info_title">ⓘ Thông tin</button>
             <hr class="divider">
-            <button id="open-settings-sub" class="menu-item">
-                ⚙ <span data-key="setting_title">Cài đặt</span>
-            </button>
-        </div>
-        
-        <div class="menu-footer">
-            <p>︵»𝓐𝓸𝓲𝓒𝓱𝓪𝓷 © 2026«︵</p>
-        </div>
+            <button id="open-settings-sub" class="menu-item" data-key="setting_title">⚙ Cài đặt</button>
+        </nav>
+        <footer class="menu-footer" data-key="copyright"></footer>
     </aside>
 
-    <!-- Lớp phủ khi mở menu -->
-    <div id="overlay" class="overlay"></div>
-
-    <!-- Pop-up dùng chung (Cửa sổ nổi) -->
+    <!-- Viewer/Popup -->
     <div id="viewer" class="viewer hidden">
-        <div class="viewer-window">
-            <div id="viewer-header" class="viewer-header">
-                <span class="viewer-title">📖</span>
-                <button id="close-viewer" class="close-btn-modal">✘</button>
-            </div>
-            <div id="viewer-content" class="viewer-content">
-                <!-- Nội dung động sẽ được đổ vào đây -->
-            </div>
-        </div>
+        <article class="viewer-window">
+            <header class="viewer-header">
+                <span class="viewer-title"></span>
+                <button id="close-viewer" class="close-btn-modal">✕</button>
+            </header>
+            <section class="viewer-content custom-scroll"></section>
+        </article>
     </div>
 
-    <!-- Template cho nội dung Settings (Ẩn mặc định) -->
+    <!-- Template cho Cài đặt -->
     <template id="settings-template">
-        <div class="settings-sub-panel">
+        <div class="settings-popup">
             <div class="setting">
-                <label data-key="lang_label">Ngôn ngữ</label>
-                <select class="select pop-lang-select"></select>
-            </div>
-            <div class="setting">
-                <label data-key="theme_label">Giao diện</label>
-                <select class="select pop-theme-select">
-                    <option value="dark">🎣👻</option>
-                    <option value="light">🎣🥝</option>
+                <span data-key="theme_label">Giao diện</span>
+                <select class="pop-theme-select select">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
                 </select>
             </div>
             <div class="setting">
-                <label data-key="bg_label">Ảnh nền</label>
+                <span data-key="bg_label">Hình nền</span>
                 <label class="switch">
                     <input type="checkbox" class="pop-bg-toggle">
                     <span class="slider"></span>
                 </label>
             </div>
+            <div class="setting">
+                <span data-key="lang_label">Ngôn ngữ</span>
+                <select class="pop-lang-select select"></select>
+            </div>
         </div>
     </template>
 
-    <!-- Script chính -->
-    <script type="module" src="./core/app.js"></script>
+    <script type="module" src="./src/core/App.js"></script>
 </body>
 </html>
