@@ -1,101 +1,33 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷︵ </title>
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="./styles/base.css">
-    <link rel="stylesheet" href="./styles/components.css">
-    <link rel="stylesheet" href="./styles/theme.css">
+  <meta charset="UTF-8">
+  <title>🌊𝓐𝓸𝓲𝓒𝓱𝓪𝓷⤿𝐬𝐞𝐫𝐯𝐞𝐫</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/theme.css">
 </head>
-<body class="theme-dark">
-    <!-- Thanh tải trang -->
-    <div id="loader" class="loader"></div>
+<body>
 
-    <!-- Thanh điều hướng trên cùng -->
-    <header class="top-bar">
-        <div class="nav-left">
-            <button id="menu-btn" class="nav-btn">☰</button>
-            <div class="avatar">
-                <img src="./assets/img/Logo.png" alt="logo" onerror="this.src='https://placeholder.com'">
-            </div>
-        </div>
-        <div class="nav-right">
-            <!-- Có thể thêm nút search hoặc user icon ở đây -->
-        </div>
-    </header>
+<div id="navbar"></div>
 
-    <!-- Khu vực nội dung chính -->
-    <main class="main">
-        <div id="content-grid" class="grid"></div>
-    </main>
+<section class="hero">
+  <h1>AoiChan Minecraft Server</h1>
+  <p>International Experience • Custom Gameplay</p>
+  <div class="cta">
+    <a href="download.html">Play Now</a>
+    <a href="resource.html">Resource Pack</a>
+  </div>
+</section>
 
-    <!-- Menu ngăn kéo trái -->
-    <aside id="menu-left" class="drawer left">
-        <div class="menu-header">
-            <div class="avatar-mini">
-                <img src="./assets/img/Logo.png" alt="logo">
-            </div>
-            <button id="close-menu" class="close-btn-mini">✘</button>
-        </div>
-        
-        <div class="menu-links">
-            <button class="menu-item" onclick="location.reload()">🏠 Trang chủ</button>
-            <button id="info-btn" class="menu-item">ⓘ Thông tin</button>
-            <hr class="divider">
-            <button id="open-settings-sub" class="menu-item">
-                ⚙ <span data-key="setting_title">Cài đặt</span>
-            </button>
-        </div>
-        
-        <div class="menu-footer">
-            <p>︵»𝓐𝓸𝓲𝓒𝓱𝓪𝓷 © 2026«︵</p>
-        </div>
-    </aside>
+<section class="features">
+  <div class="feature">⚔️ Custom Combat</div>
+  <div class="feature">💰 Economy System</div>
+  <div class="feature">🌍 Crossplay</div>
+</section>
 
-    <!-- Lớp phủ khi mở menu -->
-    <div id="overlay" class="overlay"></div>
+<div id="footer"></div>
 
-    <!-- Pop-up dùng chung (Cửa sổ nổi) -->
-    <div id="viewer" class="viewer hidden">
-        <div class="viewer-window">
-            <div id="viewer-header" class="viewer-header">
-                <span class="viewer-title">📖</span>
-                <button id="close-viewer" class="close-btn-modal">✘</button>
-            </div>
-            <div id="viewer-content" class="viewer-content">
-                <!-- Nội dung động sẽ được đổ vào đây -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Template cho nội dung Settings (Ẩn mặc định) -->
-    <template id="settings-template">
-        <div class="settings-sub-panel">
-            <div class="setting">
-                <label data-key="lang_label">Ngôn ngữ</label>
-                <select class="select pop-lang-select"></select>
-            </div>
-            <div class="setting">
-                <label data-key="theme_label">Giao diện</label>
-                <select class="select pop-theme-select">
-                    <option value="dark">🎣👻</option>
-                    <option value="light">🎣🥝</option>
-                </select>
-            </div>
-            <div class="setting">
-                <label data-key="bg_label">Ảnh nền</label>
-                <label class="switch">
-                    <input type="checkbox" class="pop-bg-toggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-    </template>
-
-    <!-- Script chính -->
-    <script type="module" src="./core/app.js"></script>
+<script type="module" src="core/app.js"></script>
 </body>
 </html>
