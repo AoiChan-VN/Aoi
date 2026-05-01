@@ -2,7 +2,7 @@ name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡【👻】
 
 # Bật/tắt upload Artifact ( .jar )
 env:
-  ENABLE_ARTIFACT: true
+  ENABLE_ARTIFACT: false
 
 on:
   push:
