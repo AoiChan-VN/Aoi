@@ -1,57 +1,60 @@
-name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡ ωєв
+name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡【👻】
+
+# Bật/tắt upload Artifact ( .jar )
+env:
+  ENABLE_ARTIFACT: false
 
 on:
-  # push:
-    # branches: ["main"]
-  workflow_dispatch:
+  push:
+    branches: [ main ]
+    #workflow_dispatch:
 
 permissions:
   actions: write
   contents: read
-  pages: write
-  id-token: write
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
+  
 jobs:
   aoichan:
-    name: 🍒𝓐𝓸𝓲𝓒𝓱𝓪𝓷🦋
+    name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡
     runs-on: ubuntu-latest
-    environment: 
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-      - name: 📥 Checkout
-        uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - name: 🔎𝓒𝓱𝓮𝓬𝓴 𝓢𝓸𝓾𝓻𝓬𝓮
+        uses: actions/checkout@v6
 
-      - name: Artifacts ➺ Deploy
-        uses: actions/upload-pages-artifact@v3
+      # Cài đặt JavaScript
+      - name: ☕ ｊａｖａＳcｒ𝚒ｐ𝚝
+        uses: actions/setup-java@v5
         with:
-          path: .
-          
-      - name: Triển khai ➺【GitHub Pages】
-        id: deployment
-        uses: actions/deploy-pages@v5
-        
-      - name: 🗑️ 𝐎𝐋𝐃 deployment
-        run: |
-          gh api repos/${{ github.repository }}/deployments \
-            --jq '.[] | select(.environment=="github-pages") | .id' \
-            | while read id; do
-                echo "🗑️ deleting deployment $id"
-                gh api repos/${{ github.repository }}/deployments/$id -X DELETE
-              done
-        env:
-          GH_TOKEN: ${{ secrets.AOI_ACTIONS }} 
-        
-      - name: 🗑️ 𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
+          distribution: 'temurin'
+          java-version: '21'
+          cache: maven
+
+      # Xây dựng cấu trúc
+      - name: ⚒ 𝓑𝓾𝓲𝓵𝓭 🏗️
+        run: mvn -B -ntp clean package -DskipTests
+
+      #- name: 🛡️ Security Check
+        #run: |
+          #mvn org.owasp:dependency-check-maven:check \
+            #-DnvdApiKey=${{ secrets.NVD_API_KEY }}
+        #env:
+          #GH_TOKEN: ${{ secrets.AOI_ACTIONS }}
+
+      # Đóng gói file .jar
+      - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
+        if: ${{ env.ENABLE_ARTIFACT == 'true' }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: AoiChan
+          path: target/*.jar
+
+      # Tự động dọn dẹp Workflows Runs 【 5 Runs 】
+      - name: ♻️𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
         run: |
           gh api repos/${{ github.repository }}/actions/runs \
             --paginate \
-            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[1:] | map(select(.status=="completed")) | .[].id' \
+            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[5:] | map(select(.status=="completed")) | .[].id' \
             | while read run; do
                 echo "🗑️ đã xóa $run"
                 gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
@@ -59,10 +62,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AOI_ACTIONS }}
 
-      - name: 🗑️ 𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
+      - name: ♻️𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
         run: |
           gh cache list --json id,createdAt \
-            | jq 'sort_by(.createdAt) | reverse | .[1:] | .[].id' \
+            | jq 'sort_by(.createdAt) | reverse | .[5:] | .[].id' \
             | while read id; do
                 echo "🗑️ đã xóa $id"
                 gh cache delete "$id"
