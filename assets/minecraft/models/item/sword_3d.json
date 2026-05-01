@@ -1,0 +1,7 @@
+{
+  "credit": "Generated with Blockbench",
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/sword"
+  }
+} 
