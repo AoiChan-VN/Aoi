@@ -2,7 +2,7 @@ name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡【👻】
 
 # Bật/tắt upload Artifact ( .jar )
 env:
-  ENABLE_ARTIFACT: false
+  ENABLE_ARTIFACT: true
 
 on:
   push:
@@ -22,32 +22,17 @@ jobs:
       - name: 🔎𝓒𝓱𝓮𝓬𝓴 𝓢𝓸𝓾𝓻𝓬𝓮
         uses: actions/checkout@v6
 
-      # Cài đặt JavaScript
-      - name: ☕ ｊａｖａＳcｒ𝚒ｐ𝚝
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: maven
-
-      # Xây dựng cấu trúc
-      - name: ⚒ 𝓑𝓾𝓲𝓵𝓭 🏗️
-        run: mvn -B -ntp clean package -DskipTests
-
-      #- name: 🛡️ Security Check
-        #run: |
-          #mvn org.owasp:dependency-check-maven:check \
-            #-DnvdApiKey=${{ secrets.NVD_API_KEY }}
-        #env:
-          #GH_TOKEN: ${{ secrets.AOI_ACTIONS }}
-
+      - name: 📚 Tạo file zip
+        run: |
+          zip -r Aoi-Packs.zip assets pack.mcmeta pack.png || true
+          
       # Đóng gói file .jar
       - name: 📦 𝓤𝓹𝓵𝓸𝓪𝓻𝓭 𝓳𝓪𝓻
         if: ${{ env.ENABLE_ARTIFACT == 'true' }}
         uses: actions/upload-artifact@v5
         with:
-          name: AoiChan
-          path: target/*.jar
+          name: Resource-Packs
+          path: Aoi-Packs.zip
 
       # Tự động dọn dẹp Workflows Runs 【 5 Runs 】
       - name: ♻️𝐎𝐋𝐃 𝐖𝐎𝐑𝐊𝐅𝐋𝐎𝐖𝐒
