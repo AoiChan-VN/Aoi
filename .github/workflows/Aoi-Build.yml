@@ -2,7 +2,7 @@ name: ◡🥀𝓐𝓸𝓲𝓒𝓱𝓪𝓷🥀◡【👻】
 
 # Bật/tắt upload Artifact ( .jar )
 env:
-  ENABLE_ARTIFACT: true
+  ENABLE_ARTIFACT: false
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
         run: |
           gh api repos/${{ github.repository }}/actions/runs \
             --paginate \
-            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[5:] | map(select(.status=="completed")) | .[].id' \
+            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[1:] | map(select(.status=="completed")) | .[].id' \
             | while read run; do
                 echo "🗑️ đã xóa $run"
                 gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
@@ -50,7 +50,7 @@ jobs:
       - name: ♻️𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
         run: |
           gh cache list --json id,createdAt \
-            | jq 'sort_by(.createdAt) | reverse | .[5:] | .[].id' \
+            | jq 'sort_by(.createdAt) | reverse | .[1:] | .[].id' \
             | while read id; do
                 echo "🗑️ đã xóa $id"
                 gh cache delete "$id"
