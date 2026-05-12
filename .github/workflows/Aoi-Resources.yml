@@ -45,7 +45,7 @@ jobs:
                 gh api repos/${{ github.repository }}/actions/runs/$run -X DELETE
               done
         env:
-          GH_TOKEN: ${{ secrets.AOI_ACTIONS }}
+          GH_TOKEN: ${{ secrets.AOI_RESOURCES }}
 
       - name: ♻️𝐎𝐋𝐃 𝐂𝐀𝐂𝐇𝐄
         run: |
@@ -56,4 +56,4 @@ jobs:
                 gh cache delete "$id"
               done
         env:
-          GH_TOKEN: ${{ secrets.AOI_ACTIONS }}
+          GH_TOKEN: ${{ secrets.AOI_RESOURCES }}
